@@ -1,0 +1,2 @@
+module GamestatesHelper
+end

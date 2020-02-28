@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @gamestate.user_id %>
+</p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @gamestate.game_id %>
+</p>
+
+<p>
+  <strong>Hero:</strong>
+  <%= @gamestate.hero_id %>
+</p>
+
+<%= link_to 'Edit', edit_gamestate_path(@gamestate) %> |
+<%= link_to 'Back', gamestates_path %>

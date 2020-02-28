@@ -17,12 +17,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres
-  password: ROSlab134
-  host: localhost
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
 development:
   <<: *default
   database: Jama_development
@@ -34,7 +32,7 @@ development:
   #username: postgres
 
   # The password associated with the postgres role (username).
-  #password:ROSlab134
+  #password: ROSlab134
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -84,4 +82,4 @@ production:
   <<: *default
   database: Jama_production
   username: Jama
-  password: <%= ENV['JAMA_DATABASE_PASSWORD'] %>
+  password: <%= ENV['PA_RAILS_DATABASE_PASSWORD'] %>
