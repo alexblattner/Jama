@@ -4,7 +4,7 @@ class CreateGamestates < ActiveRecord::Migration[6.0]
       t.integer :user_id
       t.integer :game_id
       t.integer :hero_id
-
+      t.integer :level_id
       t.timestamps
     end
   end

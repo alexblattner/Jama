@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_02_28_205722) do
     t.integer "user_id"
     t.integer "game_id"
     t.integer "hero_id"
+    t.integer "level_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

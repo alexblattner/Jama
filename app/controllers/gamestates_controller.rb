@@ -6,7 +6,10 @@ class GamestatesController < ApplicationController
   def index
     @gamestates = Gamestate.all
   end
-
+  # POST /save/
+  def save
+    Enrollment.create(params["id"], :level_id => params["level_id"])
+  end
   # GET /gamestates/1
   # GET /gamestates/1.json
   def show
