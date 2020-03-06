@@ -8,7 +8,9 @@ class GamestatesController < ApplicationController
   end
   # POST /save/
   def save
-    Enrollment.create(params["id"], :level_id => params["level_id"])
+    puts params
+    puts params["id"]
+    
   end
   # GET /gamestates/1
   # GET /gamestates/1.json
