@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Heroes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Hero exp</th>
+      <th>Hero hp</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @heroes.each do |hero| %>
+      <tr>
+        <td><%= hero.name %></td>
+        <td><%= hero.hero_exp %></td>
+        <td><%= hero.hero_hp %></td>
+        <td><%= link_to 'Show', hero %></td>
+        <td><%= link_to 'Edit', edit_hero_path(hero) %></td>
+        <td><%= link_to 'Destroy', hero, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Hero', new_hero_path %>

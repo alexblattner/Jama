@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  hero_exp: 1
+  hero_hp: 1
+
+two:
+  name: MyString
+  hero_exp: 1
+  hero_hp: 1
