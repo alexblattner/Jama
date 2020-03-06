@@ -3,4 +3,6 @@ class MainController < ApplicationController
     render html: "Welcome to the Dungeon Game Maker!"
 
   end
+
+  
 end
