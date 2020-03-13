@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<div class="boxed">
+<p>
+  <%= @level.description %>
+</p>
+</div>
+<div class="boxed">
+<p>
+Your options are:
+  <%= @level.next_levels %>
+</p>
+</div>
+<%= form_with(url: "", method: "get") do %>
+  <%= label_tag(:q, "Do next:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Enter") %>
+<% end %>
