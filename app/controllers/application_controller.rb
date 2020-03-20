@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::Base
-    def hello
-        render html: "hello, world!"
-    end
+  
+    # before_action :require_login
+    # include SessionsHelper
+
+    # def require_login
+    #     if !logged_in?
+    #       redirect_to login_path
+    #     end
+    # end
 end
