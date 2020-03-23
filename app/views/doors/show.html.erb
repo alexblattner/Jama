@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @door.name %>
+</p>
+
+<p>
+  <strong>Next levels:</strong>
+  <%= @door.next_levels %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @door.description %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @door.image %>
+</p>
+
+<p>
+  <strong>Result:</strong>
+  <%= @door.result %>
+</p>
+
+<p>
+  <strong>Requirement:</strong>
+  <%= @door.requirement %>
+</p>
+
+<%= link_to 'Edit', edit_door_path(@door) %> |
+<%= link_to 'Back', doors_path %>

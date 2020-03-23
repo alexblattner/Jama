@@ -69,6 +69,6 @@ class LevelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def level_params
-      params.require(:level).permit(:description, :next_levels)
+      params.require(:level).permit(:name, :event_id, :doors, :description, :image)
     end
 end

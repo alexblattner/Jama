@@ -1,0 +1,47 @@
+<%= form_with(model: door, local: true) do |form| %>
+  <% if door.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(door.errors.count, "error") %> prohibited this door from being saved:</h2>
+
+      <ul>
+        <% door.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :next_levels %>
+    <%= form.text_field :next_levels %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.text_field :image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :result %>
+    <%= form.text_field :result %>
+  </div>
+
+  <div class="field">
+    <%= form.label :requirement %>
+    <%= form.text_field :requirement %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

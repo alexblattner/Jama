@@ -1,18 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<div class="boxed">
 <p>
+  <strong>Name:</strong>
+  <%= @level.name %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @level.event_id %>
+</p>
+
+<p>
+  <strong>Doors:</strong>
+  <%= @level.doors %>
+</p>
+
+<p>
+  <strong>Description:</strong>
   <%= @level.description %>
 </p>
-</div>
-<div class="boxed">
+
 <p>
-Your options are:
-  <%= @level.next_levels %>
+  <strong>Image:</strong>
+  <%= @level.image %>
 </p>
-</div>
-<%= form_with(url: "", method: "get") do %>
-  <%= label_tag(:q, "Do next:") %>
-  <%= text_field_tag(:q) %>
-  <%= submit_tag("Enter") %>
-<% end %>
+
+<%= link_to 'Edit', edit_level_path(@level) %> |
+<%= link_to 'Back', levels_path %>

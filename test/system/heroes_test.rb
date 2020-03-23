@@ -14,8 +14,10 @@ class HeroesTest < ApplicationSystemTestCase
     visit heroes_url
     click_on "New Hero"
 
-    fill_in "Hero exp", with: @hero.hero_exp
-    fill_in "Hero hp", with: @hero.hero_hp
+    fill_in "Exp", with: @hero.exp
+    fill_in "Gold", with: @hero.gold
+    fill_in "Hp", with: @hero.hp
+    fill_in "Image", with: @hero.image
     fill_in "Name", with: @hero.name
     click_on "Create Hero"
 
@@ -27,8 +29,10 @@ class HeroesTest < ApplicationSystemTestCase
     visit heroes_url
     click_on "Edit", match: :first
 
-    fill_in "Hero exp", with: @hero.hero_exp
-    fill_in "Hero hp", with: @hero.hero_hp
+    fill_in "Exp", with: @hero.exp
+    fill_in "Gold", with: @hero.gold
+    fill_in "Hp", with: @hero.hp
+    fill_in "Image", with: @hero.image
     fill_in "Name", with: @hero.name
     click_on "Update Hero"
 

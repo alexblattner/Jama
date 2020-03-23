@@ -1,6 +1,7 @@
 class GamestatesController < ApplicationController
   before_action :set_gamestate, only: [:show, :edit, :update, :destroy]
-
+require 'json'
+include GamestatesHelper
   # GET /gamestates
   # GET /gamestates.json
   def index
@@ -15,6 +16,20 @@ class GamestatesController < ApplicationController
   # GET /gamestates/1
   # GET /gamestates/1.json
   def show
+    @level=Level.find_by(id: @gamestate.level_id)
+    @hero=Hero.find_by(id: @gamestate.hero_id)
+    @hero_level_info=stats_calc(@hero.exp,@hero.hp)
+    eid=JSON.parse(@level.event_id)
+    s="1=0"
+    if eid.length>0
+      s="id=#{eid[0]}"
+      i=1
+      while i<eid.length do
+        s+=" or id=#{eid[i]}"
+        i+=1
+      end
+    end
+    @event=Event.where(s)
   end
 
   # GET /gamestates/new

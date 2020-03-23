@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  next_levels: MyString
+  description: MyString
+  image: MyString
+  result: MyString
+  requirement: MyString
+
+two:
+  name: MyString
+  next_levels: MyString
+  description: MyString
+  image: MyString
+  result: MyString
+  requirement: MyString

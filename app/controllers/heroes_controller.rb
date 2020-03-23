@@ -67,8 +67,8 @@ class HeroesController < ApplicationController
       @hero = Hero.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # Never trust parameters from the scary internet, only allow the white list through.
     def hero_params
-      params.require(:hero).permit(:name, :hero_exp, :hero_hp)
+      params.require(:hero).permit(:name, :exp, :hp, :gold, :image)
     end
 end

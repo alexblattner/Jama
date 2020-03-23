@@ -67,7 +67,7 @@ class GamesController < ApplicationController
       @game = Game.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
       params.require(:game).permit(:name, :starting_level_id, :published, :admin_id)
     end

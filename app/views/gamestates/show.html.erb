@@ -1,19 +1,16 @@
-<p id="notice"><%= notice %></p>
-
+<div id="game-screen">
+	<img id="background-image" src="<%=@level.image%>"/>
+	<img id="hero" src="<%=@hero.image%>"/>
+	<div id="health-bar"><div percent="<%=@hero_level_info['hp%']%>"></div></div>
+</div>
+<div class="boxed">
 <p>
-  <strong>User:</strong>
-  <%= @gamestate.user_id %>
+	<%= @level.description %>
 </p>
-
-<p>
-  <strong>Game:</strong>
-  <%= @gamestate.game_id %>
-</p>
-
-<p>
-  <strong>Hero:</strong>
-  <%= @gamestate.hero_id %>
-</p>
-
-<%= link_to 'Edit', edit_gamestate_path(@gamestate) %> |
-<%= link_to 'Back', gamestates_path %>
+</div>
+<%= form_with(url: "", method: "get") do %>
+  <%= label_tag(:user_input, "Do next:") %>
+  <%= text_field_tag(:user_input) %>
+  <%= submit_tag("Enter") %>
+<% end %>
+<%= javascript_pack_tag 'game.js' %>

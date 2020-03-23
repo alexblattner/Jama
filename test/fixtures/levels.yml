@@ -1,9 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  name: MyString
+  event_id: MyString
+  doors: MyString
   description: MyString
-  next_levels: MyString
+  image: MyString
 
 two:
+  name: MyString
+  event_id: MyString
+  doors: MyString
   description: MyString
-  next_levels: MyString
+  image: MyString

@@ -12,13 +12,28 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :event_id %>
+    <%= form.text_field :event_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :doors %>
+    <%= form.text_field :doors %>
+  </div>
+
+  <div class="field">
     <%= form.label :description %>
     <%= form.text_field :description %>
   </div>
 
   <div class="field">
-    <%= form.label :next_levels %>
-    <%= form.text_field :next_levels %>
+    <%= form.label :image %>
+    <%= form.text_field :image %>
   </div>
 
   <div class="actions">

@@ -5,8 +5,11 @@
 <table>
   <thead>
     <tr>
+      <th>Name</th>
+      <th>Event</th>
+      <th>Doors</th>
       <th>Description</th>
-      <th>Next levels</th>
+      <th>Image</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,8 +17,11 @@
   <tbody>
     <% @levels.each do |level| %>
       <tr>
+        <td><%= level.name %></td>
+        <td><%= level.event_id %></td>
+        <td><%= level.doors %></td>
         <td><%= level.description %></td>
-        <td><%= level.next_levels %></td>
+        <td><%= level.image %></td>
         <td><%= link_to 'Show', level %></td>
         <td><%= link_to 'Edit', edit_level_path(level) %></td>
         <td><%= link_to 'Destroy', level, method: :delete, data: { confirm: 'Are you sure?' } %></td>

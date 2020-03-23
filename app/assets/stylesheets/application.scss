@@ -13,4 +13,19 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap"
+@import "bootstrap";
+#game-screen{
+  width:500px;height:350px;position:relative;
+}
+#background-image{
+  height:100%;width:100%;position:absolute;
+}
+#hero{
+  max-width:100px;max-height:100px;background:green;position:absolute;bottom:20px;left:50px;
+}
+#health-bar{
+  width:150px;height:20px;border: 1px black solid;position:absolute;top:10px;left:10px;
+}
+#health-bar div{
+  height:100%;
+}

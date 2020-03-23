@@ -15,7 +15,10 @@ class LevelsTest < ApplicationSystemTestCase
     click_on "New Level"
 
     fill_in "Description", with: @level.description
-    fill_in "Next levels", with: @level.next_levels
+    fill_in "Doors", with: @level.doors
+    fill_in "Event", with: @level.event_id
+    fill_in "Image", with: @level.image
+    fill_in "Name", with: @level.name
     click_on "Create Level"
 
     assert_text "Level was successfully created"
@@ -27,7 +30,10 @@ class LevelsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Description", with: @level.description
-    fill_in "Next levels", with: @level.next_levels
+    fill_in "Doors", with: @level.doors
+    fill_in "Event", with: @level.event_id
+    fill_in "Image", with: @level.image
+    fill_in "Name", with: @level.name
     click_on "Update Level"
 
     assert_text "Level was successfully updated"
