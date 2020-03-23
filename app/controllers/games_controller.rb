@@ -21,6 +21,12 @@ class GamesController < ApplicationController
   def edit
   end
 
+  def published
+    @game= if params[:published].present?
+      Game.where(:published => true)
+    end
+  end
+
   # POST /games
   # POST /games.json
   def create

@@ -65,6 +65,14 @@ ActiveRecord::Schema.define(version: 2020_03_21_185753) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "heros", force: :cascade do |t|
+    t.string "name"
+    t.integer "hero_exp"
+    t.integer "hero_hp"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "levels", force: :cascade do |t|
     t.string "name"
     t.string "event_id"
@@ -75,12 +83,18 @@ ActiveRecord::Schema.define(version: 2020_03_21_185753) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_digest"
   end
 
 end
