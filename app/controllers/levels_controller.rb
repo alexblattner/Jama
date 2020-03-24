@@ -1,6 +1,6 @@
 class LevelsController < ApplicationController
   before_action :set_level, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :verify_authenticity_token, :only => [:doors]
   # GET /levels
   # GET /levels.json
   def index
@@ -20,7 +20,28 @@ class LevelsController < ApplicationController
   # GET /levels/1/edit
   def edit
   end
-
+  
+  def doors
+    if params.has_key? "level"
+      l=Level.find_by(id: params['level'])
+      arr=JSON.parse(l.doors)
+      if arr.length>0
+        i=1
+        w="id='#{arr[0]}'"
+        while i<arr.length
+          w+=" or id='#{arr[i]}'"
+          i+=1
+        end
+        ar=[1]
+        puts ar.to_json
+        d=Door.where(w)
+        resultArray = d.map{|e| [e["name"], e["description"],JSON.parse(e['next_levels'])]}
+        theHash = Hash[*resultArray.flatten]
+        puts theHash
+      end
+      
+    end
+  end
   # POST /levels
   # POST /levels.json
   def create
