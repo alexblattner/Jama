@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  resources :games
   resources :levels
   resources :events
   resources :doors
-  resources :games
   resources :heroes
   resources :users
   resources :gamestates
@@ -21,5 +21,6 @@ Rails.application.routes.draw do
 
   get '/games', to: 'games#index'
   get '/publishedgames', to: 'games#published'
-
+  
+  
 end

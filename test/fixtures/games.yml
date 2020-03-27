@@ -1,13 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  starting_level_id: 1
-  published: false
+  game_name: MyString
+  start_level_id: 1
+  description: MyString
   admin_id: 1
+  image_url: MyString
+  popularity: 1
 
 two:
-  name: MyString
-  starting_level_id: 1
-  published: false
+  game_name: MyString
+  start_level_id: 1
+  description: MyString
   admin_id: 1
+  image_url: MyString
+  popularity: 1

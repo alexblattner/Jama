@@ -15,9 +15,11 @@ class GamesTest < ApplicationSystemTestCase
     click_on "New Game"
 
     fill_in "Admin", with: @game.admin_id
-    fill_in "Name", with: @game.name
-    check "Published" if @game.published
-    fill_in "Starting level", with: @game.starting_level_id
+    fill_in "Description", with: @game.description
+    fill_in "Game name", with: @game.game_name
+    fill_in "Image url", with: @game.image_url
+    fill_in "Popularity", with: @game.popularity
+    fill_in "Start level", with: @game.start_level_id
     click_on "Create Game"
 
     assert_text "Game was successfully created"
@@ -29,9 +31,11 @@ class GamesTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Admin", with: @game.admin_id
-    fill_in "Name", with: @game.name
-    check "Published" if @game.published
-    fill_in "Starting level", with: @game.starting_level_id
+    fill_in "Description", with: @game.description
+    fill_in "Game name", with: @game.game_name
+    fill_in "Image url", with: @game.image_url
+    fill_in "Popularity", with: @game.popularity
+    fill_in "Start level", with: @game.start_level_id
     click_on "Update Game"
 
     assert_text "Game was successfully updated"
