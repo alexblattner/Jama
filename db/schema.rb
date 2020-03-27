@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2020_03_21_185753) do
-61e1ec68c2e45445dadd38f94221aaf2667f8be9
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,14 +61,6 @@ ActiveRecord::Schema.define(version: 2020_03_21_185753) do
     t.integer "hp"
     t.integer "gold"
     t.string "image"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "heros", force: :cascade do |t|
-    t.string "name"
-    t.integer "hero_exp"
-    t.integer "hero_hp"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
