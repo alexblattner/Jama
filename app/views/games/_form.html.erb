@@ -12,23 +12,33 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :game_name %>
+    <%= form.text_field :game_name %>
   </div>
 
   <div class="field">
-    <%= form.label :starting_level_id %>
-    <%= form.number_field :starting_level_id %>
+    <%= form.label :start_level_id %>
+    <%= form.number_field :start_level_id %>
   </div>
 
   <div class="field">
-    <%= form.label :published %>
-    <%= form.check_box :published %>
+    <%= form.label :description %>
+    <%= form.text_field :description %>
   </div>
 
   <div class="field">
     <%= form.label :admin_id %>
     <%= form.number_field :admin_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image_url %>
+    <%= form.text_field :image_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :popularity %>
+    <%= form.number_field :popularity %>
   </div>
 
   <div class="actions">

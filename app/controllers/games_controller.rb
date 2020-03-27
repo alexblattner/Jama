@@ -21,12 +21,6 @@ class GamesController < ApplicationController
   def edit
   end
 
-  def published
-    @game= if params[:published].present?
-      Game.where(:published => true)
-    end
-  end
-
   # POST /games
   # POST /games.json
   def create
@@ -75,6 +69,6 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:name, :starting_level_id, :published, :admin_id)
+      params.require(:game).permit(:game_name, :start_level_id, :description, :admin_id, :image_url, :popularity)
     end
 end

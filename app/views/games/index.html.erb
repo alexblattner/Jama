@@ -5,10 +5,12 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Starting level</th>
-      <th>Published</th>
+      <th>Game name</th>
+      <th>Start level</th>
+      <th>Description</th>
       <th>Admin</th>
+      <th>Image url</th>
+      <th>Popularity</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +18,12 @@
   <tbody>
     <% @games.each do |game| %>
       <tr>
-        <td><%= game.name %></td>
-        <td><%= game.starting_level_id %></td>
-        <td><%= game.published %></td>
+        <td><%= game.game_name %></td>
+        <td><%= game.start_level_id %></td>
+        <td><%= game.description %></td>
         <td><%= game.admin_id %></td>
+        <td><%= game.image_url %></td>
+        <td><%= game.popularity %></td>
         <td><%= link_to 'Show', game %></td>
         <td><%= link_to 'Edit', edit_game_path(game) %></td>
         <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
