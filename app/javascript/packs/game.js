@@ -4,7 +4,7 @@
 $("#user_input").focus();
 var p=$("#health-bar div").attr("percent");
 healthbar(p);
-setTimeout(function(){healthbarchange(20);},5000);
+setTimeout(function(){hero_attack();},5000);
 $.post("/levels/doors",{level:1},function(){
 	
 });
