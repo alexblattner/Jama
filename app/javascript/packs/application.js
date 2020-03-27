@@ -15,3 +15,12 @@ require("jquery-ui")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)\
+$(function(){
+    // Plain jquery
+    $('#fadeMe').fadeOut(5000);
+
+    // jquery-ui
+    const availableCities = ['Baltimore', 'New York'];
+    $('#cityField').autocomplete( { source: availableCities } );
+    $('#calendarField').datepicker( { dateFormat: 'yy-mm-dd' } );
+})
