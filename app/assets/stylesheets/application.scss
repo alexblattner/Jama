@@ -24,8 +24,14 @@
   max-width:100px;max-height:100px;background:green;position:absolute;bottom:20px;left:50px;
 }
 #health-bar{
-  width:150px;height:20px;border: 1px black solid;position:absolute;top:10px;left:10px;
+  width:90%;height:20%;border: 1px black solid;position:relative;
 }
 #health-bar div{
   height:100%;
+}
+#health-bar span{
+  position:absolute; color:white;line-height:90%;font-size:8pt;
+}
+#hero-info{
+  width:40%;position:absolute;background: grey;height:20%;
 }
