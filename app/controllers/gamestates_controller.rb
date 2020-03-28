@@ -1,5 +1,5 @@
 class GamestatesController < ApplicationController
-  before_action :set_gamestate, only: [:show, :edit, :update, :destroy]
+before_action :set_gamestate, only: [:show, :edit, :update, :destroy]
 require 'json'
 include GamestatesHelper
   # GET /gamestates

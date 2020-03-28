@@ -22,5 +22,8 @@ Rails.application.routes.draw do
   get '/games', to: 'games#index'
   get '/publishedgames', to: 'games#published'
   
+  #game creation
+  post '/creategame', to: 'games#create'
+  
   
 end
