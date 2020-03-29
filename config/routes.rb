@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :packages
   resources :games
   resources :levels
   resources :events
