@@ -17,31 +17,24 @@
   </div>
 
   <div class="field">
-    <%= form.label :start_level_id %>
-    <%= form.number_field :start_level_id %>
-  </div>
-
-  <div class="field">
     <%= form.label :description %>
     <%= form.text_field :description %>
   </div>
+
 
   <div class="field">
     <%= form.label :admin_id %>
     <%= form.number_field :admin_id %>
   </div>
 
-  <div class="field">
-    <%= form.label :image_url %>
-    <%= form.text_field :image_url %>
-  </div>
 
   <div class="field">
-    <%= form.label :popularity %>
-    <%= form.number_field :popularity %>
-  </div>
+  <%= form.label :photo %>
+  <%= form.file_field :avatar %>
+   </div>
 
   <div class="actions">
     <%= form.submit %>
   </div>
+
 <% end %>

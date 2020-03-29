@@ -15,6 +15,8 @@ class LevelsController < ApplicationController
   # GET /levels/new
   def new
     @level = Level.new
+    @level.game = Game.find(params[:game_id])
+
   end
 
   # GET /levels/1/edit
@@ -46,7 +48,8 @@ class LevelsController < ApplicationController
   # POST /levels.json
   def create
     @level = Level.new(level_params)
-
+    @level.game = Game.find(level_params[:game_id])
+    
     respond_to do |format|
       if @level.save
         format.html { redirect_to @level, notice: 'Level was successfully created.' }
@@ -90,6 +93,6 @@ class LevelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def level_params
-      params.require(:level).permit(:name, :event_id, :doors, :description, :image)
+      params.require(:level).permit(:game_id,:name, :event_id, :doors, :description, :image)
     end
 end

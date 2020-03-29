@@ -73,6 +73,8 @@ ActiveRecord::Schema.define(version: 2020_03_27_191644) do
     t.string "doors"
     t.string "description"
     t.string "image"
+    t.string "game_id"
+    t.integer "prev_level_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

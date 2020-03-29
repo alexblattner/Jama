@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   get '/publishedgames', to: 'games#published'
   
   #game creation
-  post '/creategame', to: 'games#create'
+  get '/creategame', to: 'games#new'
+
+  get '/addlevel/:game_id' , to: 'levels#new', as: 'addlevel'
   
   
 end
