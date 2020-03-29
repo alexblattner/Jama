@@ -1,9 +1,12 @@
 <link href="https://fonts.googleapis.com/css?family=Coda+Caption:800&display=swap" rel="stylesheet">
 
 <nav class="nav navbar navbar-expand-lg navbar-fixed-top">
-<%= link_to "JAMA", root_path, class: "navbar-brand" %>
+
   
       <ul class="nav nav-tabs">
+          <li>
+            <%= link_to(image_tag("logo.jpg", :height =>"47", :width => "70"), root_path) %>
+          </li>
           <li>
               <%= link_to "Game Center", games_path %> 
           </li>
