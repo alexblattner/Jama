@@ -27,20 +27,22 @@ class GamesController < ApplicationController
   def edit
   end
 
+  def addlogic
+    render 'logicform'
+  end
+
   # POST /games
   # POST /games.json
   def create
     @game = Game.new(game_params)
-   
-   
-      if @game.save
+    if @game.save
         flash[:success] = "Get new game created, let's add some levels to the game."
         puts @game.id 
         redirect_to addlevel_url(@game.id)
-      else
+    else
         render "new"
        
-      end
+    end
    
   end
 

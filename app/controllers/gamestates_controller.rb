@@ -45,7 +45,6 @@ include GamestatesHelper
   # POST /gamestates.json
   def create
     @gamestate = Gamestate.new(gamestate_params)
-
     respond_to do |format|
       if @gamestate.save
         format.html { redirect_to @gamestate, notice: 'Gamestate was successfully created.' }

@@ -16,7 +16,7 @@ class LevelsController < ApplicationController
   def new
     @level = Level.new
     @level.game = Game.find(params[:game_id])
-    
+  
   end
 
   # GET /levels/1/edit
@@ -49,12 +49,16 @@ class LevelsController < ApplicationController
   def create
     @level = Level.new(level_params)
     @level.game = Game.find(level_params[:game_id])
-    
-    
     if @level.save
-       puts "hiiiiii"
+      flash[:success] = "Get new level created."
+      if params[:commit] == 'Add the level'
+        redirect_to addlevel_url(level_params[:game_id])
+      else
+        redirect_to addlogic_url(level_params[:game_id])
+      end
+      
     else
-        
+      render "new"
     end
    
   end
