@@ -16,7 +16,7 @@ class LevelsController < ApplicationController
   def new
     @level = Level.new
     @level.game = Game.find(params[:game_id])
-
+    
   end
 
   # GET /levels/1/edit
@@ -50,15 +50,13 @@ class LevelsController < ApplicationController
     @level = Level.new(level_params)
     @level.game = Game.find(level_params[:game_id])
     
-    respond_to do |format|
-      if @level.save
-        format.html { redirect_to @level, notice: 'Level was successfully created.' }
-        format.json { render :show, status: :created, location: @level }
-      else
-        format.html { render :new }
-        format.json { render json: @level.errors, status: :unprocessable_entity }
-      end
+    
+    if @level.save
+       puts "hiiiiii"
+    else
+        
     end
+   
   end
 
   # PATCH/PUT /levels/1

@@ -7,6 +7,11 @@ class GamesController < ApplicationController
     @games = Game.all
   end
 
+  def all
+    @games = Game.all
+    render 'all'
+  end
+
   # GET /games/1
   # GET /games/1.json
   def show

@@ -8,7 +8,7 @@
             <%= link_to(image_tag("logo.jpg", :height =>"47", :width => "70"), root_path) %>
           </li>
           <li>
-              <%= link_to "Game Center", games_path %> 
+              <%= link_to "Game Center", allgames_path %> 
           </li>
           <li>
               <%= link_to "Create New Game", creategame_path %> 
@@ -24,10 +24,11 @@
                       <li><%= link_to "Profile", creategame_path  %></li>
                       <li><%= link_to "My Course", creategame_path  %></li>
                       <li class="divider"></li>
-                      <li>
-                      <%= link_to "Log out", logout_path, method: :delete %>
-                      </li>
+                    
               </ul>
+              <li>
+              <%= link_to "Log out", logout_path, method: :delete %>
+              </li>
           </li>
       </ul>
       <% else %>
