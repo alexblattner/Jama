@@ -1,7 +1,7 @@
 <link href="https://fonts.googleapis.com/css?family=Coda+Caption:800&display=swap" rel="stylesheet">
 
 <nav class="nav navbar navbar-expand-lg navbar-fixed-top">
-
+   <% if logged_in? %>
   
       <ul class="nav nav-tabs">
           <li>
@@ -30,6 +30,11 @@
               </ul>
           </li>
       </ul>
+      <% else %>
+        <ul class="nav nav-tabs navbar-right">
+            <li><%= link_to "Log in", login_path  %></li>
+        </ul>
+    <% end %>
   
 </nav>
 
