@@ -51,8 +51,8 @@ class LevelsController < ApplicationController
     @level.game = Game.find(level_params[:game_id])
     if @level.save
       flash[:success] = "Get new level created."
-      if params[:commit] == 'Add the level'
-        redirect_to addlevel_url(level_params[:game_id])
+      if params[:commit] == 'Save and add events'
+        redirect_to addevent_url(@level.id)
       else
         redirect_to addlogic_url(level_params[:game_id])
       end
@@ -60,7 +60,6 @@ class LevelsController < ApplicationController
     else
       render "new"
     end
-   
   end
 
   # PATCH/PUT /levels/1

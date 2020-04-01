@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_04_01_043526) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
+    t.string "level_id"
     t.string "result"
     t.string "description"
     t.string "event_type"
