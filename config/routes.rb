@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
+  resources :heroes
   resources :packages
   resources :games
   resources :levels
   resources :events
   resources :doors
-  resources :heroes
   resources :users
   resources :gamestates
   resources :sessions

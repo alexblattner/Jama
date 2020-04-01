@@ -2,14 +2,14 @@
 
 one:
   name: MyString
-  exp: 1
-  hp: 1
+  hero_exp: 1
+  hero_hp: 1
   gold: 1
-  image: MyString
+  description: MyString
 
 two:
   name: MyString
-  exp: 1
-  hp: 1
+  hero_exp: 1
+  hero_hp: 1
   gold: 1
-  image: MyString
+  description: MyString
