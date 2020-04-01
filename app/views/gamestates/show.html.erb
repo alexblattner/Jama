@@ -1,15 +1,14 @@
-<div id="game-screen">
+<div id="game-screen" events="<%=@level.event_id%>">
 	<img id="background-image" src="<%=@level.image%>"/>
 	<div id="hero-info"><div><%=@hero.name%></div>
-	<div id="health-bar"><span><%=@hero['hp']%></span><div percent="<%=@hero_level_info['hp%']%>"></div></div></div>
+	<div id="health-bar"><span><%=@hero['hp']%></span><div max="<%=@hero_level_info['maxhp']%>" percent="<%=@hero_level_info['hp%']%>"></div></div></div>
 	<img id="hero" src="<%=@hero.image%>"/>
 	<div id="doors-holder"></div>
 </div>
-<div class="boxed">
-<p>
+<div id="description">
 	<%= @level.description %>
-</p>
 </div>
+<div id="tip">press enter or click anywhere to continue</div>
 <%= form_with(url: "", method: "get") do %>
   <%= label_tag(:user_input, "Do next:") %>
   <%= text_field_tag(:user_input) %>

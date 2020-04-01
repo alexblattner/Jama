@@ -10,6 +10,11 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+     @event = Event.find(params[:id])
+  if @event.progress!=1
+  render json: @event
+  #Event.update(params[:id],:progress => 1)
+  end
   end
 
   # GET /events/new
