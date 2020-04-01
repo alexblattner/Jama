@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_04_01_043526) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.string "level_id"
+    t.string "game_id"
     t.string "result"
     t.string "description"
     t.string "event_type"
@@ -71,10 +72,10 @@ ActiveRecord::Schema.define(version: 2020_04_01_043526) do
   create_table "levels", force: :cascade do |t|
     t.string "name"
     t.string "event_id"
+    t.string "game_id"
     t.string "doors"
     t.string "description"
     t.string "image"
-    t.string "game_id"
     t.integer "prev_level_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

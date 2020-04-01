@@ -3,6 +3,7 @@ class CreateEvents < ActiveRecord::Migration[6.0]
     create_table :events do |t|
       t.string :name
       t.string :level_id
+      t.string :game_id
       t.string :result
       t.string :description
       t.string :event_type
