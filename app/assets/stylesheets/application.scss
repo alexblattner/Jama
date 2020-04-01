@@ -38,3 +38,25 @@
 #hero-info{
   width:40%;position:absolute;background: grey;height:20%;
 }
+
+
+// application
+.body-container {
+  padding-top: 10px;
+}
+
+
+.gravatar {
+  float: left;
+  margin-right: 20px;
+}
+
+.gravatar_edit {
+  margin-top: 15px;
+}
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 60%;
+  margin-bottom: 15px;
+}

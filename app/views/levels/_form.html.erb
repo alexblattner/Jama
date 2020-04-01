@@ -1,3 +1,6 @@
+
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
 <%= form_with(model: level, local: true) do |form| %>
   <% if level.errors.any? %>
     <div id="error_explanation">
@@ -11,32 +14,32 @@
     </div>
   <% end %>
 
-  <div class="field">
+    <%= form.label :game_id %>
+    <%= form.text_field :game_id, class: 'form-control' %>
+  
     <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+    <%= form.text_field :name, class: 'form-control' %>
 
-  <div class="field">
+
     <%= form.label :event_id %>
-    <%= form.text_field :event_id %>
-  </div>
+    <%= form.text_field :event_id, class: 'form-control'%>
 
-  <div class="field">
     <%= form.label :doors %>
-    <%= form.text_field :doors %>
-  </div>
-
-  <div class="field">
+    <%= form.text_field :doors,class: 'form-control' %>
+ 
     <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
+    <%= form.text_field :description, class: 'form-control'%>
+ 
 
-  <div class="field">
     <%= form.label :image %>
-    <%= form.text_field :image %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+    <%= form.text_field :image, class: 'form-control' %>
+  
+    <%= form.submit "Add the level", class: "btn btn-success" %>
+    <div>
+     <h1>   </h1>
+    </div>
+    <%= form.submit "Finish level creation and continue", class: "btn btn-success" %>
+  
+    </div>
   </div>
 <% end %>

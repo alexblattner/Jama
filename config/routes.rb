@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  resources :packages
+  resources :games
   resources :levels
   resources :events
   resources :doors
-  resources :games
   resources :heroes
   resources :users
   resources :gamestates
@@ -21,5 +22,11 @@ Rails.application.routes.draw do
 
   get '/games', to: 'games#index'
   get '/publishedgames', to: 'games#published'
-
+  
+  #game creation
+  get '/creategame', to: 'games#new'
+  get '/allgames', to: 'games#all'
+  get '/addlevel/:game_id' , to: 'levels#new', as: 'addlevel'
+  get '/addlogic/:game_id' , to: 'games#addlogic', as: 'addlogic'
+  
 end

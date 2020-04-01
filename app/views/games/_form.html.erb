@@ -1,3 +1,5 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
 <%= form_with(model: game, local: true) do |form| %>
   <% if game.errors.any? %>
     <div id="error_explanation">
@@ -11,27 +13,29 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+  
+    <%= form.label :game_name %>
+    <%= form.text_field :game_name, class: 'form-control' %>
+ 
 
-  <div class="field">
-    <%= form.label :starting_level_id %>
-    <%= form.number_field :starting_level_id %>
-  </div>
+    <%= form.label :description %>
+    <%= form.text_field :description, class: 'form-control'  %>
 
-  <div class="field">
-    <%= form.label :published %>
-    <%= form.check_box :published %>
-  </div>
 
-  <div class="field">
+
+
     <%= form.label :admin_id %>
-    <%= form.number_field :admin_id %>
-  </div>
+    <%= form.number_field :admin_id, class: 'form-control'  %>
 
-  <div class="actions">
-    <%= form.submit %>
+
+
+
+  <%= form.label :photo %>
+  <%= form.file_field :avatar, class: 'form-control'  %>
+ 
+
+  <%= form.submit "Create the game", class: "btn btn-success" %>
   </div>
+</div>
+
 <% end %>
