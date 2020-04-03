@@ -15,6 +15,11 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    @event.level = Level.find(params[:level_id])
+    puts "############################"
+    puts params
+    puts "############################"
+    @event.game = Game.find(params[:game_id])
   end
 
   # GET /events/1/edit
@@ -25,15 +30,20 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
+    puts "111"
+    puts event_params
+    puts "111"
+    @event.level = Level.find(event_params[:level_id])
+    @event.game = Game.find(event_params[:game_id])
+    if @event.save
+      flash[:success] = "Get new event created."
+      if params[:commit] == 'Continue to add event'
+        redirect_to addevent_url(event_params[:level_id, :game_id])
       else
-        format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        redirect_to addlogic_url(level_params[:game_id])
       end
+    else
+      render "new"
     end
   end
 

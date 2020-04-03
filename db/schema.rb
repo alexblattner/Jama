@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2020_04_03_183919) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
+    t.string "level_id"
+    t.string "game_id"
     t.string "result"
     t.string "description"
     t.string "event_type"
@@ -67,10 +69,10 @@ ActiveRecord::Schema.define(version: 2020_04_03_183919) do
 
   create_table "heroes", force: :cascade do |t|
     t.string "name"
-    t.integer "exp"
-    t.integer "hp"
+    t.integer "hero_exp"
+    t.integer "hero_hp"
     t.integer "gold"
-    t.string "image"
+    t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -78,9 +80,11 @@ ActiveRecord::Schema.define(version: 2020_04_03_183919) do
   create_table "levels", force: :cascade do |t|
     t.string "name"
     t.string "event_id"
+    t.string "game_id"
     t.string "doors"
     t.string "description"
     t.string "image"
+    t.integer "prev_level_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

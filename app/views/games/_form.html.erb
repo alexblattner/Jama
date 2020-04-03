@@ -10,31 +10,14 @@
       </ul>
     </div>
   <% end %>
+  <%= form.label :game_name %>
+  <%= form.text_field :game_name, class: 'form-control' %>
 
-  <div class="field">
-    <%= form.label :game_name %>
-    <%= form.text_field :game_name %>
-  </div>
+  <%= form.label :description %>
+  <%= form.text_field :description, class: 'form-control'  %>
 
-  <div class="field">
-    <%= form.label :start_level_id %>
-    <%= form.number_field :start_level_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :admin_id %>
-    <%= form.number_field :admin_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image_url %>
-    <%= form.text_field :image_url %>
-  </div>
+  <%= form.label :photo %>
+  <%= form.file_field :avatar, class: 'form-control'  %>
 
   <div class="field">
     <%= form.label :popularity %>

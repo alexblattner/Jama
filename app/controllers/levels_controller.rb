@@ -16,11 +16,14 @@ class LevelsController < ApplicationController
   def new
     @level = Level.new
     @level.game = Game.find(params[:game_id])
-  
   end
 
   # GET /levels/1/edit
   def edit
+  end
+
+  def organize
+    render 'organizelevelform'
   end
   
   def doors
@@ -50,17 +53,16 @@ class LevelsController < ApplicationController
     @level = Level.new(level_params)
     @level.game = Game.find(level_params[:game_id])
     if @level.save
-      flash[:success] = "Get new level created."
-      if params[:commit] == 'Add the level'
-        redirect_to addlevel_url(level_params[:game_id])
+      flash[:success] = "Great! New level created."
+      if params[:commit] == 'Add events'
+        redirect_to addevent_url(@level.id, @level.game_id)
       else
-        redirect_to addlogic_url(level_params[:game_id])
+        redirect_to organizelevel_url(level_params[:game_id])
       end
       
     else
       render "new"
     end
-   
   end
 
   # PATCH/PUT /levels/1
@@ -95,6 +97,6 @@ class LevelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def level_params
-      params.require(:level).permit(:game_id,:name, :event_id, :doors, :description, :image)
+      params.require(:level).permit(:game_id, :name, :event_id, :doors, :description, :image)
     end
 end

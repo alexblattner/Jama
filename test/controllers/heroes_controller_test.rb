@@ -17,7 +17,7 @@ class HeroesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create hero" do
     assert_difference('Hero.count') do
-      post heroes_url, params: { hero: { exp: @hero.exp, gold: @hero.gold, hp: @hero.hp, image: @hero.image, name: @hero.name } }
+      post heroes_url, params: { hero: { description: @hero.description, gold: @hero.gold, hero_exp: @hero.hero_exp, hero_hp: @hero.hero_hp, name: @hero.name } }
     end
 
     assert_redirected_to hero_url(Hero.last)
@@ -34,7 +34,7 @@ class HeroesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update hero" do
-    patch hero_url(@hero), params: { hero: { exp: @hero.exp, gold: @hero.gold, hp: @hero.hp, image: @hero.image, name: @hero.name } }
+    patch hero_url(@hero), params: { hero: { description: @hero.description, gold: @hero.gold, hero_exp: @hero.hero_exp, hero_hp: @hero.hero_hp, name: @hero.name } }
     assert_redirected_to hero_url(@hero)
   end
 

@@ -1,4 +1,3 @@
-
 <div class="row">
 <div class="col-md-6 col-md-offset-3">
 <%= form_with(model: level, local: true) do |form| %>
@@ -14,31 +13,23 @@
     </div>
   <% end %>
 
-    <%= form.label :game_id %>
+    <%= form.label(:game_id, "Game ID") %>
     <%= form.text_field :game_id, class: 'form-control' %>
   
-    <%= form.label :name %>
+    <%= form.label(:name, "Current Level Name") %>
     <%= form.text_field :name, class: 'form-control' %>
-
-
-    <%= form.label :event_id %>
-    <%= form.text_field :event_id, class: 'form-control'%>
-
-    <%= form.label :doors %>
-    <%= form.text_field :doors,class: 'form-control' %>
  
-    <%= form.label :description %>
+    <%= form.label(:description, "Description") %>
     <%= form.text_field :description, class: 'form-control'%>
  
-
-    <%= form.label :image %>
+    <%= form.label(:image, "Image Link") %>
     <%= form.text_field :image, class: 'form-control' %>
   
-    <%= form.submit "Add the level", class: "btn btn-success" %>
+    <%= form.submit "Add events", class: "btn btn-success" %>
     <div>
      <h1>   </h1>
     </div>
-    <%= form.submit "Finish level creation and continue", class: "btn btn-success" %>
+    <%= form.submit "Finish current level", class: "btn btn-success" %>
   
     </div>
   </div>
