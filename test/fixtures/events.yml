@@ -6,7 +6,6 @@ one:
   description: MyString
   event_type: MyString
   image: MyString
-  progress: MyString
 
 two:
   name: MyString
@@ -14,4 +13,3 @@ two:
   description: MyString
   event_type: MyString
   image: MyString
-  progress: MyString

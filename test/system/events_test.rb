@@ -18,7 +18,6 @@ class EventsTest < ApplicationSystemTestCase
     fill_in "Event type", with: @event.event_type
     fill_in "Image", with: @event.image
     fill_in "Name", with: @event.name
-    fill_in "Progress", with: @event.progress
     fill_in "Result", with: @event.result
     click_on "Create Event"
 
@@ -34,7 +33,6 @@ class EventsTest < ApplicationSystemTestCase
     fill_in "Event type", with: @event.event_type
     fill_in "Image", with: @event.image
     fill_in "Name", with: @event.name
-    fill_in "Progress", with: @event.progress
     fill_in "Result", with: @event.result
     click_on "Update Event"
 

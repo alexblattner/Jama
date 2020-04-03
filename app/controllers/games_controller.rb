@@ -7,15 +7,9 @@ class GamesController < ApplicationController
     @games = Game.all
   end
 
-  def all
-    @games = Game.all
-    render 'all'
-  end
-
   # GET /games/1
   # GET /games/1.json
   def show
-    render 'new'
   end
 
   # GET /games/new
@@ -27,23 +21,20 @@ class GamesController < ApplicationController
   def edit
   end
 
-  def addlogic
-    render 'logicform'
-  end
-
   # POST /games
   # POST /games.json
   def create
     @game = Game.new(game_params)
-    if @game.save
-        flash[:success] = "Get new game created, let's add some levels to the game."
-        puts @game.id 
-        redirect_to addlevel_url(@game.id)
-    else
-        render "new"
-       
+
+    respond_to do |format|
+      if @game.save
+        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        format.json { render :show, status: :created, location: @game }
+      else
+        format.html { render :new }
+        format.json { render json: @game.errors, status: :unprocessable_entity }
+      end
     end
-   
   end
 
   # PATCH/PUT /games/1

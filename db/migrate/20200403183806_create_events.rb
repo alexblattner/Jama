@@ -6,7 +6,6 @@ class CreateEvents < ActiveRecord::Migration[6.0]
       t.string :description
       t.string :event_type
       t.string :image
-      t.string :progress
 
       t.timestamps
     end

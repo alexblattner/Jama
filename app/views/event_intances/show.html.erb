@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Gamestate:</strong>
+  <%= @event_intance.gamestate_id %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @event_intance.level_id %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @event_intance.event_id %>
+</p>
+
+<p>
+  <strong>Progress:</strong>
+  <%= @event_intance.progress %>
+</p>
+
+<%= link_to 'Edit', edit_event_intance_path(@event_intance) %> |
+<%= link_to 'Back', event_intances_path %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_29_034050) do
+ActiveRecord::Schema.define(version: 2020_04_03_183919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,13 +26,21 @@ ActiveRecord::Schema.define(version: 2020_03_29_034050) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "event_intances", force: :cascade do |t|
+    t.integer "gamestate_id"
+    t.integer "level_id"
+    t.integer "event_id"
+    t.string "progress"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.string "result"
     t.string "description"
     t.string "event_type"
     t.string "image"
-    t.string "progress"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -73,8 +81,6 @@ ActiveRecord::Schema.define(version: 2020_03_29_034050) do
     t.string "doors"
     t.string "description"
     t.string "image"
-    t.string "game_id"
-    t.integer "prev_level_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

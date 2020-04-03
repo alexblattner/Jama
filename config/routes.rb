@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :event_intances
+  resources :events
+  resources :games
   resources :packages
   resources :games
   resources :levels

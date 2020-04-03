@@ -1,0 +1,2 @@
+class EventIntance < ApplicationRecord
+end
