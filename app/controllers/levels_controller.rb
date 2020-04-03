@@ -26,27 +26,20 @@ class LevelsController < ApplicationController
   end
   
   def doors
-  if params.has_key? "level"
-     l=Level.find_by(id: params['level'])
-     puts l.doors
-     
-     arr=JSON.parse(l.doors)
-     if arr.length>0
-       i=1
-       w="id='#{arr[0]}'"
-       while i<arr.length
-         w+=" or id='#{arr[i]}'"
-         i+=1
-       end
-       ar=[1]
-       puts ar.to_json
-       d=Door.where(w)
-       resultArray = d.map{|e| [e["name"], e["description"],JSON.parse(e['next_levels'])]}
-       #@theHash = Hash[*resultArray.flatten]
-       @resultArray = resultArray.flatten
+    if params.has_key? "level"
+      l=Level.find_by(id: params['level'])
+      arr=JSON.parse(l.doors)
+      if arr.length>0
+        i=1
+        w="id='#{arr[0]}'"
+        while i<arr.length
+          w+=" or id='#{arr[i]}'"
+          i+=1
+        end
+        ar=[1]
+        d=Door.where(w)
+        render json: d
       end
-    else
-    @resultArray = Array.new(4, "mac")
     end
   end
   # POST /levels
