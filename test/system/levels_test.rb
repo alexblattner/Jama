@@ -17,6 +17,7 @@ class LevelsTest < ApplicationSystemTestCase
     fill_in "Description", with: @level.description
     fill_in "Doors", with: @level.doors
     fill_in "Event", with: @level.event_id
+    fill_in "Game", with: @level.game_id
     fill_in "Image", with: @level.image
     fill_in "Name", with: @level.name
     click_on "Create Level"
@@ -32,6 +33,7 @@ class LevelsTest < ApplicationSystemTestCase
     fill_in "Description", with: @level.description
     fill_in "Doors", with: @level.doors
     fill_in "Event", with: @level.event_id
+    fill_in "Game", with: @level.game_id
     fill_in "Image", with: @level.image
     fill_in "Name", with: @level.name
     click_on "Update Level"

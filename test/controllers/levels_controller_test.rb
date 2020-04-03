@@ -17,7 +17,7 @@ class LevelsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create level" do
     assert_difference('Level.count') do
-      post levels_url, params: { level: { description: @level.description, doors: @level.doors, event_id: @level.event_id, image: @level.image, name: @level.name } }
+      post levels_url, params: { level: { description: @level.description, doors: @level.doors, event_id: @level.event_id, game_id: @level.game_id, image: @level.image, name: @level.name } }
     end
 
     assert_redirected_to level_url(Level.last)
@@ -34,7 +34,7 @@ class LevelsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update level" do
-    patch level_url(@level), params: { level: { description: @level.description, doors: @level.doors, event_id: @level.event_id, image: @level.image, name: @level.name } }
+    patch level_url(@level), params: { level: { description: @level.description, doors: @level.doors, event_id: @level.event_id, game_id: @level.game_id, image: @level.image, name: @level.name } }
     assert_redirected_to level_url(@level)
   end
 

@@ -7,6 +7,7 @@
     <tr>
       <th>Name</th>
       <th>Event</th>
+      <th>Game</th>
       <th>Doors</th>
       <th>Description</th>
       <th>Image</th>
@@ -19,6 +20,7 @@
       <tr>
         <td><%= level.name %></td>
         <td><%= level.event_id %></td>
+        <td><%= level.game_id %></td>
         <td><%= level.doors %></td>
         <td><%= level.description %></td>
         <td><%= level.image %></td>
@@ -31,3 +33,5 @@
 </table>
 
 <br>
+
+<%= link_to 'New Level', new_level_path %>

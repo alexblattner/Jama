@@ -3,6 +3,7 @@
 one:
   name: MyString
   event_id: MyString
+  game_id: 1
   doors: MyString
   description: MyString
   image: MyString
@@ -10,6 +11,7 @@ one:
 two:
   name: MyString
   event_id: MyString
+  game_id: 1
   doors: MyString
   description: MyString
   image: MyString

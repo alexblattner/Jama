@@ -6,10 +6,10 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Hero exp</th>
-      <th>Hero hp</th>
+      <th>Exp</th>
+      <th>Hp</th>
       <th>Gold</th>
-      <th>Description</th>
+      <th>Image</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,10 +18,10 @@
     <% @heroes.each do |hero| %>
       <tr>
         <td><%= hero.name %></td>
-        <td><%= hero.hero_exp %></td>
-        <td><%= hero.hero_hp %></td>
+        <td><%= hero.exp %></td>
+        <td><%= hero.hp %></td>
         <td><%= hero.gold %></td>
-        <td><%= hero.description %></td>
+        <td><%= hero.image %></td>
         <td><%= link_to 'Show', hero %></td>
         <td><%= link_to 'Edit', edit_hero_path(hero) %></td>
         <td><%= link_to 'Destroy', hero, method: :delete, data: { confirm: 'Are you sure?' } %></td>
