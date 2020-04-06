@@ -16,9 +16,6 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @event.level = Level.find(params[:level_id])
-    puts "############################"
-    puts params
-    puts "############################"
     @event.game = Game.find(params[:game_id])
   end
 

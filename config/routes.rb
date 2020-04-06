@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
+  resources :doors
+  resources :event_instances
+  resources :events
   resources :heroes
   resources :levels
-  resources :event_intances
-  resources :events
   resources :games
   resources :heroes
   resources :packages
-  resources :games
-  resources :levels
-  resources :events
   resources :doors
   resources :users
   resources :gamestates

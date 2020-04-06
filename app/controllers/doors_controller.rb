@@ -69,6 +69,6 @@ class DoorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def door_params
-      params.require(:door).permit(:name, :next_levels, :description, :image, :result, :requirement)
+      params.require(:door).permit(:name, :next_levels, :description, :image, :result, :requirement, :game_id)
     end
 end

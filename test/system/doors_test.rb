@@ -15,6 +15,7 @@ class DoorsTest < ApplicationSystemTestCase
     click_on "New Door"
 
     fill_in "Description", with: @door.description
+    fill_in "Game", with: @door.game_id
     fill_in "Image", with: @door.image
     fill_in "Name", with: @door.name
     fill_in "Next levels", with: @door.next_levels
@@ -31,6 +32,7 @@ class DoorsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Description", with: @door.description
+    fill_in "Game", with: @door.game_id
     fill_in "Image", with: @door.image
     fill_in "Name", with: @door.name
     fill_in "Next levels", with: @door.next_levels

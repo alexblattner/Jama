@@ -17,7 +17,7 @@ class DoorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create door" do
     assert_difference('Door.count') do
-      post doors_url, params: { door: { description: @door.description, image: @door.image, name: @door.name, next_levels: @door.next_levels, requirement: @door.requirement, result: @door.result } }
+      post doors_url, params: { door: { description: @door.description, game_id: @door.game_id, image: @door.image, name: @door.name, next_levels: @door.next_levels, requirement: @door.requirement, result: @door.result } }
     end
 
     assert_redirected_to door_url(Door.last)
@@ -34,7 +34,7 @@ class DoorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update door" do
-    patch door_url(@door), params: { door: { description: @door.description, image: @door.image, name: @door.name, next_levels: @door.next_levels, requirement: @door.requirement, result: @door.result } }
+    patch door_url(@door), params: { door: { description: @door.description, game_id: @door.game_id, image: @door.image, name: @door.name, next_levels: @door.next_levels, requirement: @door.requirement, result: @door.result } }
     assert_redirected_to door_url(@door)
   end
 

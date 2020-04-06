@@ -1,5 +1,3 @@
-<div class="row">
-<div class="col-md-6 col-md-offset-3">
 <%= form_with(model: event, local: true) do |form| %>
   <% if event.errors.any? %>
     <div id="error_explanation">
@@ -13,29 +11,32 @@
     </div>
   <% end %>
 
-    <%= form.label(:game_id, "Game ID") %>
-    <%= form.text_field :game_id, class: 'form-control' %>
-
-    <%= form.label(:level_id, "Level ID") %>
-    <%= form.text_field :level_id, class: 'form-control' %>
-
+  <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name, class: 'form-control' %>
+    <%= form.text_field :name %>
+  </div>
 
+  <div class="field">
+    <%= form.label :result %>
+    <%= form.text_field :result %>
+  </div>
+
+  <div class="field">
     <%= form.label :description %>
-    <%= form.text_field :description, class: 'form-control' %>
+    <%= form.text_field :description %>
+  </div>
 
+  <div class="field">
+    <%= form.label :event_type %>
+    <%= form.text_field :event_type %>
+  </div>
+
+  <div class="field">
     <%= form.label :image %>
-    <%= form.text_field :image, class: 'form-control' %>
+    <%= form.text_field :image %>
+  </div>
 
-    <%= form.label(:result, "Result (please enter result in this format: {hp:number})") %>
-    <%= form.text_field :result, class: 'form-control' %>
-
-    <%= form.submit "Continue to add event", class: "btn btn-success" %>
-      <div>
-      <h1>   </h1>
-      </div>
-    <%= form.submit "Finish adding events for this level and return to level creation", class: "btn btn-success" %>
-    </div>
+  <div class="actions">
+    <%= form.submit %>
   </div>
 <% end %>

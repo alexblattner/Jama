@@ -35,11 +35,30 @@
 #health-bar span{
   position:absolute; color:white;line-height:90%;font-size:8pt;
 }
+#exp-bar{
+  width:90%;height:20%;border: 1px black solid;position:relative;
+}
+#exp-bar div{
+  height:100%; background:lightblue;
+}
+#exp-bar span{
+  position:absolute; color:white;line-height:90%;font-size:8pt;
+}
 #hero-info{
   width:40%;position:absolute;background: grey;height:20%;
 }
-
-
+#doors-holder{
+  position:absolute;height:100%;width:100%;line-height:350px;
+}
+#doors-holder img{
+  max-width:100px;max-height:100px;margin:20px;
+}
+#doors-holder img:hover{
+  cursor:pointer;box-shadow: 0px 0px 15px 0px rgba(242,231,19,1);
+}
+#description{
+  font-size:10pt;margin-bottom:10px;
+}
 // application
 .body-container {
   padding-top: 10px;

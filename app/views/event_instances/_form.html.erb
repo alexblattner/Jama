@@ -1,10 +1,10 @@
-<%= form_with(model: event_intance, local: true) do |form| %>
-  <% if event_intance.errors.any? %>
+<%= form_with(model: event_instance, local: true) do |form| %>
+  <% if event_instance.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(event_intance.errors.count, "error") %> prohibited this event_intance from being saved:</h2>
+      <h2><%= pluralize(event_instance.errors.count, "error") %> prohibited this event_instance from being saved:</h2>
 
       <ul>
-        <% event_intance.errors.full_messages.each do |message| %>
+        <% event_instance.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>

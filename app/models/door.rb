@@ -1,3 +1,2 @@
 class Door < ApplicationRecord
-    
 end

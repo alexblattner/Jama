@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Event Instances</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Gamestate</th>
+      <th>Level</th>
+      <th>Event</th>
+      <th>Progress</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_instances.each do |event_instance| %>
+      <tr>
+        <td><%= event_instance.gamestate_id %></td>
+        <td><%= event_instance.level_id %></td>
+        <td><%= event_instance.event_id %></td>
+        <td><%= event_instance.progress %></td>
+        <td><%= link_to 'Show', event_instance %></td>
+        <td><%= link_to 'Edit', edit_event_instance_path(event_instance) %></td>
+        <td><%= link_to 'Destroy', event_instance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event Instance', new_event_instance_path %>

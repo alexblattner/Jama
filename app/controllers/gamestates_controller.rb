@@ -16,20 +16,30 @@ include GamestatesHelper
   # GET /gamestates/1
   # GET /gamestates/1.json
   def show
+    if session[:user_id]!= @gamestate.user_id
+    redirect_to action: 'index', status: 303
+    end
     @level=Level.find_by(id: @gamestate.level_id)
     @hero=Hero.find_by(id: @gamestate.hero_id)
     @hero_level_info=stats_calc(@hero.exp,@hero.hp)
     eid=JSON.parse(@level.event_id)
-    s="1=0"
-    if eid.length>0
-      s="id=#{eid[0]}"
-      i=1
-      while i<eid.length do
-        s+=" or id=#{eid[i]}"
-        i+=1
-      end
+    b = Hash.new(0)
+    eid.each do |v|
+      b[v] += 1
     end
-    @event=Event.where(s)
+    k=b.keys
+    k.each{#creates event instances as amount specified
+      |i|
+      @instance=EventInstance.where({event_id:i,level_id:@gamestate.level_id,gamestate_id:@gamestate.id})
+      c=@instance.count()
+      w=b[i]-c
+      while w>0
+        EventInstance.create({:gamestate_id=>@gamestate.id,:level_id=>@gamestate.level_id,:progress=>"0",:event_id=>i})
+        w-=1
+      end
+    }
+    @instance=EventInstance.where({level_id:@gamestate.level_id,gamestate_id:@gamestate.id}).where.not(progress:"1");
+    @arr=@instance.ids.to_json()
   end
 
   # GET /gamestates/new

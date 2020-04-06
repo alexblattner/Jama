@@ -7,6 +7,7 @@ class CreateDoors < ActiveRecord::Migration[6.0]
       t.string :image
       t.string :result
       t.string :requirement
+      t.integer :game_id
 
       t.timestamps
     end

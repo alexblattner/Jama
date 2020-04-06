@@ -1,6 +1,6 @@
-class CreateEventIntances < ActiveRecord::Migration[6.0]
+class CreateEventInstances < ActiveRecord::Migration[6.0]
   def change
-    create_table :event_intances do |t|
+    create_table :event_instances do |t|
       t.integer :gamestate_id
       t.integer :level_id
       t.integer :event_id
