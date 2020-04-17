@@ -36,21 +36,14 @@ ActiveRecord::Schema.define(version: 2020_04_06_172044) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "event_intances", force: :cascade do |t|
-    t.integer "gamestate_id"
-    t.integer "level_id"
-    t.integer "event_id"
-    t.string "progress"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.string "result"
     t.string "description"
     t.string "event_type"
     t.string "image"
+    t.string "level_id"
+    t.string "game_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

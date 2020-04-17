@@ -1,47 +1,33 @@
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
 <%= form_with(model: level, local: true) do |form| %>
-  <% if level.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(level.errors.count, "error") %> prohibited this level from being saved:</h2>
-
-      <ul>
-        <% level.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+ <% if level.errors.any? %>
+   <div id="error_explanation">
+     <h2><%= pluralize(level.errors.count, "error") %> prohibited this level from being saved:</h2>
+ 
+     <ul>
+       <% level.errors.full_messages.each do |message| %>
+         <li><%= message %></li>
+       <% end %>
+     </ul>
+   </div>
+ <% end %>
+ 
+   <%= form.label(:game_id, "Game ID") %>
+   <%= form.text_field :game_id, class: 'form-control' %>
+    <%= form.label(:name, "Current Level Name") %>
+   <%= form.text_field :name, class: 'form-control' %>
+   <%= form.label(:description, "Description") %>
+   <%= form.text_field :description, class: 'form-control'%>
+   <%= form.label(:image, "Image Link") %>
+   <%= form.text_field :image, class: 'form-control' %>
+    <%= form.submit "Add events", class: "btn btn-success" %>
+   <div>
+    <h1>   </h1>
+   </div>
+   <%= form.submit "Finish current level", class: "btn btn-success" %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :event_id %>
-    <%= form.text_field :event_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :game_id %>
-    <%= form.number_field :game_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :doors %>
-    <%= form.text_field :doors %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.text_field :image %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+ </div>
 <% end %>
+ 
+

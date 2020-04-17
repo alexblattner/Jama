@@ -6,7 +6,9 @@ class CreateEvents < ActiveRecord::Migration[6.0]
       t.string :description
       t.string :event_type
       t.string :image
-
+      t.string :level_id
+      t.string :game_id
+      
       t.timestamps
     end
   end
