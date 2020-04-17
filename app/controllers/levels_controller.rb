@@ -1,6 +1,5 @@
 class LevelsController < ApplicationController
   before_action :set_level, only: [:show, :edit, :update, :destroy]
-
   # GET /levels
   # GET /levels.json
   def index
@@ -15,6 +14,7 @@ class LevelsController < ApplicationController
   # GET /levels/new
   def new
     @level = Level.new
+    @level.game = Game.find(params[:game_id])
   end
 
   # GET /levels/1/edit
@@ -46,18 +46,18 @@ class LevelsController < ApplicationController
   # POST /levels.json
   def create
     @level = Level.new(level_params)
-
-    respond_to do |format|
-      if @level.save
-        format.html { redirect_to @level, notice: 'Level was successfully created.' }
-        format.json { render :show, status: :created, location: @level }
+    @level.game = Game.find(level_params[:game_id])
+    if @level.save
+        flash[:success] = "Great! New level created."
+        if params[:commit] == 'Add events'
+          redirect_to addevent_url(@level.id, @level.game_id)
+        else
+          redirect_to organizelevel_url(level_params[:game_id])
+        end
       else
-        format.html { render :new }
-        format.json { render json: @level.errors, status: :unprocessable_entity }
-      end
+        render "new"
     end
-  end
-
+end
   # PATCH/PUT /levels/1
   # PATCH/PUT /levels/1.json
   def update

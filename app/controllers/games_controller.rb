@@ -10,17 +10,40 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    render "new"
   end
 
   # GET /games/new
   def new
     @game = Game.new
   end
+  
+  def all
+    @games = Game.all
+    render "all"
+  end
 
   # GET /games/1/edit
   def edit
   end
 
+  def verify
+
+# Create a new graph
+g = GraphViz.new( :G, :type => :digraph )
+
+# Create two nodes
+hello = g.add_nodes( "Hello" )
+world = g.add_nodes( "World" )
+
+# Create an edge between the two nodes
+g.add_edges( hello, world )
+
+# Generate output image
+g.output( :png => "hello_world.png" )
+  puts "**************************"
+  puts "************************"
+  end 
   # POST /games
   # POST /games.json
   def create
