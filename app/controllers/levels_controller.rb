@@ -24,10 +24,6 @@ class LevelsController < ApplicationController
   # GET /levels/1/edit
   def edit
   end
-
-  def organize
-    render 'organizelevelform'
-  end
   
   def doors
     if params.has_key? "level"
@@ -46,6 +42,15 @@ class LevelsController < ApplicationController
       end
     end
   end
+
+  def organizeevents
+    puts "************"
+    puts params
+    @level = Level.find_by(id: params['level_id'])
+    @game = Game.find_by(id: params['game_id'])
+    render 'edit'
+    puts "************"
+  end
   # POST /levels
   # POST /levels.json
   def create
@@ -53,10 +58,10 @@ class LevelsController < ApplicationController
     @level.game = Game.find(level_params[:game_id])
     if @level.save
         flash[:success] = "Great! New level created."
-        if params[:commit] == 'Create new event'
-          redirect_to addevent_url(@level.game_id)
-        else
+        if params[:commit] == 'Create this level'
           redirect_to leveldashboard_url(@level.game_id)
+        else
+          redirect_to addlevel_url(@level.game_id)
         end
       else
         render "new"

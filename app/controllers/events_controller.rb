@@ -19,6 +19,9 @@ class EventsController < ApplicationController
     @event.game_id = params[:game_id]
   end
 
+  def add_to_level
+    
+  end 
   # GET /events/1/edit
   def edit
   end
@@ -28,10 +31,14 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.game = Game.find(event_params[:game_id])
+    
     if @event.save
       flash[:success] = "Get new event created."
-      redirect_to addlevel_url(event_params[:game_id])
-      
+      if params[:commit] == 'Create this event'
+        redirect_to leveldashboard_url(@event.game_id)
+      else
+        redirect_to addevent_url(@event.game_id)
+      end
     else
       render "new"
     end
