@@ -51,7 +51,7 @@ g.output( :png => "hello_world.png" )
     if @game.save
         flash[:success] = "Great! New game created, let's add some levels to the game."
         #puts @game.id 
-        redirect_to addlevel_url(@game.id)
+        redirect_to leveldashboard_url(@game.id)
     else
         render "new"
     end

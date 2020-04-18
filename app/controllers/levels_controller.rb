@@ -11,10 +11,14 @@ class LevelsController < ApplicationController
   def show
   end
 
+  def dashboard
+    @game_id= params[:game_id]
+  end
   # GET /levels/new
   def new
     @level = Level.new
-    @level.game = Game.find(params[:game_id])
+    @level.game_id = params[:game_id]
+  
   end
 
   # GET /levels/1/edit
@@ -49,10 +53,10 @@ class LevelsController < ApplicationController
     @level.game = Game.find(level_params[:game_id])
     if @level.save
         flash[:success] = "Great! New level created."
-        if params[:commit] == 'Add events'
-          redirect_to addevent_url(@level.id, @level.game_id)
+        if params[:commit] == 'Create new event'
+          redirect_to addevent_url(@level.game_id)
         else
-          redirect_to organizelevel_url(level_params[:game_id])
+          redirect_to leveldashboard_url(@level.game_id)
         end
       else
         render "new"

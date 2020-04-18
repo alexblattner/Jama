@@ -1,0 +1,6 @@
+<h3> DASHBOARD </h3>
+<% levels = Level.where(game_id: @game_id) %>
+<% levels.each do |level| %>
+        <%=  level.name %>
+<% end %>
+<%= link_to 'Add level', addlevel_path(@game_id) %>

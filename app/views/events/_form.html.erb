@@ -16,9 +16,6 @@
    <%= form.label(:game_id, "Game ID") %>
    <%= form.text_field :game_id, class: 'form-control' %>
  
-   <%= form.label(:level_id, "Level ID") %>
-   <%= form.text_field :level_id, class: 'form-control' %>
- 
    <%= form.label :name %>
    <%= form.text_field :name, class: 'form-control' %>
  
@@ -31,11 +28,10 @@
    <%= form.label(:result, "Result (please enter result in this format: {hp:number})") %>
    <%= form.text_field :result, class: 'form-control' %>
  
-   <%= form.submit "Continue to add event", class: "btn btn-success" %>
+   <%= form.submit "Add event to this level", class: "btn btn-success" %>
      <div>
      <h1>   </h1>
      </div>
-   <%= form.submit "Finish adding events for this level and return to level creation", class: "btn btn-success" %>
    </div>
  </div>
 <% end %>

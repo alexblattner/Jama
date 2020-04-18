@@ -11,7 +11,7 @@ class DoorsController < ApplicationController
   # GET /doors/1.json
   def show
   end
-
+ 
   # GET /doors/new
   def new
     @door = Door.new

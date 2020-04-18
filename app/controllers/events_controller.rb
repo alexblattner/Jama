@@ -15,12 +15,8 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    puts "*************"
-    puts params
-    puts "***********"
-    @event.level = Level.find(params[:level_id])
-   
-    @event.game = Game.find(params[:game_id])
+    
+    @event.game_id = params[:game_id]
   end
 
   # GET /events/1/edit
@@ -31,15 +27,11 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-    @event.level = Level.find(event_params[:level_id])
     @event.game = Game.find(event_params[:game_id])
     if @event.save
       flash[:success] = "Get new event created."
-      if params[:commit] == 'Continue to add event'
-        redirect_to addevent_url(event_params[:level_id, :game_id])
-      else
-        redirect_to addlogic_url(event_params[:game_id])
-      end
+      redirect_to addlevel_url(event_params[:game_id])
+      
     else
       render "new"
     end
@@ -77,6 +69,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :result, :description, :event_type, :image, :level_id, :game_id)
+      params.require(:event).permit(:name, :result, :description, :event_type, :image, :game_id)
     end
 end
