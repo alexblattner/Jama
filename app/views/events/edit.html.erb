@@ -2,5 +2,4 @@
  
 <%= render 'form', event: @event %>
  
-<%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Go back to the levels', addlevel_url(@event.game_id) %>

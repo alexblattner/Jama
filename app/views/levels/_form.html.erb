@@ -21,11 +21,14 @@
    <%= form.text_field :description, class: 'form-control'%>
    <%= form.label(:image, "Image Link") %>
    <%= form.text_field :image, class: 'form-control' %>
-    <%= form.submit "Create new event", class: "btn btn-success" %>
+   <%= form.label(:list_of_event_ids, "Event Id's") %>
+   <%= form.text_field :list_of_event_ids, class: 'form-control' %>
+    <%= form.submit "Create this level", class: "btn btn-success" %>
    <div>
     <h1>   </h1>
    </div>
-   <%= form.submit "Finish current level", class: "btn btn-success" %>
+   <%= form.submit "Continue creating levels", class: "btn btn-success" %>
     </div>
  </div>
 <% end %>
+

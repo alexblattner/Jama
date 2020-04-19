@@ -1,6 +1,21 @@
-<h3> DASHBOARD </h3>
+<p style="font-size:45px">
+ DASHBOARD 
+</p>
+<br> </br>
+<p style="font-size:30px">
 <% levels = Level.where(game_id: @game_id) %>
 <% levels.each do |level| %>
-        <%=  level.name %>
+        <%= link_to level.name, editlevel_path(@game_id, level.id) %>
 <% end %>
 <%= link_to 'Add level', addlevel_path(@game_id) %>
+<br></br>
+<b>
+
+<% events = Event.where(game_id: @game_id) %>
+<% events.each do |event| %>
+        <%=  event.name %>
+<% end %>
+<%= link_to 'Add event', addevent_path(@game_id) %>
+
+</b>
+</p>
