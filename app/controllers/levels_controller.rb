@@ -99,6 +99,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def level_params
-      params.require(:level).permit(:name, :event_id, :game_id, :doors, :description, :image)
+      params.require(:level).permit(:name, :event_id, :game_id, :doors, :description, :level_image)
     end
 end

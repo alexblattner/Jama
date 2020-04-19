@@ -19,8 +19,11 @@
  <%= form.label :description %>
  <%= form.text_field :description, class: 'form-control'  %>
  
- <%= form.label :photo %>
- <%= form.file_field :avatar, class: 'form-control'  %>
+ <div class="field">
+        <%= form.label :game_image %>
+        <%= form.file_field :game_image %>
+   </div>
+
  
  <%= form.submit "Create the game", class: "btn btn-success" %>
  </div>

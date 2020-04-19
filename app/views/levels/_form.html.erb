@@ -22,8 +22,9 @@
    <%= form.label(:image, "Image Link") %>
    <%= form.text_field :image, class: 'form-control' %>
     <%= form.submit "Create new event", class: "btn btn-success" %>
-   <div>
-    <h1>   </h1>
+   <div class="field">
+        <%= form.label :level_image %>
+        <%= form.file_field :level_image %>
    </div>
    <%= form.submit "Finish current level", class: "btn btn-success" %>
     </div>
