@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages, only: [:new, :create]
   resources :doors
   resources :event_instances
   resources :events
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   resources :users
   resources :gamestates
   resources :sessions
+  
   get  '/gamestate', to: 'gamestates#save'
   get 'main/index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -34,5 +36,8 @@ Rails.application.routes.draw do
   get '/addevent/:level_id/:game_id' , to: 'events#new', as: 'addevent'
 
   get '/organize/:game_id' , to: 'levels#organize', as: 'organizelevel'
+
+  #websocket chat
+  get '/forum' , to: 'messages#forum'
   
 end

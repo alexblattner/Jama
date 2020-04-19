@@ -16,20 +16,11 @@
          
           <li><%= link_to "Search", creategame_path  %></li>
        
-          <li class="nav-item dropdown">
-              <a href="" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown">
-                      Account
-              </a>
-              <ul class="dropdown-menu">
-                      <li><%= link_to "Profile", creategame_path  %></li>
-                      <li><%= link_to "My Course", creategame_path  %></li>
-                      <li class="divider"></li>
-                    
-              </ul>
+          <li><%= link_to "Forum", forum_path  %></li>
               <li>
               <%= link_to "Log out", logout_path, method: :delete %>
               </li>
-          </li>
+        
       </ul>
       <% else %>
         <ul class="nav nav-tabs navbar-right">

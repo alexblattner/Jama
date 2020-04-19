@@ -16,3 +16,6 @@ require("jquery-ui")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)\
+$(document).on('turbolinks:load', function () {
+    console.log("test success.")
+})

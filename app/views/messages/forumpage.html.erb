@@ -1,0 +1,13 @@
+<h1>Game discussion</h1>
+<%= form_for @message, remote: true do |form| %>
+    <div id="msg">
+
+    </div>
+    
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+
+    <div class="actions">
+    <%= form.submit %>
+    </div>
+<% end %>
