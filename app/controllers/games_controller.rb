@@ -89,6 +89,6 @@ g.output( :png => "hello_world.png" )
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:game_name, :start_level_id, :description, :admin_id, :image_url, :popularity)
+      params.require(:game).permit(:game_name, :start_level_id, :description, :admin_id, :image_url, :popularity, :game_image)
     end
 end

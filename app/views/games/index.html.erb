@@ -24,6 +24,7 @@
         <td><%= game.admin_id %></td>
         <td><%= game.image_url %></td>
         <td><%= game.popularity %></td>
+        <%= image_tag(game.game_image) %>
         <td><%= link_to 'Show', game %></td>
         <td><%= link_to 'Edit', edit_game_path(game) %></td>
         <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
