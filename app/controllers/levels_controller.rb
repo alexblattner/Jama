@@ -11,6 +11,69 @@ class LevelsController < ApplicationController
   def show
   end
 
+  def events_to_names lev
+    @names = Array.new
+    if(lev.list_of_event_ids.to_s.strip.length != 0)
+      event_ids = JSON.parse(lev.list_of_event_ids)
+      event_ids.each do 
+        |event_id| event = Event.find_by(id: event_id)
+        @names.push(event.name)
+      end
+    end
+    @names
+  end
+  helper_method :events_to_names
+
+  def creategamelogic
+    @game_id = params[:game_id]
+  end
+
+  def queueevent
+    @game_id = params[:game_id]
+    @level_id = params[:level_id]
+    @event_id = params[:event_id]
+    curr_level = Level.find_by(id: @level_id)
+    curr_event_ids = Array.new
+    len = curr_level.list_of_event_ids.to_s.strip.length
+    
+    #because the default JSON string is "[]"
+    if(len > 2)
+      curr_event_ids = JSON.parse(curr_level.list_of_event_ids)
+    end
+    curr_event_ids.push(@event_id)
+    curr_level.list_of_event_ids= curr_event_ids.to_json
+    event = Event.find_by(id: @event_id)
+    if(curr_level.save)
+      flash[:success] = "Great, " + event.name + " was added to the list"  
+    end
+    render 'assigneventforone'
+  end
+
+  def dequeueevent
+    @game_id = params[:game_id]
+    @level_id = params[:level_id]
+    curr_level = Level.find_by(id: @level_id)
+    len = curr_level.list_of_event_ids.to_s.strip.length
+    
+    #because the default JSON string is "[]"
+    if(len <= 2)
+      flash[:fail] = "No events to remove"
+    else
+      puts "~~~~~~~~~~~~~"
+      puts curr_level.list_of_event_ids.to_s.strip
+      puts "~~~~~~~~~~~~~"
+      curr_event_ids = JSON.parse(curr_level.list_of_event_ids)
+      curr_event = curr_event_ids.pop
+      curr_event = Event.find_by(id: curr_event)
+      curr_level.list_of_event_ids= curr_event_ids.to_json
+      if(curr_level.save)
+        flash[:success] = "Great, " + curr_event.name + " was removed from the list"  
+      end
+    end
+    render 'assigneventforone'
+
+  end
+  
   def dashboard
     @game_id= params[:game_id]
   end
@@ -55,10 +118,12 @@ class LevelsController < ApplicationController
   # POST /levels.json
   def create
     @level = Level.new(level_params)
-    @level.game = Game.find(level_params[:game_id])
+
+    #@level.game = Game.find(level_params[:game_id])
+  
     if @level.save
         flash[:success] = "Great! New level created."
-        if params[:commit] == 'Create this level'
+        if params[:commit] == 'Finish this level and return to dashboard'
           redirect_to leveldashboard_url(@level.game_id)
         else
           redirect_to addlevel_url(@level.game_id)
@@ -70,17 +135,26 @@ end
   # PATCH/PUT /levels/1
   # PATCH/PUT /levels/1.json
   def update
-    respond_to do |format|
-      if @level.update(level_params)
-        format.html { redirect_to @level, notice: 'Level was successfully updated.' }
-        format.json { render :show, status: :ok, location: @level }
-      else
-        format.html { render :edit }
-        format.json { render json: @level.errors, status: :unprocessable_entity }
-      end
+    if @level.update(level_params)
+        if params[:commit] == 'Finish this level and return to dashboard'
+          redirect_to leveldashboard_url(@level.game_id)
+        elsif params[:commit] == 'Add events'
+            redirect_to assigneventforall_path(@level.game_id)
+        else
+          redirect_to addlevel_url(@level.game_id)
+        end
+    else 
+      render "edit"
     end
   end
-
+  def assigneventforall
+    @game_id = params['game_id']
+  end
+  def assigneventforone
+    @game_id = params['game_id']
+    @level_id = params['level_id']
+    
+  end
   # DELETE /levels/1
   # DELETE /levels/1.json
   def destroy
@@ -99,6 +173,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def level_params
-      params.require(:level).permit(:name, :event_id, :game_id, :doors, :description, :level_image)
+      params.require(:level).permit(:name, :list_of_event_ids, :game_id, :doors, :description, :level_image)
     end
 end

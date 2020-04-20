@@ -32,8 +32,13 @@ Rails.application.routes.draw do
   get '/allgames', to: 'games#all'
   get '/addlevel/:game_id' , to: 'levels#new', as: 'addlevel'
   get '/addevent/:game_id' , to: 'events#new', as: 'addevent'
-  
+  get '/adddoor/:game_id' , to: 'doors#new', as: 'adddoor'
+
+  get 'editevent/:game_id/:id', to: 'events#edit', as: 'editevent'
   get 'editlevel/:game_id/:level_id', to: 'levels#organizeevents', as: 'editlevel'
+  get 'editdoor/:game_id/:id', to: 'doors#edit', as: 'editdoor'
+
+  get '/assignevent/:game_id', to: 'levels#assignevent', as: 'assignevent'
   get '/organize/:game_id' , to: 'levels#organize', as: 'organizelevel'
   get '/levels/dashboard/:game_id', to: 'levels#dashboard', as: 'leveldashboard'
 end

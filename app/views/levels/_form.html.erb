@@ -19,22 +19,14 @@
    <%= form.text_field :name, class: 'form-control' %>
    <%= form.label(:description, "Description") %>
    <%= form.text_field :description, class: 'form-control'%>
-   <%= form.label(:image, "Image Link") %>
-   <%= form.text_field :image, class: 'form-control' %>
-<<<<<<< HEAD
-   <%= form.label(:list_of_event_ids, "Event Id's") %>
-   <%= form.text_field :list_of_event_ids, class: 'form-control' %>
-    <%= form.submit "Create this level", class: "btn btn-success" %>
-   <div>
-    <h1>   </h1>
-=======
-    <%= form.submit "Create new event", class: "btn btn-success" %>
-   <div class="field">
+
+  
+    <div class="field">
         <%= form.label :level_image %>
         <%= form.file_field :level_image %>
->>>>>>> 3bfb319f39f223877ffe8625ae184d314be2d2a3
-   </div>
-   <%= form.submit "Continue creating levels", class: "btn btn-success" %>
+        </div>
+    <%= form.submit "Finish this level and return to dashboard", class: "btn btn-success" %>
+   <%= form.submit "Save and make next level", class: "btn btn-success" %>
     </div>
  </div>
 <% end %>

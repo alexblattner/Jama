@@ -15,7 +15,9 @@
  
    <%= form.label(:game_id, "Game ID") %>
    <%= form.text_field :game_id, class: 'form-control' %>
- 
+   <%= form.label :event_type %>
+   <%= form.select :event_type, ['direct', 'store', 'fight']%>
+   <br> </br>
    <%= form.label :name %>
    <%= form.text_field :name, class: 'form-control' %>
  
@@ -24,10 +26,12 @@
  
    <%= form.label :image %>
    <%= form.text_field :image, class: 'form-control' %>
- 
-   <%= form.label(:result, "Result (please enter result in this format: {hp:number})") %>
-   <%= form.text_field :result, class: 'form-control' %>
- 
+   <%= form.label :hp %>
+   <%= form.text_field :hp, class: 'form-control' %>
+   <%= form.label :exp %>
+   <%= form.text_field :exp, class: 'form-control' %>
+   <%= form.label :gold %>
+   <%= form.text_field :gold, class: 'form-control' %>
    <%= form.submit "Create this event", class: "btn btn-success" %>
    <div>
     <h1>   </h1>

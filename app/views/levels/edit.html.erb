@@ -2,10 +2,4 @@
 
 <%= render 'form', level: @level %>
 
-<%= link_to 'Show', @level %> |
-<%= link_to 'Back', levels_path %>
-<% events = Event.where(game_id: @level.game_id) %>
-<% events.each do |event| %>
-        <%=  event.name %>
-        <%=  event.id %>
-<% end %>
+<%= link_to 'Back to the dashboard', leveldashboard_path %>

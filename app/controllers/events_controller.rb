@@ -25,13 +25,26 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
   end
-
+  
+  
+  #turns hp, exp, and gold into the JSON required for result
+  def createResultJSON
+    result = ""
+    result += "[\"hp\":"
+    result += @event.hp
+    result += ",\"exp\":"
+    result += @event.exp
+    result += ", \"gold\":"
+    result += @event.gold
+    result += "]"
+    result
+  end
   # POST /events
   # POST /events.json
   def create
     @event = Event.new(event_params)
     @event.game = Game.find(event_params[:game_id])
-    
+    @event.result = createResultJSON
     if @event.save
       flash[:success] = "Get new event created."
       if params[:commit] == 'Create this event'
@@ -47,13 +60,12 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
-        format.json { render :show, status: :ok, location: @event }
+    if @event.update(event_params)
+      flash[:success] = "Successfully updated event."
+      if params[:commit] == 'Create this event'
+        redirect_to leveldashboard_url(@event.game_id)
       else
-        format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        redirect_to addevent_url(@event.game_id)
       end
     end
   end
@@ -76,6 +88,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :result, :description, :event_type, :image, :game_id)
+      params.require(:event).permit(:name, :result, :description, :event_type, :image, :game_id, :hp, :exp, :gold)
     end
 end

@@ -1,52 +1,38 @@
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
 <%= form_with(model: door, local: true) do |form| %>
-  <% if door.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(door.errors.count, "error") %> prohibited this door from being saved:</h2>
-
-      <ul>
-        <% door.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+ <% if door.errors.any? %>
+   <div id="error_explanation">
+     <h2><%= pluralize(door.errors.count, "error") %> prohibited this door from being saved:</h2>
+ 
+     <ul>
+       <% door.errors.full_messages.each do |message| %>
+         <li><%= message %></li>
+       <% end %>
+     </ul>
+   </div>
+ <% end %>
+ 
+   <%= form.label(:game_id, "Game ID") %>
+   <%= form.text_field :game_id, class: 'form-control' %>
+    <%= form.label(:name, "Current door Name") %>
+   <%= form.text_field :name, class: 'form-control' %>
+   <%= form.label(:description, "Description") %>
+   <%= form.text_field :description, class: 'form-control'%>
+   <div class="field">
+        <%= form.label :door_image %>
+        <%= form.file_field :door_image %>
+   </div>
+   <%= form.label(:result, "Result") %>
+   <%= form.text_field :result, class: 'form-control' %>
+   <%= form.label(:requirement, "Requirement") %>
+   <%= form.text_field :requirement, class: 'form-control' %>
+    <%= form.submit "Finish this door and return to game logic", class: "btn btn-success" %>
+   <div>
+    <h1>   </h1>
+   </div>
+   <%= form.submit "Save and make next door", class: "btn btn-success" %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :next_levels %>
-    <%= form.text_field :next_levels %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.text_field :image %>
-  </div>
-
-  <div class="field">
-    <%= form.label :result %>
-    <%= form.text_field :result %>
-  </div>
-
-  <div class="field">
-    <%= form.label :requirement %>
-    <%= form.text_field :requirement %>
-  </div>
-
-  <div class="field">
-    <%= form.label :game_id %>
-    <%= form.number_field :game_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+ </div>
 <% end %>
+
