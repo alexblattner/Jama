@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2020_04_19_014725) do
 
   create_table "levels", force: :cascade do |t|
     t.string "name"
-    t.string "list_of_event_ids"
+    t.string "event_id"
     t.integer "game_id"
     t.string "doors"
     t.string "description"

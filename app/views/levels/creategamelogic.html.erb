@@ -1,16 +1,25 @@
- 
+ Step 1: Create some doors:
 <%= link_to 'Add doors',adddoor_url(@game_id) %>
-
+<br>
+Edit existing doors:
 <% doors = Door.where(game_id: @game_id) %>
 <% doors.each do |door| %>
-        <%=  door.name%>
+        <%= link_to door.name, editdoor_path(@game_id, door.id)%>
 <% end %>
 
 <br>
-Add doors to these levels:
+<br>
+Step 2: Connect doors to their next levels
+<% doors.each do |door| %>
+        <%=  link_to door.name, assignlevelforone_path(@game_id, door.id)%>
+<% end %>
+<br>
+<br>
+Step 3: Assign doors to each level
 
 <% levels = Level.where(game_id: @game_id) %>
 <% levels.each do |level| %>
         <%=  link_to level.name, assigndoorforone_path(@game_id, level.id)%>
 <% end %>
+<br>
 <%= link_to 'Back to dashboard', leveldashboard_path(@game_id) %>

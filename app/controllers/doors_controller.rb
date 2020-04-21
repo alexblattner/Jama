@@ -65,6 +65,66 @@ class DoorsController < ApplicationController
     end
   end
 
+  def assignlevelforone
+    @door_id = params['door_id']
+    @game_id = params['game_id']
+  end
+
+  def levels_to_names door
+    @names = Array.new
+    if(door.next_levels.to_s.strip.length > 2)
+      level_ids = JSON.parse(door.next_levels)
+      level_ids.each do 
+        |level_id| level = Level.find_by(id: level_id)
+        @names.push(level.name)
+      end
+    end
+    @names
+  end
+  helper_method :levels_to_names
+
+  def queuelevel
+    @game_id = params[:game_id]
+    @level_id = params[:level_id]
+    @door_id = params[:door_id]
+    curr_door = Door.find_by(id: @door_id)
+    curr_levels = Array.new
+    len = curr_door.next_levels.to_s.strip.length
+    
+    #because the default JSON string is "[]"
+    if(len > 2)
+      curr_levels = JSON.parse(curr_door.next_levels)
+    end
+    curr_levels.push(@level_id)
+    curr_door.next_levels = curr_levels.to_json
+    level = Level.find_by(id: @level_id)
+    if(curr_door.save)
+      flash[:success] = "Great, " + level.name + " was added to the list"  
+    end
+    render 'assignlevelforone'
+  end
+
+  def dequeuelevel
+    @game_id = params[:game_id]
+    @door_id = params[:door_id]
+    curr_door = Door.find_by(id: @door_id)
+    len = curr_door.next_levels.to_s.strip.length
+    
+    #because the default JSON string is "[]"
+    if(len <= 2)
+      flash[:fail] = "No levels to remove"
+    else
+      curr_levels = JSON.parse(curr_door.next_levels)
+      curr_level = curr_levels.pop
+      curr_door = Door.find_by(id: curr_door)
+      curr_door.next_levels= curr_levels.to_json
+      if(curr_door.save)
+        flash[:success] = "Great, " + curr_door.name + " was removed from the list"  
+      end
+    end
+    render 'assignlevelforone'
+
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_door

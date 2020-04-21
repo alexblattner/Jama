@@ -13,8 +13,8 @@ class LevelsController < ApplicationController
 
   def events_to_names lev
     @names = Array.new
-    if(lev.list_of_event_ids.to_s.strip.length != 0)
-      event_ids = JSON.parse(lev.list_of_event_ids)
+    if(lev.event_id.to_s.strip.length != 0)
+      event_ids = JSON.parse(lev.event_id)
       event_ids.each do 
         |event_id| event = Event.find_by(id: event_id)
         @names.push(event.name)
@@ -47,14 +47,14 @@ class LevelsController < ApplicationController
     @event_id = params[:event_id]
     curr_level = Level.find_by(id: @level_id)
     curr_event_ids = Array.new
-    len = curr_level.list_of_event_ids.to_s.strip.length
+    len = curr_level.event_id.to_s.strip.length
     
     #because the default JSON string is "[]"
     if(len > 2)
-      curr_event_ids = JSON.parse(curr_level.list_of_event_ids)
+      curr_event_ids = JSON.parse(curr_level.event_id)
     end
     curr_event_ids.push(@event_id)
-    curr_level.list_of_event_ids= curr_event_ids.to_json
+    curr_level.event_id= curr_event_ids.to_json
     event = Event.find_by(id: @event_id)
     if(curr_level.save)
       flash[:success] = "Great, " + event.name + " was added to the list"  
@@ -66,19 +66,16 @@ class LevelsController < ApplicationController
     @game_id = params[:game_id]
     @level_id = params[:level_id]
     curr_level = Level.find_by(id: @level_id)
-    len = curr_level.list_of_event_ids.to_s.strip.length
+    len = curr_level.event_id.to_s.strip.length
     
     #because the default JSON string is "[]"
     if(len <= 2)
       flash[:fail] = "No events to remove"
     else
-      puts "~~~~~~~~~~~~~"
-      puts curr_level.list_of_event_ids.to_s.strip
-      puts "~~~~~~~~~~~~~"
-      curr_event_ids = JSON.parse(curr_level.list_of_event_ids)
+      curr_event_ids = JSON.parse(curr_level.event_id)
       curr_event = curr_event_ids.pop
       curr_event = Event.find_by(id: curr_event)
-      curr_level.list_of_event_ids= curr_event_ids.to_json
+      curr_level.event_id= curr_event_ids.to_json
       if(curr_level.save)
         flash[:success] = "Great, " + curr_event.name + " was removed from the list"  
       end
@@ -124,7 +121,7 @@ class LevelsController < ApplicationController
     else
       curr_doors = JSON.parse(curr_level.doors)
       curr_door = curr_doors.pop
-      curr_door = Event.find_by(id: curr_door)
+      curr_door = Door.find_by(id: curr_door)
       curr_level.doors= curr_doors.to_json
       if(curr_level.save)
         flash[:success] = "Great, " + curr_door.name + " was removed from the list"  
@@ -213,7 +210,6 @@ end
   def assigneventforone
     @game_id = params['game_id']
     @level_id = params['level_id']
-    
   end
   # DELETE /levels/1
   # DELETE /levels/1.json
@@ -233,6 +229,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def level_params
-      params.require(:level).permit(:name, :list_of_event_ids, :game_id, :doors, :description, :level_image)
+      params.require(:level).permit(:name, :event_id, :game_id, :doors, :description, :level_image)
     end
 end
