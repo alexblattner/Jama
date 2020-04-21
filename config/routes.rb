@@ -38,7 +38,17 @@ Rails.application.routes.draw do
   get 'editlevel/:game_id/:level_id', to: 'levels#organizeevents', as: 'editlevel'
   get 'editdoor/:game_id/:id', to: 'doors#edit', as: 'editdoor'
 
-  get '/assignevent/:game_id', to: 'levels#assignevent', as: 'assignevent'
+  get '/assigneventforone/:game_id/:level_id', to: 'levels#assigneventforone', as: 'assigneventforone'
+  get '/queueevent/:game_id/:level_id/:event_id', to: 'levels#queueevent', as: 'queueevent'
+  get '/dequeueevent/:game_id/:level_id', to: 'levels#dequeueevent', as: 'dequeueevent'
+
+  get '/assigndoorforone/:game_id/:level_id', to: 'levels#assigndoorforone', as: 'assigndoorforone'
+  get '/queuedoor/:game_id/:level_id/:door_id', to: 'levels#queuedoor', as: 'queuedoor'
+  get '/dequeuedoor/:game_id/:level_id', to: 'levels#dequeuedoor', as: 'dequeuedoor'
+
+  get '/assigneventforall/:game_id', to: 'levels#assigneventforall', as: 'assigneventforall'
+  get '/creategamelogic/:game_id', to: 'levels#creategamelogic', as: 'creategamelogic'
   get '/organize/:game_id' , to: 'levels#organize', as: 'organizelevel'
   get '/levels/dashboard/:game_id', to: 'levels#dashboard', as: 'leveldashboard'
+
 end

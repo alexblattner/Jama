@@ -24,6 +24,19 @@ class LevelsController < ApplicationController
   end
   helper_method :events_to_names
 
+  def doors_to_names lev
+    @names = Array.new
+    if(lev.doors.to_s.strip.length > 2)
+      door_ids = JSON.parse(lev.doors)
+      door_ids.each do 
+        |door_id| door = Door.find_by(id: door_id)
+        @names.push(door.name)
+      end
+    end
+    @names
+  end
+  helper_method :doors_to_names
+
   def creategamelogic
     @game_id = params[:game_id]
   end
@@ -71,6 +84,53 @@ class LevelsController < ApplicationController
       end
     end
     render 'assigneventforone'
+
+  end
+
+  def assigndoorforone
+    @level_id = params['level_id']
+    @game_id = params['game_id']
+  end
+  def queuedoor
+    @game_id = params[:game_id]
+    @level_id = params[:level_id]
+    @door_id = params[:door_id]
+    curr_level = Level.find_by(id: @level_id)
+    curr_doors = Array.new
+    len = curr_level.doors.to_s.strip.length
+    
+    #because the default JSON string is "[]"
+    if(len > 2)
+      curr_doors = JSON.parse(curr_level.doors)
+    end
+    curr_doors.push(@door_id)
+    curr_level.doors = curr_doors.to_json
+    door = Door.find_by(id: @door_id)
+    if(curr_level.save)
+      flash[:success] = "Great, " + door.name + " was added to the list"  
+    end
+    render 'assigndoorforone'
+  end
+
+  def dequeuedoor
+    @game_id = params[:game_id]
+    @level_id = params[:level_id]
+    curr_level = Level.find_by(id: @level_id)
+    len = curr_level.doors.to_s.strip.length
+    
+    #because the default JSON string is "[]"
+    if(len <= 2)
+      flash[:fail] = "No doors to remove"
+    else
+      curr_doors = JSON.parse(curr_level.doors)
+      curr_door = curr_doors.pop
+      curr_door = Event.find_by(id: curr_door)
+      curr_level.doors= curr_doors.to_json
+      if(curr_level.save)
+        flash[:success] = "Great, " + curr_door.name + " was removed from the list"  
+      end
+    end
+    render 'assigndoorforone'
 
   end
   
