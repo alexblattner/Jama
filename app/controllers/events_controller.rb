@@ -15,8 +15,6 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    @event.level = Level.find(params[:level_id])
-    @event.game = Game.find(params[:game_id])
   end
 
   # GET /events/1/edit
@@ -27,11 +25,6 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-    puts "111"
-    puts event_params
-    puts "111"
-    @event.level = Level.find(event_params[:level_id])
-    @event.game = Game.find(event_params[:game_id])
     if @event.save
       flash[:success] = "Get new event created."
       if params[:commit] == 'Continue to add event'

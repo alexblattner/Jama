@@ -22,8 +22,35 @@ class EventInstancesController < ApplicationController
         @event_instance.save
         json=JSON.parse(@event.result)
         hero_update(json,@hero)
+        e=@event
+      elsif @event.event_type=="fight"
+        @gamestate=Gamestate.find_by(id: @event_instance.gamestate_id)
+        @hero=Hero.find_by(id: @gamestate.hero_id)
+        p=@event_instance.progress
+        if p!="0"
+          h=@event_instance.progress.delete_suffix('hp').to_i
+          s=stats_calc(@hero.exp,@hero.hp)
+          h=h-(s['level']*10)
+          if h<=0
+            @event_instance.progress="1"
+          else
+            @event_instance.progress=h.to_s+"hp"
+          end
+          @event_instance.save
+          json=JSON.parse(@event.result)
+          json=(h<=0)?json['death']:json['attack']
+          hero_update(json,@hero)
+        else
+          json=JSON.parse(@event.result)
+          @event_instance.progress=json['hp'].to_s+"hp"
+          @event_instance.save
+        end
+        e=@event.to_json
+        e=JSON.parse(e)
+        p=@event_instance.progress
+        e['progress']=p
       end
-      render json: @event.to_json()
+      render json: e.to_json()
       
     else
       render json: {}.to_json()
