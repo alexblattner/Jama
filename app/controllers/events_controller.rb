@@ -15,7 +15,6 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    
     @event.game_id = params[:game_id]
   end
 

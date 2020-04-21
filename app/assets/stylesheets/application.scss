@@ -15,7 +15,7 @@
  */
 @import "bootstrap";
 #game-screen{
-  width:500px;height:350px;position:relative;
+  width:550px;height:350px;position:relative;
 }
 #background-image{
   height:100%;width:100%;position:absolute;
@@ -26,13 +26,16 @@
 #hero{
   max-width:100px;max-height:100px;background:green;position:absolute;bottom:20px;left:50px;
 }
-#health-bar{
+#enemy{
+  max-width:100px;max-height:100px;background:green;position:absolute;bottom:20px;right:50px;
+}
+.health-bar{
   width:90%;height:20%;border: 1px black solid;position:relative;
 }
-#health-bar div{
+.health-bar div{
   height:100%;
 }
-#health-bar span{
+.health-bar span{
   position:absolute; color:white;line-height:90%;font-size:8pt;
 }
 #exp-bar{
@@ -46,6 +49,9 @@
 }
 #hero-info{
   width:40%;position:absolute;background: grey;height:20%;
+}
+#enemy-info{
+  width:40%;position:absolute;background: grey;height:20%;right:0;
 }
 #doors-holder{
   position:absolute;height:100%;width:100%;line-height:350px;

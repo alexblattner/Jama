@@ -146,9 +146,13 @@ class LevelsController < ApplicationController
   end
   
   def doors
-    if params.has_key? "level"
-      l=Level.find_by(id: params['level'])
+    if params.has_key? "id"
+      g=Gamestate.find_by(id: params['id'])
+      l=Level.find_by(id: g.level_id)
+      arr=[]
+      if l.doors.length>0
       arr=JSON.parse(l.doors)
+      end
       if arr.length>0
         i=1
         w="id='#{arr[0]}'"
