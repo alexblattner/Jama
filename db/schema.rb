@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2020_04_19_014725) do
     t.string "hp"
     t.string "exp"
     t.string "gold"
+    t.string "requirement"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -103,7 +104,7 @@ ActiveRecord::Schema.define(version: 2020_04_19_014725) do
 
   create_table "levels", force: :cascade do |t|
     t.string "name"
-    t.string "list_of_event_ids"
+    t.string "event_id"
     t.integer "game_id"
     t.string "doors"
     t.string "description"
