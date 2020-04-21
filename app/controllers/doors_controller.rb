@@ -12,10 +12,12 @@ class DoorsController < ApplicationController
   # GET /doors/1.json
   def show
   end
-
+ 
   # GET /doors/new
   def new
     @door = Door.new
+    @door.game_id = params[:game_id]
+
   end
 
   # GET /doors/1/edit
@@ -69,28 +71,30 @@ class DoorsController < ApplicationController
   def create
     @door = Door.new(door_params)
 
-    respond_to do |format|
-      if @door.save
-        format.html { redirect_to @door, notice: 'Door was successfully created.' }
-        format.json { render :show, status: :created, location: @door }
+    if @door.save
+      flash[:success] = "Great! New door created."
+      if params[:commit] == 'Finish this door and return to game logic'
+        redirect_to creategamelogic_url(@door.game_id)
       else
-        format.html { render :new }
-        format.json { render json: @door.errors, status: :unprocessable_entity }
+        redirect_to adddoor_url(@door.game_id)
       end
-    end
+    else
+      render "new"
+  end
   end
 
   # PATCH/PUT /doors/1
   # PATCH/PUT /doors/1.json
   def update
-    respond_to do |format|
-      if @door.update(door_params)
-        format.html { redirect_to @door, notice: 'Door was successfully updated.' }
-        format.json { render :show, status: :ok, location: @door }
+    if @door.update(door_params)
+      flash[:success] = "Great! Door updated."
+      if params[:commit] == 'Finish this door and return to dashboard'
+        redirect_to leveldashboard_url(@door.game_id)
       else
-        format.html { render :edit }
-        format.json { render json: @door.errors, status: :unprocessable_entity }
+        redirect_to adddoor_url(@door.game_id)
       end
+    else
+      render "edit"
     end
   end
 

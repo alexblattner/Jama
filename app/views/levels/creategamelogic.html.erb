@@ -1,0 +1,16 @@
+ 
+<%= link_to 'Add doors',adddoor_url(@game_id) %>
+
+<% doors = Door.where(game_id: @game_id) %>
+<% doors.each do |door| %>
+        <%=  door.name%>
+<% end %>
+
+<br>
+Add doors to these levels:
+
+<% levels = Level.where(game_id: @game_id) %>
+<% levels.each do |level| %>
+        <%=  link_to level.name, assigndoorforone_path(@game_id, level.id)%>
+<% end %>
+<%= link_to 'Back to dashboard', leveldashboard_path(@game_id) %>

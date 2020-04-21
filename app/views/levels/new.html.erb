@@ -1,5 +1,5 @@
-<h1>New Level</h1>
+<h1 align = "center">New Level</h1>
 
 <%= render 'form', level: @level %>
+<%= link_to 'Back to the dashboard', leveldashboard_path(@level.game_id) %>
 
-<%= link_to 'Back', levels_path %>

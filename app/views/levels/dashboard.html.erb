@@ -1,0 +1,37 @@
+<p style="font-size:45px">
+ DASHBOARD 
+</p>
+<br> </br>
+<p style="font-size:30px">
+<% levels = Level.where(game_id: @game_id) %>
+<% levels.each do |level| %>
+        <% if (level.level_image.attached?) %>
+                <%= link_to image_tag(level.level_image, :height =>"47", :width => "70"), editlevel_path(@game_id, level.id)  %>
+        <% else %>
+                <%= link_to level.name, editlevel_path(@game_id, level.id) %>
+        <% end %>
+<% end %>
+<%= link_to 'Add level', addlevel_path(@game_id) %>
+<br></br>
+<b>
+
+<% events = Event.where(game_id: @game_id) %>
+<% events.each do |event| %>
+        <%=  link_to event.name, editevent_url(@game_id, event.id) %>
+<% end %>
+<%= link_to 'Add event', addevent_path(@game_id) %>
+
+</b>
+
+<br>
+<%= link_to 'Add events to levels',assigneventforall_url(@game_id) %>
+
+<br> 
+<br>
+<%= link_to 'Add doors to the game', creategamelogic_path(@game_id) %>
+<br> </br>
+
+
+
+
+</p>

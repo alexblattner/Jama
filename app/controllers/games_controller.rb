@@ -10,17 +10,40 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    render "new"
   end
 
   # GET /games/new
   def new
     @game = Game.new
   end
+  
+  def all
+    @games = Game.all
+    render "all"
+  end
 
   # GET /games/1/edit
   def edit
   end
 
+  def verify
+
+# Create a new graph
+g = GraphViz.new( :G, :type => :digraph )
+
+# Create two nodes
+hello = g.add_nodes( "Hello" )
+world = g.add_nodes( "World" )
+
+# Create an edge between the two nodes
+g.add_edges( hello, world )
+
+# Generate output image
+g.output( :png => "hello_world.png" )
+  puts "**************************"
+  puts "************************"
+  end 
   # POST /games
   # POST /games.json
   def create
@@ -28,7 +51,7 @@ class GamesController < ApplicationController
     if @game.save
         flash[:success] = "Great! New game created, let's add some levels to the game."
         #puts @game.id 
-        redirect_to addlevel_url(@game.id)
+        redirect_to leveldashboard_url(@game.id)
     else
         render "new"
     end
@@ -66,6 +89,6 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:game_name, :start_level_id, :description, :admin_id, :image_url, :popularity)
+      params.require(:game).permit(:game_name, :start_level_id, :description, :admin_id, :image_url, :popularity, :game_image)
     end
 end

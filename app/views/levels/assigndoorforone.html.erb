@@ -1,0 +1,40 @@
+Assign doors to this level:
+<br>
+<% @level = Level.find_by(id: @level_id) %>
+
+
+Available Doors:
+<% @doors = Door.where(game_id: @game_id) %>
+<% @door_names = Array.new %>
+<% if !@doors.nil? %>
+    <% @doors.each do |door| %>
+        <%= link_to door.name, queuedoor_path(@game_id, @level_id, door.id) %>
+        <% @door_names.push(door.name) %>
+        <%= door.result %>
+    <% end %>
+    <% @level.name %>
+
+<br>
+<% else %>
+        You don't have any doors
+        <%= link_to 'Go back and make some doors', adddoor_path(@game_id) %>
+        <%= link_to 'Back to the dashboard', leveldashboard_path(@game_id) %>
+<% end %>
+<% @names = doors_to_names(@level) %>
+    Doors currently assigned to this level: 
+    <br>
+    <% @names.each do |name| %>
+        <%= name %>
+        <br>
+<% end %>
+    
+<br> 
+<%= link_to "Remove the last door", dequeuedoor_path(@game_id, @level_id) %>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<%= link_to 'Finish adding doors for this level and choose a different level', creategamelogic_path(@game_id) %>
