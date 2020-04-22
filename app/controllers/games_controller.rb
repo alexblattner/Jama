@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
+  include UsersHelper
+  include SessionsHelper
 
   # GET /games
   # GET /games.json
@@ -48,6 +50,7 @@ g.output( :png => "hello_world.png" )
   # POST /games.json
   def create
     @game = Game.new(game_params)
+    @game.admin_id = session['user_id']
     if @game.save
         flash[:success] = "Great! New game created, let's add some levels to the game."
         #puts @game.id 
