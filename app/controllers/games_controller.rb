@@ -24,6 +24,19 @@ class GamesController < ApplicationController
     @games = Game.all
     render "all"
   end
+  def startinglevel
+    @game_id = params[:game_id]
+    @level_id = params[:level_id]
+    @game = Game.find_by(id: @game_id)
+    @game.start_level_id = @level_id
+    if(@game.save)
+      flash[:success] = "Starting level set"
+    else
+      flash[:fail] = "Failed to set starting level"
+    end
+    render 'levels/designatestart', game_id: @game_id
+  end
+
 
   # GET /games/1/edit
   def edit

@@ -167,6 +167,10 @@ class LevelsController < ApplicationController
     end
   end
 
+  def designatestart
+    @game_id = params['game_id']
+    @game = Game.find_by(id: @game_id)
+  end
   def organizeevents
     puts "************"
     puts params
