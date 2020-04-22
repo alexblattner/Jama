@@ -1,0 +1,15 @@
+<% levels = Level.where(game_id: @game_id) %>
+
+<% levels.each do |level| %>
+        <% if (level.level_image.attached?) %>
+                <% if(@game.start_level_id == level.id) %>
+                    <div style="width:75px;height:52px;border:2px solid #000;"> <%= link_to image_tag(level.level_image, :height =>"47", :width => "70"), startinglevel_path(@game_id, level.id)  %> </div>
+                <% else %> 
+                    <%= link_to image_tag(level.level_image, :height =>"47", :width => "70"), startinglevel_path(@game_id, level.id)  %>
+                <% end %>
+        <% else %>
+                <%= link_to level.name, startinglevel_path(@game_id, level.id) %>
+        <% end %>
+<% end %>
+
+<%= link_to "Return to dashboard", leveldashboard_path(@game_id) %>

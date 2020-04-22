@@ -15,9 +15,7 @@
  
    <%= form.label(:game_id, "Game ID") %>
    <%= form.text_field :game_id, class: 'form-control' %>
-   <%= form.label :event_type %>
-   <%= form.select :event_type, ['direct', 'store', 'fight']%>
-   <br> </br>
+  
    <%= form.label :name %>
    <%= form.text_field :name, class: 'form-control' %>
  
@@ -26,12 +24,44 @@
  
    <%= form.label :image %>
    <%= form.text_field :image, class: 'form-control' %>
-   <%= form.label :hp %>
-   <%= form.text_field :hp, class: 'form-control' %>
-   <%= form.label :exp %>
-   <%= form.text_field :exp, class: 'form-control' %>
-   <%= form.label :gold %>
-   <%= form.text_field :gold, class: 'form-control' %>
+    <form action="" id="events">
+    <select name="event_type" id="event_selector">
+        <option value="direct">direct</option>
+        <option value="fight">fight</option>
+    </select>
+    <p>&nbsp;</p>
+    <% @json = get_json %>
+    <label class="hidden_option">Enemy HP:</label>
+    <input type="text" name="enemy_hp" class="hidden_option" value= <%= @json.try(:[], 'hp') || 0 %> />
+    <br>
+     <label class="hidden_option">Damage dealt per attack:</label>
+    <input type="text" name="enemy_attack_hp" class="hidden_option" value= <%= @json.try(:[], 'attack').try(:[], 'hp') || 0 %> />
+    <br>
+    <label class="hidden_option">Exp loss per attack:</label>
+    <input type="text" name="enemy_attack_exp" class="hidden_option" value= <%= @json.try(:[], 'attack').try(:[], 'exp') || 0 %> />
+    <br>
+    <label class="hidden_option">Gold loss per attack:</label>
+    <input type="text" name="enemy_attack_gold" class="hidden_option" value= <%= @json.try(:[], 'attack').try(:[], 'gold') || 0 %> />
+    <br> 
+    <label class="hidden_option">HP gained on death:</label>
+    <input type="text" name="enemy_death_hp" class="hidden_option" value= <%= @json.try(:[], 'death').try(:[], 'hp') || 0 %> />
+    <br>
+    <label class="hidden_option">EXP dropped on death:</label>
+    <input type="text" name="enemy_death_exp" class="hidden_option" value= <%= @json.try(:[], 'death').try(:[], 'exp') || 0%> />
+    <br>
+    <label class="hidden_option">Gold on death:</label>
+    <input type="text" name="enemy_death_gold" class="hidden_option" value= <%= @json.try(:[], 'death').try(:[], 'gold') || 0 %> />
+    <br>
+    
+    <label class="shown_option">HP:</label>
+    <input type="text" name="hp" class="shown_option" value= <%= @json.try(:[], 'hp') || 0 %> />
+    <br>
+    <label class="shown_option">Exp:</label>
+    <input type="text" name="exp" class="shown_option" value= <%= @json.try(:[], 'exp') || 0 %> />
+    <br>
+    <label class="shown_option">Gold:</label>
+    <input type="text" name="gold" class="shown_option" value= <%= @json.try(:[], 'gold') || 0 %> />
+
    <%= form.submit "Create this event", class: "btn btn-success" %>
    <div>
     <h1>   </h1>
@@ -40,4 +70,17 @@
     </div>
  </div>
 <% end %>
-
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#event_selector").change(function(){
+        if($("#event_selector").val() == "fight"){
+          $(".hidden_option").show('fast');
+          $(".shown_option").hide('fast');   
+        }
+        else{
+        	$(".hidden_option").hide('fast');
+          $(".shown_option").show('fast');   
+        }
+    });        
+});
+</script>
