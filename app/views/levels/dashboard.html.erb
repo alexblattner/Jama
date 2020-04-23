@@ -5,7 +5,8 @@
 
 <div class="container">
         <h2>Add Levels</h2>
-        <%= link_to 'Add a level', addlevel_path(@game_id) %>
+        <%= link_to(image_tag("plussign.png", :height =>"70", :width => "70"), addlevel_path(@game_id)) %>
+        <!-- <%= link_to 'Add a level', addlevel_path(@game_id) %> -->
         <% levels = Level.where(game_id: @game_id) %>
         <% levels.each do |level| %>
                 <% if (level.level_image.attached?) %>
@@ -18,7 +19,7 @@
 </div>
 <div class="container">
         <h2>Add Events</h2>
-        <%= link_to 'Add a event', addevent_path(@game_id) %>
+        <%= link_to(image_tag("plussign.png", :height =>"70", :width => "70"), addevent_path(@game_id)) %>
         <% events = Event.where(game_id: @game_id) %>
         <% events.each do |event| %>
                 <%=  link_to event.name, editevent_url(@game_id, event.id) %>

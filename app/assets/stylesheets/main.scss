@@ -1,50 +1,25 @@
 // Place all the styles related to the main controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-* {
-    box-sizing: border-box;
-  }
-  
-  /* Style the search field */
-  form.example input[type=text] {
-    padding: 10px;
-    font-size: 17px;
-    border: 1px solid grey;
-    float: left;
-    width: 80%;
-    background: #f1f1f1;
-  }
-  
-  /* Style the submit button */
-  form.example button {
-    float: left;
-    width: 20%;
-    padding: 10px;
-    background: coral;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none; /* Prevent double borders */
-    cursor: pointer;
-  }
-  
-  form.example button:hover {
-    background: #0b7dda;
-  }
-  
-  /* Clear floats */
-  form.example::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
 
-  
-.buttonpos {
-    display: flex;
-    align-items: center;
-    background: red;
-   
-  }
-  
-  
+// spacing
+
+body { 
+  padding-top: 200px;
+  background-image: image-url('landing.png');
+}
+
+h1 {
+  color: black !important;
+}
+
+.jumbotron {
+  background-color:transparent !important; 
+}
+
+  //learn more butotn
+.btn-lg {
+  padding: 15px 30px!important;
+  font-size: 20px!important;
+  border-radius: 10px!important;
+}
