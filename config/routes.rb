@@ -57,4 +57,8 @@ Rails.application.routes.draw do
   get 'designatestart/:game_id', to: 'levels#designatestart', as: 'designatestart'
   get '/levels/dashboard/:game_id', to: 'levels#dashboard', as: 'leveldashboard'
   get '/startinglevel/:game_id/:level_id', to: 'games#startinglevel', as: 'startinglevel'
+
+
+
+
 end

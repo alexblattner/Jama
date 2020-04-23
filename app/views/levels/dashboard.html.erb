@@ -1,75 +1,85 @@
-<div class="container p-3 my-3 bg-dark text-white"></div>
+<div class="container">
         <h1>Dashboard</h1>
         <p>This is the dashboard for your game creation</p>
 </div>
-<br>
-<p style="font-size:30px">
-<% levels = Level.where(game_id: @game_id) %>
-<% levels.each do |level| %>
-        <% if (level.level_image.attached?) %>
-                <%= link_to image_tag(level.level_image, :height =>"47", :width => "70"), editlevel_path(@game_id, level.id)  %>
-        <% else %>
-                <%= link_to level.name, editlevel_path(@game_id, level.id) %>
+
+<div class="container">
+        <h2>Add Levels</h2>
+        <%= link_to 'Add a level', addlevel_path(@game_id) %>
+        <% levels = Level.where(game_id: @game_id) %>
+        <% levels.each do |level| %>
+                <% if (level.level_image.attached?) %>
+                        <%= link_to image_tag(level.level_image, :height =>"47", :width => "70"), editlevel_path(@game_id, level.id)  %>
+                <% else %>
+                        <%= link_to level.name, editlevel_path(@game_id, level.id) %>
+                <% end %>
         <% end %>
-<% end %>
-<%= link_to 'Add level', addlevel_path(@game_id) %>
-<br></br>
-<b>
-
-<% events = Event.where(game_id: @game_id) %>
-<% events.each do |event| %>
-        <%=  link_to event.name, editevent_url(@game_id, event.id) %>
-<% end %>
-<%= link_to 'Add event', addevent_path(@game_id) %>
-
-</b>
-<br>
-<br>
-<h1> Assign events to levels </h1>
-Here are the levels that need events assigned
-<% @unassigned_levels = Level.where(game_id: @game_id, event_id: [nil, "[]", ""]) %>
-<% @assigned_levels = Level.where(game_id: @game_id).where.not(event_id: [nil, "[]", ""]) %>
-<br>
-Levels with assigned events
-<br> 
-<% @assigned_levels.each do |level| %>
-        <% level %>
-        <%= link_to level.name, assigneventforone_path(@game_id, level.id) %>
-        <% if (level.level_image.attached?) %>
-                <%= link_to image_tag(level.level_image, :height =>"47", :width => "70"), assigneventforone_path(@game_id, level.id)  %>
+        <hr>
+</div>
+<div class="container">
+        <h2>Add Events</h2>
+        <%= link_to 'Add a event', addevent_path(@game_id) %>
+        <% events = Event.where(game_id: @game_id) %>
+        <% events.each do |event| %>
+                <%=  link_to event.name, editevent_url(@game_id, event.id) %>
         <% end %>
-<% end %>
+        <hr>
+</div>
+
+<div class="container">
+        <div class = 'row'>
+                <h2> Event Assignments </h2>
+        </div> 
+        <% @unassigned_levels = Level.where(game_id: @game_id, event_id: [nil, "[]", ""]) %>
+        <% @assigned_levels = Level.where(game_id: @game_id).where.not(event_id: [nil, "[]", ""])%>
+        <div class='col'>
+                <h4>Levels with assigned events</h4>
+                <br> 
+                <% @assigned_levels.each do |level| %>
+                        <% level %>
+                        <%= link_to level.name, assigneventforone_path(@game_id, level.id) %>
+                        <% if (level.level_image.attached?) %>
+                                <%= link_to image_tag(level.level_image, :height =>"47", :width => "70"), assigneventforone_path(@game_id, level.id)  %>
+                        <% end %>
+                <% end %>
+        </div>
+        <div class='col'>
+                <h4>Levels without assigned events</h4>
+                <% @unassigned_levels.each do |level| %>
+                        <% level %>
+                        <% if (level.level_image.attached?) %>
+                                <%= link_to image_tag(level.level_image, :height =>"47", :width => "70"), assigneventforone_path(@game_id, level.id)  %>
+                        <% else %>
+                                <%= link_to level.name, assigneventforone_path(@game_id, level.id) %>
+                        <% end %>
+                <% end %>
+        </div>
+</div>
+
 <br>
-Levels without assigned events
-<% @unassigned_levels.each do |level| %>
-        <% level %>
-        <% if (level.level_image.attached?) %>
-                <%= link_to image_tag(level.level_image, :height =>"47", :width => "70"), assigneventforone_path(@game_id, level.id)  %>
-        <% else %>
-                <%= link_to level.name, assigneventforone_path(@game_id, level.id) %>
+
+<div class='container'>
+        <h2>Add doors to the game</h2>
+        <%= link_to 'Add doors to the game', creategamelogic_path(@game_id) %>
+</div>
+
+<br>
+
+<div class='container'>
+        <h2>Designate starting level</h2>
+        <%= link_to 'Designate starting level', designatestart_path(@game_id)%> 
+        <% @game = Game.find_by(id: @game_id) %>
+        <% @start_level = Level.find_by(id: @game.start_level_id) %>
+        <br> 
+        <% if(!@start_level.nil?) %>
+                Starting level is <%= @start_level.name %>
+                <% if(@start_level.level_image.attached?) %>
+                        <%= image_tag(@start_level.level_image, :height =>"47", :width => "70") %>
+                <% end %>
         <% end %>
-<% end %>
-<br></br>
+</div>
 
-<br></br>
-
-<br> 
 <br>
-<%= link_to 'Add doors to the game', creategamelogic_path(@game_id) %>
-<br>
-<br>
-
-<%= link_to 'Designate starting level', designatestart_path(@game_id)%> 
-<% @game = Game.find_by(id: @game_id) %>
-<% @start_level = Level.find_by(id: @game.start_level_id) %>
-<br> 
-<% if(!@start_level.nil?) %>
-         Starting level is <%= @start_level.name %>
-        <% if(@start_level.level_image.attached?) %>
-                <%= image_tag(@start_level.level_image, :height =>"47", :width => "70") %>
-        <% end %>
-<% end %>
-<br>
-<%= link_to 'Finish game', allgames_path %>
-
-</p>
+<div class='container'>
+        <%= link_to "Finish game", allgames_path, class: "btn btn-success btn-lg" %>
+</div>

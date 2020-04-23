@@ -3,6 +3,8 @@ before_action :set_gamestate, only: [:show, :edit, :update, :destroy]
 require 'json'
 include GamestatesHelper
 include HeroesHelper
+include SessionsHelper
+
   # GET /gamestates
   # GET /gamestates.json
   def index
