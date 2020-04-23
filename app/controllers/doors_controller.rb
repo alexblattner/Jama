@@ -23,7 +23,7 @@ class DoorsController < ApplicationController
     @result_json['gold'] = "0"
     @req_json = Hash.new
     @req_json['hp'] = ">0"
-    @req_json['exp'] = ">0"
+    @req_json['rank'] = ">0"
     @req_json['gold'] = ">0"
     @door.result = @result_json.to_json
     @door.requirement = @req_json.to_json
@@ -106,7 +106,7 @@ class DoorsController < ApplicationController
       req += "\"" + params['door_req_hp_operator'].to_s
       req += params['door_req_hp'] + "\""
     end
-    req += ",\"exp\":"
+    req += ",\"rank\":"
     if(params['door_req_rank'].nil?)
       result += "\">0\""
     else

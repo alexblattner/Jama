@@ -28,8 +28,7 @@ class HeroesController < ApplicationController
 
     respond_to do |format|
       if @hero.save
-        format.html { redirect_to @hero, notice: 'Hero was successfully created.' }
-        format.json { render :show, status: :created, location: @hero }
+        redirect_to leveldashboard_url
       else
         format.html { render :new }
         format.json { render json: @hero.errors, status: :unprocessable_entity }
@@ -69,6 +68,6 @@ class HeroesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hero_params
-      params.require(:hero).permit(:name, :exp, :hp, :gold, :image)
+      params.require(:hero).permit(:name, :exp, :hp, :gold, :hero_image)
     end
 end

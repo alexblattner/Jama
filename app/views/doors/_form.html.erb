@@ -15,9 +15,8 @@
     
 
 
+   <%= form.hidden_field :game_id, :value => params[:game_id] %>
    
-   <%= form.label(:game_id, "Game ID") %>
-   <%= form.text_field :game_id, class: 'form-control' %>
     <%= form.label(:name, "Current door Name") %>
    <%= form.text_field :name, class: 'form-control' %>
    <%= form.label(:description, "Description") %>
@@ -40,11 +39,11 @@
    <br>
    <label class="door_req">Rank:</label>
    <select name="door_req_rank_operator" id="door_selector" style="width: 30px;">
-    <option value=">" <%= if (@req_json['exp'][0] == ">") then "selected" end %> > &gt; </option>
-    <option value="<" <%= if (@req_json['exp'][0] == "<") then "selected" end %> > &lt; </option>
-    <option value="=" <%= if (@req_json['exp'][0] == "=") then "selected" end %> > = </option>
+    <option value=">" <%= if (@req_json['rank'][0] == ">") then "selected" end %> > &gt; </option>
+    <option value="<" <%= if (@req_json['rank'][0] == "<") then "selected" end %> > &lt; </option>
+    <option value="=" <%= if (@req_json['rank'][0] == "=") then "selected" end %> > = </option>
    </select>
-   <input type="text" name="door_req_rank" class="door_req" value= <%= @req_json.try(:[], 'exp').try(:[], 1..) || 0 %> />
+   <input type="text" name="door_req_rank" class="door_req" value= <%= @req_json.try(:[], 'rank').try(:[], 1..) || 0 %> />
    <br>
    <label class="door_req">Gold:</label>
    <select name="door_req_gold_operator" id="door_selector" style="width: 30px;">

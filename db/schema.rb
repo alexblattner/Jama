@@ -64,9 +64,7 @@ ActiveRecord::Schema.define(version: 2020_04_19_014725) do
     t.string "event_type"
     t.string "image"
     t.string "game_id"
-    t.string "hp"
-    t.string "exp"
-    t.string "gold"
+    t.string "requirement"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
