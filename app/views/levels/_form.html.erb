@@ -13,8 +13,8 @@
    </div>
  <% end %>
  
-   <%= form.label(:game_id, "Game ID") %>
-   <%= form.text_field :game_id, class: 'form-control' %>
+ <%= form.hidden_field :game_id, :value => params[:game_id] %>
+
     <%= form.label(:name, "Current Level Name") %>
    <%= form.text_field :name, class: 'form-control' %>
    <%= form.label(:description, "Description") %>
