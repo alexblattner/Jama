@@ -164,11 +164,7 @@ class EventsController < ApplicationController
     if params['event_type'] == "fight"
       @event.result = createFightJSON(params)
     else
-      puts @event.result
-      puts "~~~~~~~~****************"
       @event.result = createDirectJSON(params)
-      puts params
-      puts @event.result
     end
     @result_json = @event.result
     if @event.update(event_params)
@@ -178,6 +174,8 @@ class EventsController < ApplicationController
       else
         redirect_to addevent_url(@event.game_id)
       end
+    else
+      render "edit"
     end
   end
 

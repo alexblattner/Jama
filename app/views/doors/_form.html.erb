@@ -12,7 +12,10 @@
      </ul>
    </div>
  <% end %>
- 
+    
+
+
+   
    <%= form.label(:game_id, "Game ID") %>
    <%= form.text_field :game_id, class: 'form-control' %>
     <%= form.label(:name, "Current door Name") %>
@@ -23,10 +26,44 @@
         <%= form.label :door_image %>
         <%= form.file_field :door_image %>
    </div>
-   <%= form.label(:result, "Result") %>
-   <%= form.text_field :result, class: 'form-control' %>
-   <%= form.label(:requirement, "Requirement") %>
-   <%= form.text_field :requirement, class: 'form-control' %>
+   <% @req_json = get_req_json %>
+   <% @result_json = get_result_json %>
+   Requirements to enter:
+   <br>
+   <label class="door_req">HP:</label>
+   <select name="door_req_hp_operator" id="door_selector"  style="width: 30px;">
+      <option value=">" <%= if (@req_json['hp'][0] == ">") then "selected" end %> > &gt; </option>
+      <option value="<" <%= if (@req_json['hp'][0] == "<") then "selected" end %> > &lt; </option>
+      <option value="=" <%= if (@req_json['hp'][0] == "=") then "selected" end %> > = </option>
+   </select>
+   <input type="text" name="door_req_hp" class="door_req" value= <%= @req_json.try(:[], 'hp').try(:[], 1..) || 0 %> />
+   <br>
+   <label class="door_req">Rank:</label>
+   <select name="door_req_rank_operator" id="door_selector" style="width: 30px;">
+    <option value=">" <%= if (@req_json['exp'][0] == ">") then "selected" end %> > &gt; </option>
+    <option value="<" <%= if (@req_json['exp'][0] == "<") then "selected" end %> > &lt; </option>
+    <option value="=" <%= if (@req_json['exp'][0] == "=") then "selected" end %> > = </option>
+   </select>
+   <input type="text" name="door_req_rank" class="door_req" value= <%= @req_json.try(:[], 'exp').try(:[], 1..) || 0 %> />
+   <br>
+   <label class="door_req">Gold:</label>
+   <select name="door_req_gold_operator" id="door_selector" style="width: 30px;">
+      <option value=">" <%= if (@req_json['gold'][0] == ">") then "selected" end %> > &gt; </option>
+      <option value="<" <%= if (@req_json['gold'][0] == "<") then "selected" end %> > &lt; </option>
+      <option value="=" <%= if (@req_json['gold'][0] == "=") then "selected" end %> > = </option>
+   </select>
+   <input type="text" name="door_req_gold" class="door_req" value= <%= @req_json.try(:[], 'gold').try(:[], 1..) || 0 %> />
+   <br>
+   Result on entering:
+   <br>
+   <label class="door_result">HP gained or lost:</label>
+   <input type="text" name="door_result_hp" class="door_result" value= <%= @result_json.try(:[], 'hp') || 0 %> />
+   <br>
+   <label class="door_result">EXP gained or lost:</label>
+   <input type="text" name="door_result_exp" class="door_result" value= <%= @result_json.try(:[], 'exp') || 0 %> />
+   <br>
+   <label class="door_result">Gold gained or lost:</label>
+   <input type="text" name="door_result_gold" class="door_result" value= <%= @result_json.try(:[], 'gold') || 0 %> />
     <%= form.submit "Finish this door and return to game logic", class: "btn btn-success" %>
    <div>
     <h1>   </h1>
