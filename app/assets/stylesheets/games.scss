@@ -1,35 +1,46 @@
 // Place all the styles related to the games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+h1 {
+    color: rgb(0, 0, 0);
+}
 
-h1   {color: rgb(0, 0, 0);}
-h3   {color: rgb(0, 0, 0);}
-h4   {color: rgb(0, 0, 0);}
-p    {color: rgb(0, 0, 0);}
+h3 {
+    color: rgb(0, 0, 0);
+}
+
+h4 {
+    color: rgb(0, 0, 0);
+}
+
+p {
+    color: rgb(0, 0, 0);
+    text-align: 20%
+}
 
 a:link {
-    color: green;
+    color: black;
     background-color: transparent;
     text-decoration: none;
 }
 
 .card {
-  box-shadow: 0 4px 8px 0 rgb(245, 245, 245);
-  background-color: rgb(245,245,245)!important;
-  max-width: 300px;
-  margin: auto;
-  text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(245, 245, 245);
+    background-color: rgb(245, 245, 245)!important;
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
 }
 
 .title {
-  color: rgb(0, 0, 0);
-  font-size: 18px;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
 }
 
 .column {
-  float: left;
-  width: 25%;
-  padding: 0 10px;
+    float: left;
+    width: 25%;
+    padding: 0 10px;
 }
 
 .row {
@@ -37,7 +48,7 @@ a:link {
 }
 
 .row:after {
-  content: "";
-  display: table;
-  clear: both;
+    content: "";
+    display: table;
+    clear: both;
 }

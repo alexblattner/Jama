@@ -7,6 +7,8 @@
 body { 
   padding-top: 200px;
   background-image: image-url('landing.png');
+  background-repeat:repeat-x;
+  background-attachment:fixed;
 }
 
 h1 {
@@ -21,5 +23,35 @@ h1 {
 .btn-lg {
   padding: 15px 30px!important;
   font-size: 20px!important;
-  border-radius: 10px!important;
+  border-radius: 15px!important;
+}
+
+hr {
+  border-color: black!important;
+  border-width: 8px!important;
+  max-width:10%!important;
+}
+
+
+// learn more button
+a {
+  font-size: 20px
+}
+  
+a:link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: grey;
+  background-color: transparent;
+  text-decoration: none;
 }

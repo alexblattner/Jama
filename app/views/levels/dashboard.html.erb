@@ -1,10 +1,12 @@
+<%= stylesheet_link_tag 'levels' %>
+
 <div class="container">
         <h1>Dashboard</h1>
         <p>This is the dashboard for your game creation</p>
 </div>
 <div class="container">
-        <h2>Create a hero</h2>
-        <%= link_to 'Hero', addhero_path %>
+        <h2>Create Hero</h2>
+        <%= link_to(image_tag("plussign.png", :height =>"70", :width => "70"), addhero_path) %>
 </div>
 
 <div class="container">

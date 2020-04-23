@@ -1,12 +1,38 @@
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1>Unleash Your Creativity</h1>
-        <p>JAMA Game Maker is a game creation tool that allows you to build, play, and share the game you've designed.</p>
-        <!-- <%= link_to "Learn more", root_path, class: "btn btn-primary btn-lg" %> -->
-        <br>
-        <a class="btn btn-dark btn-lg" href="#" role="button">Learn more</a>
-    </div>
-        
-</div>
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Landing Page</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <%= stylesheet_link_tag 'main' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/le-frog/jquery-ui.min.css' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+  </head>
+
+  <body>
+    <%= render 'layouts/header' %>
+    <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <div class="text-center">
+                    <h1>Unleash Your Creativity</h1>
+                    <br>
+                    <hr>
+                    <br>
+                    <p>JAMA Game Maker is a game creation tool that allows you to build, play, and share the game you've designed.</p>
+                </div>
+                <!-- <%= link_to "Learn more", root_path, class: "btn btn-primary btn-lg" %> -->
+                <br>
+                <div class="text-center">
+                    <a class="btn btn-dark btn-lg" href="#" role="button">Learn more</a>
+                </div>
+            </div>
+        </div>
+  </body>
+</html>
 
 
