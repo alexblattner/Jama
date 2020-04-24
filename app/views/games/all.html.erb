@@ -17,7 +17,7 @@
         <div class="card-body">
           <h3 class="card-title"><%= game.game_name %></h3>
           <h4 class="card-text"><%= game.description %></h4>
-          <button type="button" class="btn btn-primary btn-lg">Play</button>
+          <%= link_to "Play", initiate_url(game.id), class:"btn btn-primary btn-lg" %>
           <%= link_to "Edit", leveldashboard_url(game.id), class: "btn btn-primary btn-lg" %>
         </div>
         </div>

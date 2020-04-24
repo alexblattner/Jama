@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   get '/addlevel/:game_id' , to: 'levels#new', as: 'addlevel'
   get '/addevent/:game_id' , to: 'events#new', as: 'addevent'
   get '/adddoor/:game_id' , to: 'doors#new', as: 'adddoor'
-  get '/addhero' , to: 'heroes#new', as: 'addhero'
+  get '/addhero/:gamestate_id' , to: 'heroes#new', as: 'addhero'
 
   get 'editevent/:game_id/:id', to: 'events#edit', as: 'editevent'
   get 'editlevel/:game_id/:level_id', to: 'levels#organizeevents', as: 'editlevel'
@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   get '/levels/dashboard/:game_id', to: 'levels#dashboard', as: 'leveldashboard'
   get '/startinglevel/:game_id/:level_id', to: 'games#startinglevel', as: 'startinglevel'
 
+  get '/initiatehero/:game_id', to: 'gamestates#initiate', as: 'initiate'
 
 
 

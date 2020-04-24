@@ -4,10 +4,7 @@
         <h1>Dashboard</h1>
         <p>This is the dashboard for your game creation</p>
 </div>
-<div class="container">
-        <h2>Create Hero</h2>
-        <%= link_to(image_tag("plussign.png", :height =>"70", :width => "70"), addhero_path) %>
-</div>
+
 
 <div class="container">
         <h2>Add Levels</h2>
@@ -28,7 +25,11 @@
         <%= link_to(image_tag("plussign.png", :height =>"70", :width => "70"), addevent_path(@game_id)) %>
         <% events = Event.where(game_id: @game_id) %>
         <% events.each do |event| %>
-                <%=  link_to event.name, editevent_url(@game_id, event.id) %>
+                <% if (event.event_image.attached?) %>
+                        <%= link_to image_tag(event.event_image, :height =>"47", :width => "70"), editevent_path(@game_id, event.id)  %>
+                <% else %>
+                        <%= link_to event.name, editevent_path(@game_id, event.id) %>
+                <% end %>
         <% end %>
         <hr>
 </div>

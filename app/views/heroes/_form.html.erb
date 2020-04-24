@@ -11,6 +11,8 @@
     </div>
   <% end %>
 
+  <%= form.hidden_field :gamestate_id, :value => params[:gamestate_id] %>
+
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
