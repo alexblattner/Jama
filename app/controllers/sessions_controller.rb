@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
     # skip_before_action :require_login, only: [:new, :create]
     
   include SessionsHelper
-  skip_before_action :require_login, only: [:new, :create]
+  #skip_before_action :require_login, only: [:new, :create]
   include SessionsHelper
 
   # GET /sessions
@@ -24,7 +24,6 @@ class SessionsController < ApplicationController
   def edit
   end
 
-
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
@@ -37,11 +36,11 @@ class SessionsController < ApplicationController
       render 'new'
     end
   end
-    # destroy the current session
-    def destroy
-      log_out
-      redirect_to root_url
-    end
-  
+  # destroy the current session
+  def destroy
+    log_out
+    redirect_to root_url
+  end
+
   end
   
