@@ -22,8 +22,11 @@
    <%= form.label :description %>
    <%= form.text_field :description, class: 'form-control' %>
  
-   <%= form.label :image %>
-   <%= form.text_field :image, class: 'form-control' %>
+   <div class="field">
+        <%= form.label :event_image %>
+        <%= form.file_field :event_image %>
+    </div>
+    
     <form action="" id="events">
     <select name="event_type" id="event_selector">
         <option value="direct">direct</option>
