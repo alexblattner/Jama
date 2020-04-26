@@ -185,6 +185,9 @@ class EventsController < ApplicationController
     else
       @event.result = createDirectJSON(params)
     end
+    @event.image = url_for(@event.event_image)
+    puts @event.image
+
     @result_json = @event.result
     @event.requirement = createRequirementJSON(params)
     @requirement_json = @event.requirement
@@ -209,6 +212,8 @@ class EventsController < ApplicationController
       @event.result = createDirectJSON(params)
     end
     @result_json = @event.result
+    @event.image = url_for(@event.event_image)
+
     @event.requirement = createRequirementJSON(params)
     if @event.update(event_params)
       flash[:success] = "Successfully updated event."

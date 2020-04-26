@@ -185,7 +185,8 @@ class LevelsController < ApplicationController
     @level = Level.new(level_params)
 
     #@level.game = Game.find(level_params[:game_id])
-  
+    @level.image = url_for(@level.level_image)
+
     if @level.save
         flash[:success] = "Great! New level created."
         if params[:commit] == 'Finish this level and return to dashboard'
@@ -200,6 +201,8 @@ end
   # PATCH/PUT /levels/1
   # PATCH/PUT /levels/1.json
   def update
+    @level.image = url_for(@level.level_image)
+
     if @level.update(level_params)
         if params[:commit] == 'Finish this level and return to dashboard'
           redirect_to leveldashboard_url(@level.game_id)

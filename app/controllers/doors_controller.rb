@@ -23,7 +23,7 @@ class DoorsController < ApplicationController
     @result_json['gold'] = "0"
     @req_json = Hash.new
     @req_json['hp'] = ">0"
-    @req_json['rank'] = ">0"
+    @req_json['rank'] = ">0" 
     @req_json['gold'] = ">0"
     @door.result = @result_json.to_json
     @door.requirement = @req_json.to_json
@@ -151,6 +151,7 @@ class DoorsController < ApplicationController
   # POST /doors.json
   def create
     @door = Door.new(door_params)
+    @door.image = url_for(@door.door_image)
 
     @door.result = createResultJSON(params)
     @door.requirement = createRequirementJSON(params)
@@ -171,6 +172,7 @@ class DoorsController < ApplicationController
   def update
     @door.game_id = params[:game_id]
     @door.result = createResultJSON(params)
+    @door.image = url_for(@door.door_image)
     @door.requirement = createRequirementJSON(params)
     if @door.update(door_params)
       flash[:success] = "Great! Door updated."
@@ -262,6 +264,6 @@ class DoorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def door_params
-      params.require(:door).permit(:name, :game_id, :next_levels, :description, :image, :result, :requirement)
+      params.require(:door).permit(:name, :game_id, :next_levels, :description, :image, :result, :requirement, :door_image)
     end
 end
