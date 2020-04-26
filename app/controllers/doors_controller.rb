@@ -27,6 +27,8 @@ class DoorsController < ApplicationController
     @req_json['gold'] = ">0"
     @door.result = @result_json.to_json
     @door.requirement = @req_json.to_json
+    arr = Array.new
+    @door.next_levels = arr.to_json
   end
 
   # GET /doors/1/edit
@@ -147,15 +149,72 @@ class DoorsController < ApplicationController
     result += "}"
     result
   end
+  def has_this_door(lev, id)
+    if(id == -1)
+      return false
+    end
+    lev.doors
+    json = JSON.parse(lev.doors)
+    has = ""
+    if json.detect{|c| c == id}
+      has = "checked"
+    end
+    puts has
+    has
+  end
+  helper_method :has_this_door
+
+  def has_this_level lev
+    if(@door.nil?)
+      puts "door was nil"
+      return ""
+    end
+    l = @door.next_levels
+    json = JSON.parse(l)
+    has = ""
+    puts lev.id
+    puts @door.next_levels
+    if json.detect{|c| c == lev.id.to_s}
+      puts "has this level"
+      has = "checked"
+    end
+    puts has
+    has
+  end
+  helper_method :has_this_level
+  
   # POST /doors
   # POST /doors.json
   def create
+    @prev_levels = params['prev_level_ids']
+    @next_levels = params['next_level_ids']
+    puts "params: !!!!!!!!!!!!!!!"
+    puts params
+    par = door_params.reject { |k,v| k == 'prev_level_ids' || k == 'next_level_ids' }
+    nex = @next_levels.to_json
+    
+    puts @next_levels.to_json    
     @door = Door.new(door_params)
-    @door.image = url_for(@door.door_image)
-
+    @door.next_levels = @next_levels.to_json
+    if (@door.door_image.attached?)
+      @door.image = url_for(@door.door_image)
+    end
     @door.result = createResultJSON(params)
     @door.requirement = createRequirementJSON(params)
+    
+
     if @door.save
+      @prev_levels.each do
+        |level| lev = Level.find(level)
+        doors = Array.new
+        len = lev.doors.to_s.strip.length
+        if len > 2
+          doors = JSON.parse(lev.doors)
+        end
+        doors.push(@door.id)
+        lev.doors = doors.to_json
+        lev.save
+      end 
       flash[:success] = "Great! New door created."
       if params[:commit] == 'Finish this door and return to game logic'
         redirect_to creategamelogic_url(@door.game_id)
@@ -163,7 +222,7 @@ class DoorsController < ApplicationController
         redirect_to adddoor_url(@door.game_id)
       end
     else
-      render "new"
+      redirect_to adddoor_url(@door.game_id)
   end
   end
 

@@ -8,7 +8,6 @@
                 <div class='row'>
                         <h3>This is the dashboard for your game creation</h3>
                 </div>
-
                 <div class='row'>
                 <h2>Add Levels</h2>
                 </div>
@@ -34,7 +33,11 @@
                 <%= link_to(image_tag("plussign.png", :height =>"70", :width => "70"), addevent_path(@game_id)) %>
                 <% events = Event.where(game_id: @game_id) %>
                 <% events.each do |event| %>
-                        <%=  link_to event.name, editevent_url(@game_id, event.id) %>
+                        <% if (event.event_image.attached?) %>
+                                <%= link_to image_tag(event.event_image, :height =>"47", :width => "70"), editevent_url(@game_id, event.id)  %>
+                        <% else %>
+                                <%=  link_to event.name, editevent_url(@game_id, event.id) %>
+                        <% end %>
                 <% end %>
                 </div>
 
@@ -69,11 +72,18 @@
                                 </div>
                         </div> 
                 <div class='row'>
-                        <h2>Add doors to the game</h2>    
+                <h2>Add Doors</h2>
                 </div>
-
                 <div class='row'>
-                        <%= link_to 'Add doors to the game', creategamelogic_path(@game_id) %>
+                <%= link_to(image_tag("plussign.png", :height =>"70", :width => "70"), adddoor_path(@game_id)) %>
+                <% doors = Door.where(game_id: @game_id) %>
+                <% doors.each do |door| %>
+                        <% if (door.door_image.attached?) %>
+                                <%= link_to image_tag(door.door_image, :height =>"47", :width => "70"), editdoor_url(@game_id, door.id)  %>
+                        <% else %>
+                                <%= link_to door.name, editdoor_url(@game_id, door.id) %>
+                        <% end %>
+                <% end %>
                 </div>
 
                 <div class='row'>

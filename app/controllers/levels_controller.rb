@@ -186,7 +186,8 @@ class LevelsController < ApplicationController
 
     #@level.game = Game.find(level_params[:game_id])
     @level.image = url_for(@level.level_image)
-
+    doors = Array.new
+    @level.doors = doors.to_json
     if @level.save
         flash[:success] = "Great! New level created."
         if params[:commit] == 'Finish this level and return to dashboard'

@@ -63,8 +63,52 @@
    <br>
    <label class="door_result">Gold gained or lost:</label>
    <input type="text" name="door_result_gold" class="door_result" value= <%= @result_json.try(:[], 'gold') || 0 %> />
-    <%= form.submit "Finish this door and return to game logic", class: "btn btn-success" %>
-   <div>
+    
+   <% levels = Level.where(game_id: @door.game_id) %>
+   <br>
+   <style>
+    {
+        box-sizing: border-box;
+    }
+    /* Set additional styling options for the columns*/
+    .column {
+      float: left;
+      width: 50%;
+    }
+
+    .row:after {
+    content: "";
+    display: table;
+
+    clear: both;
+    }
+    </style>
+   <div class="row">
+    <div class="column">
+    Set the levels you can enter this door from
+    <br>  
+    <% levels.each do |level| %>
+        <%= level.name %>
+        &nbsp;
+        &nbsp;
+        <input type="checkbox" name="prev_level_ids[]" value= <%= level.id %> <%= has_this_door(level, (@door.id || -1))%> /> 
+        <br>   
+      <% end %>
+    </div>
+    <div class="column">
+    Set the levels you can get to through this door
+    <br>
+      <% levels.each do |level| %>
+        <%= level.name %>
+        &nbsp;
+        &nbsp;
+        <input type="checkbox" name="next_level_ids[]" value= <%= level.id %>  <%= has_this_level(level) %> />    
+        <br>
+      <% end %>
+    </div>
+    </div>
+   <%= form.submit "Finish this door and return to game logic", class: "btn btn-success" %>
+  <div>
     <h1>   </h1>
    </div>
    <%= form.submit "Save and make next door", class: "btn btn-success" %>
