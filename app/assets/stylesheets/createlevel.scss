@@ -5,11 +5,13 @@ body {
     background-attachment: fixed;
 }
 
-//form
 .form-control {
     background-color: transparent !important;
     border: none !important;
-    width: 25%;
+}
+
+h1 {
+    color: black !important;
 }
 
 label {
@@ -17,16 +19,4 @@ label {
     clear: both;
     float: left;
     margin-right: 15px;
-}
-
-// create game button
-.btn-creategame {
-    background-color: rgb(0, 0, 0)!important;
-    width: 20%!important;
-    color: white!important;
-    padding: 15px 32px!important;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px!important;
 }
