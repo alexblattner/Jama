@@ -1,57 +1,48 @@
 // Place all the styles related to the main controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-
 // spacing
-
-body { 
-  padding-top: 200px;
-  background-image: image-url('landing.png');
-  background-repeat:repeat-x;
-  background-attachment:fixed;
+body {
+    padding-top: 15%!important;
+    //background-image: image-url('landing.png');
+    background-repeat: repeat-x;
+    background-attachment: fixed;
 }
 
 h1 {
-  color: black !important;
+    color: black !important;
 }
 
 .jumbotron {
-  background-color:transparent !important; 
+    background-color: transparent !important;
 }
 
-  //learn more butotn
-.btn-lg {
-  padding: 15px 30px!important;
-  font-size: 20px!important;
-  border-radius: 15px!important;
-}
-
+//learn more butotn
 hr {
-  border-color: black!important;
-  border-width: 8px!important;
-  max-width:10%!important;
+    border-color: black!important;
+    border-width: 8px!important;
+    max-width: 15%!important;
 }
-
 
 // learn more button
 a {
-  font-size: 20px
+    font-size: 20px
 }
-  
+
 a:link {
-  color: black;
-  background-color: transparent;
-  text-decoration: none;
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
 }
 
 a:visited {
-  color: black;
-  background-color: transparent;
-  text-decoration: none;
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
 }
 
 a:hover {
-  color: grey;
-  background-color: transparent;
-  text-decoration: none;
+    color: grey;
+    background-color: transparent;
+    text-decoration: none;
 }

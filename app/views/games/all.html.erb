@@ -1,48 +1,55 @@
 <%= stylesheet_link_tag 'games' %>
 
-<div class="container">
-  <div class="row">
-  <h1>Your Games</h1>
-  <br>
-  </div>
+<html>
+  <head>
+    <title>Game Center</title>
+  </head>
 
-  <div class="row">
-  <% Game.where(admin_id: session['user_id']).each do |game| %>
-        <div class="card">
-        <% if game.game_image.blank? %>
-          <%= link_to(image_tag("defaultgame.png", :height =>"180", :width => "260"), root_path) %>
-        <% else %>
-            <%= link_to(image_tag(game.game_image, :height =>"180", :width => "260"), root_path) %>
+  <body>
+    <div class="container">
+      <div class="row">
+      <h1>Your Games</h1>
+      <br>
+      </div>
+
+      <div class="row">
+      <% Game.where(admin_id: session['user_id']).each do |game| %>
+            <div class="card">
+            <% if game.game_image.blank? %>
+              <%= link_to(image_tag("defaultgame.png", :height =>"180", :width => "260"), root_path) %>
+            <% else %>
+                <%= link_to(image_tag(game.game_image, :height =>"180", :width => "260"), root_path) %>
+            <% end %>
+            <div class="card-body">
+              <h3 class="card-title"><%= game.game_name %></h3>
+              <h4 class="card-text"><%= game.description %></h4>
+              <button type="button" class="btn btn-primary btn-lg">Play</button>
+              <%= link_to "Edit", leveldashboard_url(game.id), class: "btn btn-primary btn-lg" %>
+            </div>
+            </div>
         <% end %>
-        <div class="card-body">
-          <h3 class="card-title"><%= game.game_name %></h3>
-          <h4 class="card-text"><%= game.description %></h4>
-          <%= link_to "Play", initiate_url(game.id), class:"btn btn-primary btn-lg" %>
-          <%= link_to "Edit", leveldashboard_url(game.id), class: "btn btn-primary btn-lg" %>
-        </div>
-        </div>
-    <% end %>
-  </div>
+      </div>
 
-  <div class="row">
-  <h1>Community Games</h1>
-  <br>
-  </div>
-  <div class="row">
-    <% @games.each do |game| %>
-        <div class="card">
-        <% if game.game_image.blank? %>
-          <%= link_to(image_tag("defaultgame.png", :height =>"180", :width => "260"), root_path) %>
-        <% else %>
-            <%= link_to(image_tag(game.game_image, :height =>"180", :width => "260"), root_path) %>
+      <div class="row">
+      <h1>Community Games</h1>
+      <br>
+      </div>
+      <div class="row">
+        <% @games.each do |game| %>
+            <div class="card">
+            <% if game.game_image.blank? %>
+              <%= link_to(image_tag("defaultgame.png", :height =>"180", :width => "260"), root_path) %>
+            <% else %>
+                <%= link_to(image_tag(game.game_image, :height =>"180", :width => "260"), root_path) %>
+            <% end %>
+            <div class="card-body">
+              <h3 class="card-title"><%= game.game_name %></h3>
+              <h4 class="card-text"><%= game.description %></h4>
+              <button type="button" class="btn btn-primary btn-lg">Play</button>
+            </div>
+            </div>
         <% end %>
-        <div class="card-body">
-          <h3 class="card-title"><%= game.game_name %></h3>
-          <h4 class="card-text"><%= game.description %></h4>
-          <button type="button" class="btn btn-primary btn-lg">Play</button>
-        </div>
-        </div>
-    <% end %>
-  </div>
-
- </div>
+      </div>
+    </div>
+  </body>
+ </html>
