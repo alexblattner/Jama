@@ -27,10 +27,7 @@ class HeroesController < ApplicationController
   def create
     @gamestate_id = hero_params['gamestate_id']
     #hero_params.delete('gamestate_id')
-    puts @gamestate_id
-    puts hero_params
     h = hero_params.reject { |k,v| k == 'gamestate_id' }
-    puts h
     @hero = Hero.new(h)
     @hero.hp = 100
     @hero.exp = 0

@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag 'games' %>
+<%= stylesheet_link_tag 'gamecenter' %>
 
 <html>
   <head>
@@ -15,17 +15,17 @@
       <div class="row">
       <% Game.where(admin_id: session['user_id']).each do |game| %>
             <div class="card">
-            <% if game.game_image.blank? %>
-              <%= link_to(image_tag("defaultgame.png", :height =>"180", :width => "260"), root_path) %>
-            <% else %>
-                <%= link_to(image_tag(game.game_image, :height =>"180", :width => "260"), root_path) %>
-            <% end %>
-            <div class="card-body">
-              <h3 class="card-title"><%= game.game_name %></h3>
-              <h4 class="card-text"><%= game.description %></h4>
-              <button type="button" class="btn btn-primary btn-lg">Play</button>
-              <%= link_to "Edit", leveldashboard_url(game.id), class: "btn btn-primary btn-lg" %>
-            </div>
+              <% if game.game_image.blank? %>
+                <%= link_to(image_tag("defaultgame.png", :height =>"180", :width => "260"), root_path) %>
+              <% else %>
+                  <%= link_to(image_tag(game.game_image, :height =>"180", :width => "260"), root_path) %>
+              <% end %>
+              <div class="card-body">
+                <h3 class="card-title"><%= game.game_name %></h3>
+                <h4 class="card-text"><%= game.description %></h4>
+                <%= link_to "Play", initiate_url(game.id), class: "btn-dark" %>
+                <%= link_to "Edit", leveldashboard_url(game.id), class: "btn-dark" %>
+              </div>
             </div>
         <% end %>
       </div>
@@ -45,7 +45,7 @@
             <div class="card-body">
               <h3 class="card-title"><%= game.game_name %></h3>
               <h4 class="card-text"><%= game.description %></h4>
-              <button type="button" class="btn btn-primary btn-lg">Play</button>
+              <%= link_to "Play", initiate_url(game.id), class: "btn-dark" %>
             </div>
             </div>
         <% end %>

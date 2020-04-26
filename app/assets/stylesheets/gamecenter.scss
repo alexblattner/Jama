@@ -1,0 +1,36 @@
+body {
+    padding-top: 12%!important;
+    //background-image: image-url('landing.png');
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+}
+
+h1 {
+    color: black;
+    font-size: 40px!important;
+}
+
+// display each game using card
+.card {
+    //box-shadow: 0 4px 8px 0 rgb(245, 245, 245);
+    background-color: rgb(245, 245, 245)!important;
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+.card-title {
+    color: black;
+    font-size: 30px!important;
+}
+
+.card-text {
+    color: black;
+    font-size: 20px!important;
+}
+
+.btn-dark {
+    background-color: black!important;
+    color: white!important;
+    font-size: 15px!important;
+}

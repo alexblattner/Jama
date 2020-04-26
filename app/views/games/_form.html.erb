@@ -10,8 +10,9 @@
       <div>
         <h1>Create a New Game</h1>
       </div>
+      <br>
       
-      <div>
+      <div class = 'formgroup'>
         <%= form_with(model: game, local: true) do |form| %>
           <!-- Validation check -->
           <% if game.errors.any? %>
@@ -26,20 +27,23 @@
           <% end %>
           <!-- Input fields-->
           <div>
-            <%= form.label 'Enter game name' %>
+            <%= form.label 'Enter game name:' %>
             <%= form.text_field :game_name, class: 'form-control' %>
           </div>
+          <br><br>
           <div>
             <%= form.label 'Write a brief description of this game:' %>
             <%= form.text_field :description, class: 'form-control'  %>
           </div>
+          <br><br>
           <div>
-            <%= form.label 'Upload a cover image of this game:' %>
+            <%= form.label 'Upload a cover image:' %>
             <%= form.file_field :game_image, class: 'form-control'%>
           </div>
+          <br><br>
           <!-- Submit Button-->
           <div>
-            <%= form.submit "Create the game", class: "btn-creategame" %>
+            <%= form.submit "Create!", class: "btn-creategame" %>
           </div>
         <% end %>
       </div>

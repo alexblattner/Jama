@@ -12,8 +12,6 @@ include SessionsHelper
   end
   # POST /save/
   def save
-    puts params
-    puts params["id"]
   end
 
   def initiate

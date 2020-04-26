@@ -1,25 +1,26 @@
 <%= stylesheet_link_tag 'general' %>
 
 <head>
-    <nav class="navbar navbar-expand-lg navbar-fixed-top">
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <!-- Brand -->
-                <li><%= link_to(image_tag("logo.jpg", :height =>"47", :width => "70"), root_path) %></li>
-                <!-- Main Menu -->
-                <li><%= link_to "Game Center", allgames_path %></li>
-                <li><%= link_to "Create New Game", creategame_path %></li>
-                <!-- User Activity Function-->
-                <% if !logged_in? %>
-                    <li><%= link_to "Log in", login_path  %></li>
-                <% else %>
-                    <li><%= link_to "Log out", logout_path, method: :delete %></li>
-                <% end %>
-            </ul>
-        </div>
+    <nav class="navbar navbar-expand-lg fixed-top justify-content-center">
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="navbar-brand">
+            <%= link_to(image_tag("logo.jpg", :height =>"47", :width => "70"), root_path) %>
+            </li>
+            <li class="nav-item">
+            <%= link_to "Game Center", allgames_path %>
+            </li>
+            <li class="nav-item">
+            <%= link_to "Create New Game", creategame_path %>
+            </li>
+            <li class="nav-item">
+            <!-- User Activity Function-->
+            <% if !logged_in? %>
+            <%= link_to "Log in", login_path  %>
+            <% else %>
+            <%= link_to "Log out", logout_path, method: :delete %>
+            <% end %>
+            </li>
+        </ul>
     </nav>
 </head>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
