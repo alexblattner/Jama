@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
+  get '/event_instances/:id/:choice', to: 'event_instances#show'
+
   get  '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
   get '/gamestates/reset/:id', to: 'gamestates#reset'
@@ -39,7 +41,7 @@ Rails.application.routes.draw do
   get '/addlevel/:game_id' , to: 'levels#new', as: 'addlevel'
   get '/addevent/:game_id' , to: 'events#new', as: 'addevent'
   get '/adddoor/:game_id' , to: 'doors#new', as: 'adddoor'
-  get '/addhero' , to: 'heroes#new', as: 'addhero'
+  get '/addhero/:gamestate_id' , to: 'heroes#new', as: 'addhero'
 
   get 'editevent/:game_id/:id', to: 'events#edit', as: 'editevent'
   get 'editlevel/:game_id/:level_id', to: 'levels#organizeevents', as: 'editlevel'
@@ -57,13 +59,14 @@ Rails.application.routes.draw do
   get '/queuelevel/:game_id/:door_id/:level_id', to: 'doors#queuelevel', as: 'queuelevel'
   get '/dequeuelevel/:game_id/:door_id', to: 'doors#dequeuelevel', as: 'dequeuelevel'
 
-  get '/assigneventforall/:game_id', to: 'levels#assigneventforall', as: 'assigneventforall'
+  #get '/assigneventforall/:game_id', to: 'levels#assigneventforall', as: 'assigneventforall'
   get '/creategamelogic/:game_id', to: 'levels#creategamelogic', as: 'creategamelogic'
   get '/organize/:game_id' , to: 'levels#organize', as: 'organizelevel'
   get 'designatestart/:game_id', to: 'levels#designatestart', as: 'designatestart'
   get '/levels/dashboard/:game_id', to: 'levels#dashboard', as: 'leveldashboard'
   get '/startinglevel/:game_id/:level_id', to: 'games#startinglevel', as: 'startinglevel'
 
+  get '/initiatehero/:game_id', to: 'gamestates#initiate', as: 'initiate'
 
 
 

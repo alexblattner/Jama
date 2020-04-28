@@ -12,11 +12,11 @@ class EventInstancesController < ApplicationController
   # GET /event_instances/1.json
   def show
     @event_instance=EventInstance.find_by(id:params[:id])
-    uid=Gamestate.find_by(id:@event_instance.gamestate_id).user_id
+    @gamestate=Gamestate.find_by(id: @event_instance.gamestate_id)
+    uid=@gamestate.user_id
     if @event_instance.progress!="1" && session[:user_id]==uid
       @event=Event.find_by(id: @event_instance.event_id)
       if @event.event_type=="direct"
-        @gamestate=Gamestate.find_by(id: @event_instance.gamestate_id)
         @hero=Hero.find_by(id: @gamestate.hero_id)
         @event_instance.progress="1"
         @event_instance.save
@@ -24,15 +24,16 @@ class EventInstancesController < ApplicationController
         hero_update(json,@hero)
         e=@event
       elsif @event.event_type=="fight"
-        @gamestate=Gamestate.find_by(id: @event_instance.gamestate_id)
         @hero=Hero.find_by(id: @gamestate.hero_id)
         p=@event_instance.progress
+        d=false
         if p!="0"
           h=@event_instance.progress.delete_suffix('hp').to_i
           s=stats_calc(@hero.exp,@hero.hp)
-          h=h-(s['level']*10)
+          h=h-(s['rank']*10)
           if h<=0
             @event_instance.progress="1"
+            d=true
           else
             @event_instance.progress=h.to_s+"hp"
           end
@@ -47,11 +48,43 @@ class EventInstancesController < ApplicationController
         end
         e=@event.to_json
         e=JSON.parse(e)
+        if !d
         p=@event_instance.progress
+        else
+          p="1"
+        end
         e['progress']=p
+      elsif @event.event_type=="choice"
+        e=@event
+        if @event_instance.progress!="1"
+          if params.key?("choice")
+            r=JSON.parse(@event.result)
+            ind=params['choice'].to_i
+            if r[ind].key?("requirement")
+              if requirements_passed(@hero,r[ind]['requirement'])
+                e=[]
+                r[ind]['events'].each{
+                  |i|
+                  e.push(EventInstance.create({:gamestate_id=>@gamestate.id,:level_id=>@gamestate.level_id,:progress=>"0",:event_id=>i}).id)
+                }
+                @event_instance.progress="1"
+                @event_instance.save
+              else
+                e=[0]
+              end
+            else
+              e=[]
+              r[ind]['events'].each{
+                |i|
+                e.push(EventInstance.create({:gamestate_id=>@gamestate.id,:level_id=>@gamestate.level_id,:progress=>"0",:event_id=>i}).id)
+              }
+              @event_instance.progress="1"
+              @event_instance.save
+            end
+          end
+        end
       end
       render json: e.to_json()
-      
     else
       render json: {}.to_json()
     end

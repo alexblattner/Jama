@@ -18,20 +18,20 @@ class EventsController < ApplicationController
     @result_json = Hash.new
     @result_json['attack'] = Hash.new
     @result_json['death'] = Hash.new
-    @result_json['hp'] = "0"
-    @result_json['exp'] = "0"
-    @result_json['gold'] = "0"
-    @result_json['attack']['hp'] = "0"
-    @result_json['attack']['exp'] = "0"
-    @result_json['attack']['gold'] = "0"
-    @result_json['death']['hp'] = "0"
-    @result_json['death']['exp'] = "0"
-    @result_json['death']['gold'] = "0"
+    # @result_json['hp'] = "0"
+    # @result_json['exp'] = "0"
+    # @result_json['gold'] = "0"
+    # @result_json['attack']['hp'] = "0"
+    # @result_json['attack']['exp'] = "0"
+    # @result_json['attack']['gold'] = "0"
+    # @result_json['death']['hp'] = "0"
+    # @result_json['death']['exp'] = "0"
+    # @result_json['death']['gold'] = "0"
     @event.result = @result_json.to_json
-    @requirement_json = Hash.new
-    @requirement_json['hp'] = ">0"
-    @requirement_json['rank'] = ">0"
-    @requirement_json['gold'] = ">0"
+    # @requirement_json = Hash.new
+    # @requirement_json['hp'] = ">0"
+    # @requirement_json['rank'] = ">0"
+    # @requirement_json['gold'] = ">0"
     @event.requirement = @requirement_json.to_json
   end
 
@@ -65,25 +65,25 @@ class EventsController < ApplicationController
   helper_method :get_req_json
 
   def createRequirementJSON params
-    req = ""
-    req += "{\"hp\":"
-    if(params['event_req_hp'].nil?)
-      req += "\">0\""
-    else
+    req = "{"
+    if(!params['event_req_hp'].nil? && !(params['event_req_hp'].to_i == 0))
+      req += "\"hp\":"
       req += "\"" + params['event_req_hp_operator'].to_s
       req += params['event_req_hp'] + "\""
     end
-    req += ",\"rank\":"
-    if(params['event_req_rank'].nil?)
-      result += "\">0\""
-    else
+    if(!params['event_req_rank'].nil? && !(params['event_req_rank'].to_i == 0))
+      if(req.length > 2)
+        req += ","
+      end
+      req += "\"rank\":"
       req += "\"" +params['event_req_rank_operator']
       req += params['event_req_rank'] + "\""
     end
-    req += ", \"gold\":"
-    if(params['event_req_gold'].nil?)
-      req += "\">0\""
-    else
+    if(!params['event_req_gold'].nil? && !(params['event_req_gold'].to_i == 0))
+      if(req.length > 2)
+        req += ","
+      end
+      req += "\"gold\":"
       req += "\"" + params['event_req_gold_operator']
       req += params['event_req_gold'] + "\""
     end
@@ -92,26 +92,23 @@ class EventsController < ApplicationController
   end
   #turns hp, exp, and gold into the JSON required for result
   def createDirectJSON params
-    result = ""
-    result += "{\"hp\":"
-    if(params['hp'].nil?)
-      result += "0"
-      puts "hp nil"
-    else
+    result = "{"
+    if(!params['hp'].nil? && !(params['hp'].to_i == 0))
+      result += "\"hp\":"
       result += params['hp'] 
     end
-    result += ",\"exp\":"
-    if(params['exp'].nil?)
-      result += "0"
-      puts "exp nil"
-    else
+    if(!params['exp'].nil? && !(params['exp'].to_i == 0))
+      if(result.length > 2)
+        result += ","
+      end
+      result += "\"exp\":"
       result += params['exp'] 
     end
-    result += ", \"gold\":"
-    if(params['gold'].nil?)
-      result += "0"
-       puts "gold nil"
-    else
+    if(!params['gold'].nil? && !(params['gold'].to_i == 0))
+      if(result.length > 2)
+        result += ","
+      end
+      result += "\"gold\":"      
       result += params['gold']
     end
     result += "}"
@@ -185,6 +182,10 @@ class EventsController < ApplicationController
     else
       @event.result = createDirectJSON(params)
     end
+    # @event.image = url_for(@event.event_image)
+    # puts @event.image
+    @event.image = @event.attachment_url
+
     @result_json = @event.result
     @event.requirement = createRequirementJSON(params)
     @requirement_json = @event.requirement
@@ -209,6 +210,8 @@ class EventsController < ApplicationController
       @event.result = createDirectJSON(params)
     end
     @result_json = @event.result
+    @event.image = @event.attachment_url
+
     @event.requirement = createRequirementJSON(params)
     if @event.update(event_params)
       flash[:success] = "Successfully updated event."
@@ -240,6 +243,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :result, :description, :event_type, :image, :game_id, :requirement)
+      params.require(:event).permit(:name, :result, :description, :event_type, :image, :game_id, :requirement, :event_image)
     end
 end

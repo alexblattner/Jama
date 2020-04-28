@@ -1,3 +1,105 @@
 // Place all the styles related to the Gamestates controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import "bootstrap";
+@media screen and (min-device-width: 600px){
+  :root{
+    --screen-width: 1050px;
+    --screen-height: 500px;
+    --bar-height:25px;
+    --info-height:140px;
+    --info-width:300px;
+    --font-desc:14pt;
+    --font-tip:12pt;
+    --char-size:200px;
+  }
+}
+@media screen and (max-device-width: 600px){
+  :root{
+    --screen-width: 100%;
+    --screen-height: 800px;
+    --bar-height:30px;
+    --info-height:200px;
+    --info-width:370px;
+    --font-desc:26pt;
+    --font-tip:20pt;
+    --char-size:200px;
+  }
+  #description p{
+    line-height:50px;
+  }
+}
+#game-screen{
+  width:var(--screen-width);height:var(--screen-height);position:relative;left:50%;margin-left:calc((-1)*var(--screen-width)/2);margin-top:-150px;
+}
+#bottom{
+  width:var(--screen-width);position:relative;left:50%;margin-left:calc((-1)*var(--screen-width)/2);background:black;border:1px grey solid;
+}
+#background-image{
+  height:100%;width:100%;position:absolute;
+}
+#event{
+  height:100%;width:100%;position:absolute;opacity:0;
+}
+#hero{
+  max-width:var(--char-size);max-height:var(--char-size);background:green;position:absolute;bottom:20px;left:50px;
+}
+#enemy{
+  max-width:var(--char-size);max-height:var(--char-size);background:green;position:absolute;bottom:20px;right:50px;
+}
+.health-bar{
+  width:90%;height:var(--bar-height);border: 1px black solid;position:relative;
+}
+.health-bar div{
+  height:100%;
+}
+.health-bar span{
+  position:absolute; color:white;line-height:90%;font-size:var(--font-tip);
+}
+#exp-bar{
+  width:90%;height:var(--bar-height);border: 1px black solid;position:relative;
+}
+#exp-bar div{
+  height:100%; background:lightblue;
+}
+#exp-bar span{
+  position:absolute; color:white;line-height:90%;font-size:var(--font-tip);
+}
+#hero-info{
+  width:var(--info-width);position:absolute;background: grey;height:var(--info-height);font-size:var(--font-tip);
+}
+#enemy-info{
+  width:var(--info-width);position:absolute;background: grey;height:var(--info-height);right:0;font-size:var(--font-tip);
+}
+#doors-holder{
+  position:absolute;height:var(--screen-height);width:100%;line-height:var(--screen-height);
+}
+#doors-holder img{
+  width:calc(var(--char-size)*0.5);height:var(--char-size);margin:20px;border:4px solid brown;
+}
+#doors-holder.choice img{
+  width:var(--char-size);height:var(--char-size);margin:20px;border-style:none;
+}
+#doors-holder img:hover{
+  cursor:pointer;box-shadow: 0px 0px 15px 0px rgba(242,231,19,1);
+}
+#description{
+  font-size:var(--font-desc);margin-bottom:10px;margin-left:10px;color:white;
+}
+#description p{
+  font-size:var(--font-desc);
+}
+.warning{
+  color:red;
+}
+#tip{
+  font-size:var(--font-tip);margin-bottom:10px;margin-left:10px;color:white;
+  animation-name: text-highlight;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-delay: 2s;
+}
+@keyframes text-highlight {
+  0%   {box-shadow: 0px 0px 0px 0px rgba(250,250,250,0.75);}
+  100% {box-shadow: 0px 0px 5px 3px rgba(250,250,250,0.75);}
+}

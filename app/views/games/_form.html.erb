@@ -1,31 +1,54 @@
 <%= stylesheet_link_tag 'creategame' %>
+<html>
+  <head>
+    <title>Create Your Game</title>
+  </head>
 
-<div class="container">
-  <h1>Create a New Game</h1>
-    <%= form_with(model: game, local: true) do |form| %>
-      <!-- Validation check -->
-      <% if game.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
-          <ul>
-            <% game.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-      <!-- Input fields-->
+  <body>
+    <div class="container">
+    
       <div>
-        <%= form.label :game_name %>
-        <%= form.text_field :game_name, class: 'form-control' %>
+        <h1>Create a New Game</h1>
       </div>
-      <%= form.label :description %>
-      <%= form.text_field :description, class: 'form-control'  %>
-      <%= form.label :game_image %>
-      <%= form.file_field :game_image, class: 'form-control'%>
-      <!-- Submit Button-->
-      <%= form.submit "Create the game", class: 'btn btn-dark' %>
-</div>
+      <br>
+      
+      <div class = 'formgroup'>
+        <%= form_with(model: game, local: true) do |form| %>
+          <!-- Validation check -->
+          <% if game.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+              <ul>
+                <% game.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <!-- Input fields-->
+          <div>
+            <%= form.label 'Enter game name:' %>
+            <%= form.text_field :game_name, class: 'form-control' %>
+          </div>
+          <br><br>
+          <div>
+            <%= form.label 'Write a brief description of this game:' %>
+            <%= form.text_field :description, class: 'form-control'  %>
+          </div>
+          <br><br>
+          <div>
+            <%= form.label 'Upload a cover image:' %>
+            <%= form.file_field :game_image, class: 'form-control'%>
+          </div>
+          <br><br>
+          <!-- Submit Button-->
+          <div>
+            <%= form.submit "Create!", class: "btn-creategame" %>
+          </div>
+        <% end %>
+      </div>
 
-<% end %>
+    </div>
 
+  </body>
+<html>

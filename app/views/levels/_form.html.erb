@@ -1,33 +1,56 @@
-<div class="row">
-<div class="col-md-6 col-md-offset-3">
-<%= form_with(model: level, local: true) do |form| %>
- <% if level.errors.any? %>
-   <div id="error_explanation">
-     <h2><%= pluralize(level.errors.count, "error") %> prohibited this level from being saved:</h2>
- 
-     <ul>
-       <% level.errors.full_messages.each do |message| %>
-         <li><%= message %></li>
-       <% end %>
-     </ul>
-   </div>
- <% end %>
- 
- <%= form.hidden_field :game_id, :value => params[:game_id] %>
+<%= stylesheet_link_tag 'createlevel' %>
+<html>
+  <head>
+    <title>Create Level</title>
+  </head>
 
-    <%= form.label(:name, "Current Level Name") %>
-   <%= form.text_field :name, class: 'form-control' %>
-   <%= form.label(:description, "Description") %>
-   <%= form.text_field :description, class: 'form-control'%>
+  <body>
+  <div class= 'container'>
+      <div>
+        <h1>Create a New Level</h1>
+      </div>
+      <div>
+        <%= form_with(model: level, local: true) do |form| %>
+          <% if level.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(level.errors.count, "error") %> prohibited this level from being saved:</h2>
+            <ul>
+              <% level.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+          <% end %>
 
-  
-    <div class="field">
-        <%= form.label :level_image %>
-        <%= form.file_field :level_image %>
+        <div>
+          <%= form.hidden_field :game_id, :value => params[:game_id] %>
         </div>
-    <%= form.submit "Finish this level and return to dashboard", class: "btn btn-success" %>
-   <%= form.submit "Save and make next level", class: "btn btn-success" %>
-    </div>
- </div>
-<% end %>
 
+        <div>
+          <%= form.label(:name, "Enter level name:") %>
+          <%= form.text_field :name, class: 'form-control' %>
+        </div>
+
+        <div>
+          <%= form.label(:description, "Write a brief description of this level") %>
+          <%= form.text_field :description, class: 'form-control'%>
+        </div>
+  
+        <div>
+            <%= form.label :level_image %>
+            <%= form.file_field :level_image %>
+        </div>
+        <div class="submits" %>
+          <div class="row">
+            <%= form.submit "Save & Finish", class: "btn btn-finish" %>
+          </div>
+          <br>
+          <div class="row">
+            <%= form.submit "Save & Next", class: "btn btn-create" %>
+          </div>
+        </div>
+        <% end %>
+     </div>  <!-- form class -->
+  </div> <!-- container class -->
+  </body>
+<html>

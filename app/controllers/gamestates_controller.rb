@@ -12,9 +12,25 @@ include SessionsHelper
   end
   # POST /save/
   def save
-    puts params
-    puts params["id"]
   end
+
+  def initiate
+    @game_id = params['game_id']
+    @user_id = session['user_id']
+    @gamestate = Gamestate.find_by(game_id: @game_id, user_id: @user_id)
+    if @gamestate.nil?
+      @gamestate = Gamestate.new
+      @gamestate.user_id = @user_id
+      @gamestate.game_id = @game_id
+      @game = Game.find_by(id: @game_id)
+      @gamestate.level_id = @game.start_level_id
+      @gamestate.save
+      redirect_to addhero_path(@gamestate.id)
+    else
+      redirect_to gamestate_path(@gamestate.id)
+    end
+  end
+
   def reset
     @gamestate=Gamestate.find_by(id:params[:id])
     if session[:user_id]== @gamestate.user_id
@@ -33,6 +49,9 @@ include SessionsHelper
     @level=Level.find_by(id: @gamestate.level_id)
     @hero=Hero.find_by(id: @gamestate.hero_id)
     @hero_level_info=stats_calc(@hero.exp,@hero.hp)
+    puts 3030
+    puts 303030
+    puts @hero_level_info
     eid=JSON.parse(@level.event_id)
     b = Hash.new(0)
     eid.each do |v|
@@ -49,10 +68,8 @@ include SessionsHelper
         w-=1
       end
     }
-    @instance=EventInstance.where({level_id:@gamestate.level_id,gamestate_id:@gamestate.id}).where.not(progress:"1")
+    @instance=EventInstance.where({level_id:@gamestate.level_id,gamestate_id:@gamestate.id}).where.not(progress:"1").order(:id)
     ar=@instance.ids
-    puts 49489
-    puts ar.class
     @description=@level.description
     @boss={}
     if ar!=[]
@@ -61,7 +78,7 @@ include SessionsHelper
     if en.event_type=="fight"
       @boss=JSON.parse(en.result)
       @boss['name']=en.name
-      @boss['image']=en.image
+      @boss['image']=@boss.attachment_url #changed, originally en.image
       @boss['progress']=finst.progress.delete_suffix('hp').to_i
       if @boss['progress']==0
         @boss['progress']=@boss['hp']

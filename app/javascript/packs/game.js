@@ -3,11 +3,12 @@
  */
 require("jquery-ui")
 $("#user_input").focus();
-var inventory_tip='<div id="inv-tip">click on your inventory bag to check your inventory</div>';
-var continure_tip='<div id="continue-tip">click anywhere on the screen to continue</div>';
-var doors_tip='<div id="doors-tip">click on a door to go to another level</div>';
-var won_tip='<div id="doors-tip">click anywhere on the screen to restart the game</div>';
-$("#tip").append(inventory_tip+continure_tip);
+var continue_tip='click anywhere on the screen to continue';
+var doors_tip='click on a door to go to another level';
+var won_tip='click anywhere on the screen to restart the game';
+var fight_tip='click anywhere on the screen to attack';
+var choice_tip='click on one of your possible decisions'
+tip(continue_tip);
 healthbar(0,"hero");
 healthbar(0,"enemy");
 expbar(0);
@@ -19,14 +20,21 @@ $(document).on("click","#game-screen",function(){
 });
 $(document).on({
     mouseenter: function(){
-        change_description("This is the <b>"+$(this).attr("name")+"</b>. "+$(this).attr("desc")+requirements_tip($(this).attr('requirement')));
+    	var x=($("#game-screen").attr("choice")=="" || typeof $("#game-screen").attr("choice")=="undefined")?"<p>This is the <b>"+$(this).attr("name")+"</b>. ":"";
+        change_description(x+$(this).attr("desc")+requirements_tip($(this).attr('requirement'))+"</p>");
     },
     mouseleave: function(){
-        change_description("You have cleared this level, now choose your path.");
+    	if($("#game-screen").attr("choice")=="" || typeof $("#game-screen").attr("choice")=="undefined")
+        change_description("<p>You have cleared this level, now choose your path.</p>");
+        else{
+        	var j=JSON.parse($("#game-screen").attr("choice"));
+        	change_description('You encountered <b>'+j['name']+'</b>. '+j['description']);
+        }
     },
     click:function(){
+    	if($("#game-screen").attr("choice")=="" || typeof $("#game-screen").attr("choice")=="undefined"){
     	var id=$(this).attr("id");
-    	var url="/doors/open/"+id;
+    	var url="/doors/open/"+id+".json";
     	$.get(url,function(d){
     		if(JSON.stringify(d)!='[0]'){
     		if(d.length!=0){
@@ -75,12 +83,31 @@ $(document).on({
 					$("#doors-holder").empty();
 					$("#hero").show();
 					change_description(d.level.description);
+					tip(continue_tip);
 				});
 			},k.length*800);
 			}else{
 				alert("requirements not met");
 			}
     	});
+    }else{
+    	var events=JSON.parse($("#game-screen").attr("events"));
+    	var url="/event_instances/"+events[0]+"/"+$(this).attr('id')+".json";
+    	$.get(url,function(d){
+    		if(JSON.stringify(d)!='[0]'){
+    		events.shift();
+    		for(var i=d.length-1;i>=0;i--)
+    			events.unshift(d[i]);
+			$("#game-screen").attr("events",JSON.stringify(events));
+			$("#game-screen").attr("choice","");
+			$("#doors-holder").empty();
+			$("#doors-holder").removeClass('choice');
+			$("#game-screen").removeClass('hold');
+			}else{
+				alert("requirements not met");
+			}
+    	});
+    }
     }
 }, "#doors-holder img");
 function next(){
@@ -93,25 +120,23 @@ function next(){
 				$("#hero").hide();
 				$.get(url,function(d){
 					if(typeof d!='undefined'&&d.length>0){
-						change_description("You have cleared this level, now choose your path.");
+						change_description("<p>You have cleared this level, now choose your path.</p>");
 						for(var i=0;i<d.length;i++){
+							d[i]['requirement']=(typeof d[i]['requirement']=="undefined")?"":d[i]['requirement'];
 							$("#doors-holder").append("<img id='"+d[i]['id']+"' requirement='"+d[i]['requirement']+"' name='"+d[i]['name']+"' desc='"+d[i]['description']+"' src='"+d[i]['image']+"'/>");
-							$("#tip").empty();
-							$("#tip").append(doors_tip);
+							tip(doors_tip);
 						}
 					}else{
-						change_description("You completed this game, congratulations!");
-						$("#tip").empty();
-						$("#tip").append(won_tip);
+						change_description("<p>You completed this game, congratulations!</p>");
+						tip(won_tip)
 						$("#game-screen").attr("r",1);
 						$("#game-screen").removeClass('hold');
 					}
 				});
 			}
 		}else{
-			change_description("You died.");
-			$("#tip").empty();
-			$("#tip").append(won_tip);
+			change_description("<p>You died.</p>");
+			tip(fight_tip);
 			$("#game-screen").attr("r",1);
 			$("#game-screen").removeClass('hold');
 		}
@@ -122,35 +147,38 @@ function next(){
 		});
 	}
 }
+function tip(s){
+	$("#tip").replaceWith("<span id='tip'>"+s+"</span>");
+}
 function requirements_tip(ob){
 	ob=JSON.parse(ob);
 	var arr=Object.keys(ob);
 	var f='';
 	if(arr.length>0){
-		f="<br/>You need to ";
+		f="<br/><p class='warning'>You need to ";
 		for(var i=0;i<arr.length;i++){
 			if(ob[arr[i]].charAt(0)==">"){
-				if(arr[i]!="level")
+				if(arr[i]!="rank")
 				f+="have more than "+ob[arr[i]].substring(1)+" "+arr[i];
 				else
-				f+="to be more than "+ob[arr[i]].substring(1)+" "+arr[i];
+				f+="to be rank "+ob[arr[i]].substring(1)+" or higher";
 			}else if(ob[arr[i]].charAt(0)=="="){
-				if(arr[i]!="level")
+				if(arr[i]!="rank")
 				f+="have "+ob[arr[i]].substring(1)+" "+arr[i];
 				else
-				f+="to be "+ob[arr[i]].substring(1)+" "+arr[i];
+				f+="to be rank "+ob[arr[i]].substring(1);
 			}else if(ob[arr[i]].charAt(0)=="<"){
-				if(arr[i]!="level")
+				if(arr[i]!="rank")
 				f+="have less than "+ob[arr[i]].substring(1)+" "+arr[i];
 				else
-				f+="to be less than "+ob[arr[i]].substring(1)+" "+arr[i];
+				f+="to be rank "+ob[arr[i]].substring(1)+" or lower";
 			}else{
 				break;
 			}
 			if(i<arr.length-1)
 			f+=", "
 			else
-			f+=" to enter";
+			f+=" to enter</p>";
 		}
 	}
 	return f;
@@ -161,13 +189,24 @@ function change_description(text){
 }
 function events(){
 var events=JSON.parse($("#game-screen").attr("events"));
-if($("#game-screen").attr("boss")=="" || typeof $("#game-screen").attr("boss")=="undefined"){
+if(($("#game-screen").attr("boss")=="" || typeof $("#game-screen").attr("boss")=="undefined")&&($("#game-screen").attr("choice")=="" || typeof $("#game-screen").attr("choice")=="undefined")){
 	if(events.length>0){
 	var url="/event_instances/"+events[0]+".json";
 	$.get(url,function(d){
 		var r=d;
 		r['result']=JSON.parse(r['result']);
-		if(typeof r.result.attack=="undefined"){
+		if(Array.isArray(r['result'])){
+			change_description('You encountered <b>'+r['name']+'</b>. '+r['description']);
+			tip(choice_tip);
+			d=r.result;
+			for(var i=0;i<d.length;i++){
+				d[i]['requirement']=(typeof d[i]['requirement']=='undefined')?"{}":d[i]['requirement'];
+				$("#doors-holder").append("<img id='"+i+"' requirement='"+d[i]['requirement']+"' desc='"+d[i]['description']+"' src='"+d[i]['image']+"'/>");
+				tip(doors_tip);
+			}
+			$("#doors-holder").addClass("choice");
+			$("#game-screen").attr("choice",JSON.stringify(r));
+		}else if(typeof r.result.attack=="undefined"){
 			$("#tip").hide();
 			$("#description").empty();
 			$("#description").append("<p>You encountered <b>"+r.name+"</b></p>");
@@ -181,6 +220,9 @@ if($("#game-screen").attr("boss")=="" || typeof $("#game-screen").attr("boss")==
 			$("#game-screen").attr("events",JSON.stringify(events));
 			},2600);
 		}else{
+			$("#tip").hide();
+			$("#description").empty();
+			$("#description").append("<p>You encountered <b>"+r.name+"</b></p>");
 			var pro=(r.progress==1)?0:r.progress.substring(0, r.progress.length - 2);
 			if($("#enemy-info").length<1){
 				$("#game-screen").append(`<div id="enemy-info"><div>${r.name}</div>
@@ -193,18 +235,19 @@ if($("#game-screen").attr("boss")=="" || typeof $("#game-screen").attr("boss")==
 			if((r.result.hp+"hp")!=r.progress){
 				hero_attack();
 				var damage=parseInt($("#enemy-info span").text())-pro;
-				change_description("You dealt <b>"+damage+" damage</b>");
+				change_description("<p>You dealt <b>"+damage+" damage</b></p>");
 				healthbarchange((-1)*damage,"enemy");
 				damaged($("#enemy"));
 				$("#game-screen").attr("boss",JSON.stringify(r.result));
 			}
-			setTimeout(function(){$("#game-screen").removeClass('hold')},1000);
+			setTimeout(function(){$("#game-screen").removeClass('hold')},500);
+			$("#tip").show();
 		}
 	});
 	return 1
 	}else
 	return 0;
-}else{
+}else if($("#game-screen").attr("boss")!="" && typeof $("#game-screen").attr("boss")!="undefined"){
 	var json=JSON.parse($("#game-screen").attr("boss"));
 	if($("#enemy-info span").text()!=0){
 		enemy_attack();
@@ -336,6 +379,7 @@ function expbarchange (exp) {
   			$("#exp-bar div").attr("max",Math.floor(parseInt($("#exp-bar div").attr("max"))*2));
   			lvl++;
   			$("#exp-bar span").text(0);
+  			$("#hero-info .health-bar div").attr("max",100+(lvl-1)*10);
   		}else{
 	  		done=true;
   		}
@@ -353,15 +397,49 @@ function expbarchange (exp) {
 	  			$("#exp-bar div").animate({width:p+"%"},400,function(){
 		  			var linc=lvl-parseInt($("#lvl").attr("lvl"));
 		  			$("#lvl").attr("lvl",lvl);
-		  			$("#lvl").text("lvl "+lvl);
+		  			$("#lvl").text("Rank "+lvl);
 		  			healthbarchange(linc*10,"hero");
 		  		});
 	  		},400);
   		}
   	}
   }else{
-  	while(exp>0&&texp>0){
-  		
+  	while(exp<0&&texp>0&&!done){
+  		var c=parseInt($("#exp-bar span").attr("exp"))+exp;
+  		if(c<0){
+  			exp+=parseInt($("#exp-bar span").attr("exp"));
+  			$("#exp-bar div").attr("max",Math.floor(parseInt($("#exp-bar div").attr("max"))/2));
+			$("#exp-bar span").text($("#exp-bar div").attr("max"));
+			$("#exp-bar span").attr("exp",$("#exp-bar div").attr("max"));
+			$("#exp-bar div").width("100%");
+			$("#exp-bar div").attr("percent",0);
+			lvl--;
+  			if(lvl==0){
+  				exp=0;
+  				lvl++;
+  			}
+  			$("#exp-bar span").text($("#exp-bar div").attr("max"));
+  			$("#hero-info .health-bar div").attr("max",100+(lvl-1)*10);
+  		}else{
+	  		done=true;
+	  		$("#exp-bar span").text(c);
+			$("#exp-bar span").attr("exp",c);
+  		}
+  		if(done==true||exp==0){
+  			setTimeout(function(){
+	  			var p=Math.floor(parseInt($("#exp-bar span").attr("exp"))*100/parseInt($("#exp-bar div").attr("max")));
+	  			$("#exp-bar div").attr("percent",p);
+	  			if(parseInt($("#hero-info .health-bar div").attr("max"))<parseInt($("#hero-info .health-bar span").text()))
+	  			$("#hero-info .health-bar span").text($("#hero-info .health-bar div").attr("max"))
+	  			var hpp=(parseInt($("#hero-info .health-bar span").text())/parseInt($("#hero-info .health-bar div").attr("max")))*100;
+				$("#hero-info .health-bar div").attr("percent",hpp);
+	  			$("#exp-bar div").animate({width:p+"%"},400,function(){
+		  			$("#lvl").attr("lvl",lvl);
+		  			$("#lvl").text("Rank "+lvl);
+		  			healthbarchange(0,"hero");
+		  		});
+	  		},400);
+  		}
   	}
   }
 }
