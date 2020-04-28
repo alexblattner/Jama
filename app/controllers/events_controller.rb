@@ -18,20 +18,20 @@ class EventsController < ApplicationController
     @result_json = Hash.new
     @result_json['attack'] = Hash.new
     @result_json['death'] = Hash.new
-    @result_json['hp'] = "0"
-    @result_json['exp'] = "0"
-    @result_json['gold'] = "0"
-    @result_json['attack']['hp'] = "0"
-    @result_json['attack']['exp'] = "0"
-    @result_json['attack']['gold'] = "0"
-    @result_json['death']['hp'] = "0"
-    @result_json['death']['exp'] = "0"
-    @result_json['death']['gold'] = "0"
+    # @result_json['hp'] = "0"
+    # @result_json['exp'] = "0"
+    # @result_json['gold'] = "0"
+    # @result_json['attack']['hp'] = "0"
+    # @result_json['attack']['exp'] = "0"
+    # @result_json['attack']['gold'] = "0"
+    # @result_json['death']['hp'] = "0"
+    # @result_json['death']['exp'] = "0"
+    # @result_json['death']['gold'] = "0"
     @event.result = @result_json.to_json
-    @requirement_json = Hash.new
-    @requirement_json['hp'] = ">0"
-    @requirement_json['rank'] = ">0"
-    @requirement_json['gold'] = ">0"
+    # @requirement_json = Hash.new
+    # @requirement_json['hp'] = ">0"
+    # @requirement_json['rank'] = ">0"
+    # @requirement_json['gold'] = ">0"
     @event.requirement = @requirement_json.to_json
   end
 
@@ -185,8 +185,9 @@ class EventsController < ApplicationController
     else
       @event.result = createDirectJSON(params)
     end
-    @event.image = url_for(@event.event_image)
-    puts @event.image
+    # @event.image = url_for(@event.event_image)
+    # puts @event.image
+    @event.image = @event.attachment_url
 
     @result_json = @event.result
     @event.requirement = createRequirementJSON(params)
@@ -212,7 +213,7 @@ class EventsController < ApplicationController
       @event.result = createDirectJSON(params)
     end
     @result_json = @event.result
-    @event.image = url_for(@event.event_image)
+    @event.image = @event.attachment_url
 
     @event.requirement = createRequirementJSON(params)
     if @event.update(event_params)
