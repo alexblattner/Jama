@@ -46,9 +46,9 @@
         <div>
           <label class="req-label">HP:</label>
           <select name="door_req_hp_operator" id="door_selector" class = "selector">
-            <option value=">" <%= if (@req_json['hp'][0] == ">") then "selected" end %> > &gt; </option>
-            <option value="<" <%= if (@req_json['hp'][0] == "<") then "selected" end %> > &lt; </option>
-            <option value="=" <%= if (@req_json['hp'][0] == "=") then "selected" end %> > = </option>
+            <option value=">" <%= if (@req_json.try(:[], 'hp').try(:[], 0) == ">") then "selected" end %> > &gt; </option>
+            <option value="<" <%= if (@req_json.try(:[], 'hp').try(:[], 0) == "<") then "selected" end %> > &lt; </option>
+            <option value="=" <%= if (@req_json.try(:[], 'hp').try(:[], 0) == "=") then "selected" end %> > = </option>
           </select>
           <input type="text" name="door_req_hp" class="req-form-control" value= <%= @req_json.try(:[], 'hp').try(:[], 1..) || 0 %> />
         <br>
@@ -56,9 +56,9 @@
         <div>
           <label class="req-label">Rank:</label>
           <select name="door_req_rank_operator" id="door_selector" class = "selector">
-            <option value=">" <%= if (@req_json['rank'][0] == ">") then "selected" end %> > &gt; </option>
-            <option value="<" <%= if (@req_json['rank'][0] == "<") then "selected" end %> > &lt; </option>
-            <option value="=" <%= if (@req_json['rank'][0] == "=") then "selected" end %> > = </option>
+            <option value=">" <%= if (@req_json.try(:[], 'rank').try(:[], 0) == ">") then "selected" end %> > &gt; </option>
+            <option value="<" <%= if (@req_json.try(:[], 'rank').try(:[], 0) == "<") then "selected" end %> > &lt; </option>
+            <option value="=" <%= if (@req_json.try(:[], 'rank').try(:[], 0) == "=") then "selected" end %> > = </option>
           </select>
           <input type="text" name="door_req_rank" class="req-form-control" value= <%= @req_json.try(:[], 'rank').try(:[], 1..) || 0 %> />
           <br>
@@ -66,9 +66,9 @@
         <div>
           <label class="req-label">Gold:</label>
           <select name="door_req_gold_operator" id="door_selector" class = "selector">
-            <option value=">" <%= if (@req_json['gold'][0] == ">") then "selected" end %> > &gt; </option>
-            <option value="<" <%= if (@req_json['gold'][0] == "<") then "selected" end %> > &lt; </option>
-            <option value="=" <%= if (@req_json['gold'][0] == "=") then "selected" end %> > = </option>
+            <option value=">" <%= if (@req_json.try(:[], 'gold').try(:[], 0) == ">") then "selected" end %> > &gt; </option>
+            <option value="<" <%= if (@req_json.try(:[], 'gold').try(:[], 0) == "<") then "selected" end %> > &lt; </option>
+            <option value="=" <%= if (@req_json.try(:[], 'gold').try(:[], 0) == "=") then "selected" end %> > = </option>
           </select>
           <input type="text" name="door_req_gold" class="req-form-control" value= <%= @req_json.try(:[], 'gold').try(:[], 1..) || 0 %> />
           <br>
