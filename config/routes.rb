@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :topics
+  resources :messages
   resources :doors
   resources :event_instances
   resources :events
@@ -28,6 +30,9 @@ Rails.application.routes.draw do
   get '/gamestates/reset/:id', to: 'gamestates#reset'
   get '/gamestates/partial/:id', to: 'gamestates#partial'
   get '/games', to: 'games#index'
+  get '/discussion', to: 'messages#discussion'
+  post '/discussion', to: 'message#create'
+  get '/addtopic', to: 'topics#new'
   get '/publishedgames', to: 'games#published'
   get '/doors/open/:id', to: 'doors#open'
   #game creation

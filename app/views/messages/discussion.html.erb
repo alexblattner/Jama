@@ -1,0 +1,44 @@
+<style>
+  
+</style>
+
+<h1 style = "text-align:center">Discussion Page</h1>
+<h2 style = "text-align:center">Hi welcome to game discussion forum <%=  @curruser.name %></h2>
+<div class="d-flex justify-content-center">
+    <%= link_to "Add Topic", addtopic_path, class:"btn btn-lg btn-warning" %>
+</div>
+
+
+<% @topics.each do |topic|%>
+  
+    <div class = "jumbtron">
+    <h3> <%= topic.name %></h3>
+    <h4> <%= topic.description %></h4>
+    <h4> <%= topic.topictype %></h4>
+    <div class = "well" id = "chatbox_<%= topic.id %>" style = "height:300px; border: solid 1px #222222; overflow-y: scroll">
+        <% @messages.each do |message| %>
+            <%if message.topic_id == topic.id %>
+               <%= render 'messages/message', message: message %>
+            <% end %>
+        <% end %>
+    </div>
+    <% if @curruser %>
+        <%=  form_with model: @message do |f| %>
+            <div class="input-group mb-3">
+                <%= f.hidden_field :topic_id, :value => topic.id %>
+                <%= f.text_field :body, placeholder: "Enter message...", class:'form-control', autocomplete:'off'  %>
+                <div class = "input-group-append">
+                    <%= f.submit "Send", class: 'btn btn-outline-secondary ' %>
+                </div>
+            </div>
+        <% end %>
+    <% else %>
+        <p style = "text-align:center">
+            You need to be <%= link_to"log in", login_path %> to chat.
+        </p>
+    <% end %>
+    </div>
+
+<% end %>
+
+
