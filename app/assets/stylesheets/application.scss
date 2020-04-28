@@ -14,57 +14,21 @@
  *= require_self
  */
 @import "bootstrap";
-#game-screen{
-  width:550px;height:350px;position:relative;
-}
-#background-image{
-  height:100%;width:100%;position:absolute;
-}
-#event{
-  height:100%;width:100%;position:absolute;opacity:0;
-}
-#hero{
-  max-width:100px;max-height:100px;background:green;position:absolute;bottom:20px;left:50px;
-}
-#enemy{
-  max-width:100px;max-height:100px;background:green;position:absolute;bottom:20px;right:50px;
-}
-.health-bar{
-  width:90%;height:20%;border: 1px black solid;position:relative;
-}
-.health-bar div{
-  height:100%;
-}
-.health-bar span{
-  position:absolute; color:white;line-height:90%;font-size:8pt;
-}
-#exp-bar{
-  width:90%;height:20%;border: 1px black solid;position:relative;
-}
-#exp-bar div{
-  height:100%; background:lightblue;
-}
-#exp-bar span{
-  position:absolute; color:white;line-height:90%;font-size:8pt;
-}
-#hero-info{
-  width:40%;position:absolute;background: grey;height:20%;
-}
-#enemy-info{
-  width:40%;position:absolute;background: grey;height:20%;right:0;
-}
-#doors-holder{
-  position:absolute;height:100%;width:100%;line-height:350px;
-}
-#doors-holder img{
-  max-width:100px;max-height:100px;margin:20px;
-}
-#doors-holder img:hover{
-  cursor:pointer;box-shadow: 0px 0px 15px 0px rgba(242,231,19,1);
-}
-#description{
-  font-size:10pt;margin-bottom:10px;
-}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
 // application
 .body-container {
   padding-top: 10px;
