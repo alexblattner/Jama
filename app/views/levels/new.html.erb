@@ -1,3 +1,9 @@
-<%= render 'form', level: @level %>
-<%= link_to 'Back to the dashboard', leveldashboard_path(@level.game_id) %>
+<%= stylesheet_link_tag 'createlevel' %>
+
+<body>
+    <div class='newlevelpage'>
+        <%= render 'form', level: @level %>
+        <%= link_to 'Back', leveldashboard_path(@level.game_id), :class=>"btn-returndash"%>
+        </div>
+</body>
 

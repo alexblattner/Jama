@@ -15,8 +15,7 @@
 		</div>
 
 		<div class='db-row-list'>
-			<%= link_to(image_tag("plussign.png", :height =>"90", :width => "90"), addlevel_path(@game_id)) %>
-			<!-- <%= link_to 'Add a level', addlevel_path(@game_id) %> -->
+			<%= link_to(image_tag("plussign.png", :height =>"90", :width => "90", :class=>"cancelhover"), addlevel_path(@game_id))%>
 			<% levels = Level.where(game_id: @game_id) %>
 			<% levels.each do |level| %>
 				<% if (level.level_image.attached?) %>

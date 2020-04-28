@@ -191,7 +191,7 @@ class EventsController < ApplicationController
     @requirement_json = @event.requirement
     if @event.save
       flash[:success] = "Get new event created."
-      if params[:commit] == 'Create this event'
+      if params[:commit] == 'Save & Finish'
         redirect_to leveldashboard_url(@event.game_id)
       else
         redirect_to addevent_url(@event.game_id)
@@ -215,7 +215,7 @@ class EventsController < ApplicationController
     @event.requirement = createRequirementJSON(params)
     if @event.update(event_params)
       flash[:success] = "Successfully updated event."
-      if params[:commit] == 'Create this event'
+      if params[:commit] == 'Save & Finish'
         redirect_to leveldashboard_url(@event.game_id)
       else
         redirect_to addevent_url(@event.game_id)

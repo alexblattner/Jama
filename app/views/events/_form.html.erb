@@ -1,5 +1,13 @@
+<%= stylesheet_link_tag 'createevent' %>
+<html>
+  <head>
+    <title>Create Event</title>
+  </head>
+  <body>
+  
+  
+
 <div class="row">
-<div class="col-md-6 col-md-offset-3">
 <%= form_with(model: event, local: true) do |form| %>
  <% if event.errors.any? %>
    <div id="error_explanation">
@@ -91,14 +99,20 @@
    </select>
    <input type="text" name="event_req_gold" class="event_req" value= <%= @req_json.try(:[], 'gold').try(:[], 1..) || 0 %> />
    <br>
-   <%= form.submit "Create this event", class: "btn btn-success" %>
    <div>
-    <h1>   </h1>
+   <%= form.submit "Save & Finish", class: "btn-finish" %>
    </div>
-   <%= form.submit "Continue creating events", class: "btn btn-success" %>
-    </div>
+   <div>
+   <%= form.submit "Save & Next", class: "btn-create" %>
+   </div>
  </div>
 <% end %>
+
+
+</body>
+</html>
+
+
 <script type="text/javascript">
 $(document).ready(function(){
     $("#event_selector").change(function(){
