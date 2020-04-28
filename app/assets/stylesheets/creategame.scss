@@ -1,0 +1,44 @@
+body {
+    padding-top: 10%!important;
+    //background-image: image-url('landing.png');
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+    background-color: white!important;
+    font-family: Courier!important;
+}
+
+h1 {
+    font-size: 50px!important;
+    color: black!important;
+}
+
+//form
+.form-control {
+    color: black!important;
+    background-color: transparent !important;
+    border: none !important;
+    width: 25%;
+    box-shadow: none!important;
+    border-bottom: 3px solid black!important;
+}
+
+label {
+    color: black!important;
+    text-align: right;
+    clear: both;
+    float: left;
+    margin-right: 15px;
+    font-size: 25px!important;
+}
+
+// create game button
+.btn-creategame {
+    background-color: black!important;
+    width: 20%!important;
+    color: white!important;
+    padding: 15px 32px!important;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px!important;
+}

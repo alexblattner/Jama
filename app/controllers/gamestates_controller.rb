@@ -3,6 +3,8 @@ before_action :set_gamestate, only: [:show, :edit, :update, :destroy]
 require 'json'
 include GamestatesHelper
 include HeroesHelper
+include SessionsHelper
+
   # GET /gamestates
   # GET /gamestates.json
   def index
@@ -10,9 +12,25 @@ include HeroesHelper
   end
   # POST /save/
   def save
-    puts params
-    puts params["id"]
   end
+
+  def initiate
+    @game_id = params['game_id']
+    @user_id = session['user_id']
+    @gamestate = Gamestate.find_by(game_id: @game_id, user_id: @user_id)
+    if @gamestate.nil?
+      @gamestate = Gamestate.new
+      @gamestate.user_id = @user_id
+      @gamestate.game_id = @game_id
+      @game = Game.find_by(id: @game_id)
+      @gamestate.level_id = @game.start_level_id
+      @gamestate.save
+      redirect_to addhero_path(@gamestate.id)
+    else
+      redirect_to gamestate_path(@gamestate.id)
+    end
+  end
+
   def reset
     @gamestate=Gamestate.find_by(id:params[:id])
     if session[:user_id]== @gamestate.user_id

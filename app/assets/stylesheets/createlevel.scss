@@ -1,0 +1,22 @@
+body {
+    padding-top: 5%!important;
+    //background-image: image-url('landing.png');
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+}
+
+.form-control {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+h1 {
+    color: black !important;
+}
+
+label {
+    text-align: right;
+    clear: both;
+    float: left;
+    margin-right: 15px;
+}

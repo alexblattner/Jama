@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
+  include UsersHelper
+  include SessionsHelper
 
   # GET /games
   # GET /games.json
@@ -19,9 +21,22 @@ class GamesController < ApplicationController
   end
   
   def all
-    @games = Game.all
+    @games = Game.where.not(admin_id: session['user_id'])
     render "all"
   end
+  def startinglevel
+    @game_id = params[:game_id]
+    @level_id = params[:level_id]
+    @game = Game.find_by(id: @game_id)
+    @game.start_level_id = @level_id
+    if(@game.save)
+      flash[:success] = "Starting level set"
+    else
+      flash[:fail] = "Failed to set starting level"
+    end
+    render 'levels/designatestart', game_id: @game_id
+  end
+
 
   # GET /games/1/edit
   def edit
@@ -48,6 +63,7 @@ g.output( :png => "hello_world.png" )
   # POST /games.json
   def create
     @game = Game.new(game_params)
+    @game.admin_id = session['user_id']
     if @game.save
         flash[:success] = "Great! New game created, let's add some levels to the game."
         #puts @game.id 

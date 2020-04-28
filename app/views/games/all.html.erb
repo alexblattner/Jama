@@ -1,51 +1,55 @@
-<style>
-h4   {color: white;}
-p    {color: black;}
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  background-color: rgb(245,245,245)!important;
-  max-width: 300px;
-  margin: auto;
-  text-align: center;
-  color: gray;
-}
+<%= stylesheet_link_tag 'gamecenter' %>
 
-.title {
-  color: grey;
-  font-size: 18px;
-}
+<html>
+  <head>
+    <title>Game Center</title>
+  </head>
 
-.column {
-  float: left;
-  width: 25%;
-  padding: 0 10px;
-}
+  <body>
+    <div class="container">
+      <div class="row">
+      <h1>Your Games</h1>
+      <br>
+      </div>
 
-.row {margin: 0 -5px;}
+      <div class="row">
+      <% Game.where(admin_id: session['user_id']).each do |game| %>
+            <div class="card">
+              <% if game.game_image.blank? %>
+                <%= link_to(image_tag("defaultgame.png", :height =>"180", :width => "260"), root_path) %>
+              <% else %>
+                  <%= link_to(image_tag(game.game_image, :height =>"180", :width => "260"), root_path) %>
+              <% end %>
+              <div class="card-body">
+                <h3 class="card-title"><%= game.game_name %></h3>
+                <h4 class="card-text"><%= game.description %></h4>
+                <%= link_to "Play", initiate_url(game.id), class: "btn-dark" %>
+                <%= link_to "Edit", leveldashboard_url(game.id), class: "btn-dark" %>
+              </div>
+            </div>
+        <% end %>
+      </div>
 
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-</style>
-
-  <div class="row">
- <% @games.each do |game| %>
-  <div class="card">
-  <% if game.game_image.blank? %>
-     <%= link_to(image_tag("picture1.jpg", :height =>"180", :width => "260"), root_path) %>
-     
-  <% else %>
-      <%= link_to(image_tag(game.game_image, :height =>"180", :width => "260"), root_path) %>
-  <% end %>
-   <div class="card-body">
-     <h5 class="card-title"><%= game.game_name %></h5>
-     <p class="card-text"><%= game.description %></p>
-   </div>
-  </div>
- <% end %>
-
- </div>
-
+      <div class="row">
+      <h1>Community Games</h1>
+      <br>
+      </div>
+      <div class="row">
+        <% @games.each do |game| %>
+            <div class="card">
+            <% if game.game_image.blank? %>
+              <%= link_to(image_tag("defaultgame.png", :height =>"180", :width => "260"), root_path) %>
+            <% else %>
+                <%= link_to(image_tag(game.game_image, :height =>"180", :width => "260"), root_path) %>
+            <% end %>
+            <div class="card-body">
+              <h3 class="card-title"><%= game.game_name %></h3>
+              <h4 class="card-text"><%= game.description %></h4>
+              <%= link_to "Play", initiate_url(game.id), class: "btn-dark" %>
+            </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </body>
+ </html>

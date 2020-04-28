@@ -11,29 +11,17 @@
     </div>
   <% end %>
 
+  <%= form.hidden_field :gamestate_id, :value => params[:gamestate_id] %>
+
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
 
-  <div class="field">
-    <%= form.label :exp %>
-    <%= form.number_field :exp %>
-  </div>
 
   <div class="field">
-    <%= form.label :hp %>
-    <%= form.number_field :hp %>
-  </div>
-
-  <div class="field">
-    <%= form.label :gold %>
-    <%= form.number_field :gold %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.text_field :image %>
+          <%= form.label :hero_image %>
+          <%= form.file_field :hero_image %>
   </div>
 
   <div class="actions">

@@ -1,0 +1,31 @@
+//nav bar position properties
+nav {
+    padding-top: 5%!important;
+    width: 100%!important;
+}
+
+//nav bar content properties
+.navbar-nav {
+    font-size: 20px;
+}
+
+//links properties
+a:link,
+a:visited,
+a:active {
+    background-color: transparent;
+    color: black;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover {
+    background-color: black;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
