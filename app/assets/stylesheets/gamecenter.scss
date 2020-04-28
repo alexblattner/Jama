@@ -17,6 +17,8 @@ body {
 
 .gs-row-2 {
     padding-left: 20%!important;
+    margin: 0 -5px!important;
+    /* Remove extra left and right margins, due to padding in columns */
 }
 
 .gs-row-3 {
@@ -30,29 +32,28 @@ body {
 
 .gs-row-4 {
     padding-left: 20%!important;
+    margin: 0 -5px!important;
 }
 
-// display each game using card
 
 /* Float four columns side by side */
 
-.column {
-    float: left;
-    width: 25%;
-    padding: 0 10px;
-}
-
-
-/* Remove extra left and right margins, due to padding in columns */
-
-.row {
-    margin: 0 -5px;
+.gs-row-2-col {
+    float: left!important;
+    column-width: 25%!important;
+    padding: 0 10px!important;
 }
 
 
 /* Clear floats after the columns */
 
-.row:after {
+.gs-row-2:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.gs-row-4:after {
     content: "";
     display: table;
     clear: both;
@@ -60,7 +61,8 @@ body {
 
 .card {
     //box-shadow: 0 4px 8px 0 rgb(245, 245, 245);
-    background-color: rgb(245, 245, 245)!important;
+    background-color: white!important;
+    min-height: 320px!important;
     max-width: 300px!important;
     margin: auto;
     text-align: center;
