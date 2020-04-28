@@ -1,5 +1,5 @@
 <div id="game-screen" events="<%=@arr%>">
-	<img id="background-image" src="<%=@level.image%>"/>
+	<img id="background-image" src="<%=url_for(@level.level_image)%>"/>
 	<div id="hero-info"><div><%=@hero.name%></div><div id="lvl" lvl="<%=@hero_level_info['level']%>">lvl <%=@hero_level_info['level']%></div>
 	<div id="gold" gold="<%=@hero['gold']%>">Gold: <%=@hero['gold']%></div>
 	<div class="health-bar"><span><%=@hero['hp']%></span><div max="<%=@hero_level_info['maxhp']%>" percent="<%=@hero_level_info['hp%']%>"></div></div>

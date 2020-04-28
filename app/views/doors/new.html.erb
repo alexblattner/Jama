@@ -1,11 +1,7 @@
 <h1>New Door</h1>
 
 <%= render 'form', door: @door %>
-<% puts "~~~~~~~~~" %>
-<% puts @door.game_id %>
-<% puts @game_id %>
-<% puts params['game_id'] %>
-<% puts "~~~~~~~~~~" %> 
+
 <%= link_to 'Back to dashboard', leveldashboard_path(@door.game_id) %>
 <br>
 <%= link_to 'Back to game logic', creategamelogic_path(@door.game_id) %>

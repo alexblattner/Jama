@@ -1,118 +1,154 @@
-<div class="row">
-<div class="col-md-6 col-md-offset-3">
-<%= form_with(model: door, local: true) do |form| %>
- <% if door.errors.any? %>
-   <div id="error_explanation">
-     <h2><%= pluralize(door.errors.count, "error") %> prohibited this door from being saved:</h2>
- 
-     <ul>
-       <% door.errors.full_messages.each do |message| %>
-         <li><%= message %></li>
-       <% end %>
-     </ul>
-   </div>
- <% end %>
-    
-
-
-   <%= form.hidden_field :game_id, :value => params[:game_id] %>
-   
-    <%= form.label(:name, "Current door Name") %>
-   <%= form.text_field :name, class: 'form-control' %>
-   <%= form.label(:description, "Description") %>
-   <%= form.text_field :description, class: 'form-control'%>
-   <div class="field">
-        <%= form.label :door_image %>
-        <%= form.file_field :door_image %>
-   </div>
-   <% @req_json = get_req_json %>
-   <% @result_json = get_result_json %>
-   Requirements to enter:
-   <br>
-   <label class="door_req">HP:</label>
-   <select name="door_req_hp_operator" id="door_selector"  style="width: 30px;">
-      <option value=">" <%= if (@req_json['hp'][0] == ">") then "selected" end %> > &gt; </option>
-      <option value="<" <%= if (@req_json['hp'][0] == "<") then "selected" end %> > &lt; </option>
-      <option value="=" <%= if (@req_json['hp'][0] == "=") then "selected" end %> > = </option>
-   </select>
-   <input type="text" name="door_req_hp" class="door_req" value= <%= @req_json.try(:[], 'hp').try(:[], 1..) || 0 %> />
-   <br>
-   <label class="door_req">Rank:</label>
-   <select name="door_req_rank_operator" id="door_selector" style="width: 30px;">
-    <option value=">" <%= if (@req_json['rank'][0] == ">") then "selected" end %> > &gt; </option>
-    <option value="<" <%= if (@req_json['rank'][0] == "<") then "selected" end %> > &lt; </option>
-    <option value="=" <%= if (@req_json['rank'][0] == "=") then "selected" end %> > = </option>
-   </select>
-   <input type="text" name="door_req_rank" class="door_req" value= <%= @req_json.try(:[], 'rank').try(:[], 1..) || 0 %> />
-   <br>
-   <label class="door_req">Gold:</label>
-   <select name="door_req_gold_operator" id="door_selector" style="width: 30px;">
-      <option value=">" <%= if (@req_json['gold'][0] == ">") then "selected" end %> > &gt; </option>
-      <option value="<" <%= if (@req_json['gold'][0] == "<") then "selected" end %> > &lt; </option>
-      <option value="=" <%= if (@req_json['gold'][0] == "=") then "selected" end %> > = </option>
-   </select>
-   <input type="text" name="door_req_gold" class="door_req" value= <%= @req_json.try(:[], 'gold').try(:[], 1..) || 0 %> />
-   <br>
-   Result on entering:
-   <br>
-   <label class="door_result">HP gained or lost:</label>
-   <input type="text" name="door_result_hp" class="door_result" value= <%= @result_json.try(:[], 'hp') || 0 %> />
-   <br>
-   <label class="door_result">EXP gained or lost:</label>
-   <input type="text" name="door_result_exp" class="door_result" value= <%= @result_json.try(:[], 'exp') || 0 %> />
-   <br>
-   <label class="door_result">Gold gained or lost:</label>
-   <input type="text" name="door_result_gold" class="door_result" value= <%= @result_json.try(:[], 'gold') || 0 %> />
-    
-   <% levels = Level.where(game_id: @door.game_id) %>
-   <br>
-   <style>
-    {
-        box-sizing: border-box;
-    }
-    /* Set additional styling options for the columns*/
-    .column {
-      float: left;
-      width: 50%;
-    }
-
-    .row:after {
-    content: "";
-    display: table;
-
-    clear: both;
-    }
-    </style>
-   <div class="row">
-    <div class="column">
-    Set the levels you can enter this door from
-    <br>  
-    <% levels.each do |level| %>
-        <%= level.name %>
-        &nbsp;
-        &nbsp;
-        <input type="checkbox" name="prev_level_ids[]" value= <%= level.id %> <%= has_this_door(level, (@door.id || -1))%> /> 
-        <br>   
-      <% end %>
-    </div>
-    <div class="column">
-    Set the levels you can get to through this door
+<%= stylesheet_link_tag 'createdoor' %>
+<head>
+  <title>Door Creator</title>
+</head>
+<body>
+  <div class="container">
     <br>
-      <% levels.each do |level| %>
-        <%= level.name %>
-        &nbsp;
-        &nbsp;
-        <input type="checkbox" name="next_level_ids[]" value= <%= level.id %>  <%= has_this_level(level) %> />    
-        <br>
+    <div class = 'formgroup'>
+      <%= form_with(model: door, local:true) do |form| %>
+        <!-- Validation check -->
+        <% if door.errors.any? %>
+          <div id="error_explanation">
+          <h2><%= pluralize(door.errors.count, "error") %> prohibited this door from being saved:</h2>
+ 
+          <ul>
+            <% door.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-    </div>
-    </div>
-   <%= form.submit "Finish this door and return to game logic", class: "btn btn-success" %>
-  <div>
-    <h1>   </h1>
-   </div>
-   <%= form.submit "Save and make next door", class: "btn btn-success" %>
-    </div>
- </div>
-<% end %>
+      <!-- Input fields-->
+      <%= form.hidden_field :game_id, :value => params[:game_id] %>
 
+      <div>
+        <%= form.label(:name, "Door Name") %>
+        <%= form.text_field :name, class: 'form-control' %>
+      </div>
+      <br><br>
+      <div>
+        <%= form.label(:description, "Description") %>
+        <%= form.text_field :description, class: 'form-control'%>
+      </div>
+      <br><br>
+      <div class="field">
+        <%= form.label :door_image %>
+        <%= form.file_field :door_image, class: 'image-field'%>
+      </div>
+      <% @req_json = get_req_json %>
+      <% @result_json = get_result_json %>
+      <div>
+        <div class="section-label">
+          Requirements to enter:
+        </div>
+        <br>
+        <div>
+          <label class="req-label">HP:</label>
+          <select name="door_req_hp_operator" id="door_selector" class = "selector">
+            <option value=">" <%= if (@req_json['hp'][0] == ">") then "selected" end %> > &gt; </option>
+            <option value="<" <%= if (@req_json['hp'][0] == "<") then "selected" end %> > &lt; </option>
+            <option value="=" <%= if (@req_json['hp'][0] == "=") then "selected" end %> > = </option>
+          </select>
+          <input type="text" name="door_req_hp" class="req-form-control" value= <%= @req_json.try(:[], 'hp').try(:[], 1..) || 0 %> />
+        <br>
+        </div>
+        <div>
+          <label class="req-label">Rank:</label>
+          <select name="door_req_rank_operator" id="door_selector" class = "selector">
+            <option value=">" <%= if (@req_json['rank'][0] == ">") then "selected" end %> > &gt; </option>
+            <option value="<" <%= if (@req_json['rank'][0] == "<") then "selected" end %> > &lt; </option>
+            <option value="=" <%= if (@req_json['rank'][0] == "=") then "selected" end %> > = </option>
+          </select>
+          <input type="text" name="door_req_rank" class="req-form-control" value= <%= @req_json.try(:[], 'rank').try(:[], 1..) || 0 %> />
+          <br>
+        </div>
+        <div>
+          <label class="req-label">Gold:</label>
+          <select name="door_req_gold_operator" id="door_selector" class = "selector">
+            <option value=">" <%= if (@req_json['gold'][0] == ">") then "selected" end %> > &gt; </option>
+            <option value="<" <%= if (@req_json['gold'][0] == "<") then "selected" end %> > &lt; </option>
+            <option value="=" <%= if (@req_json['gold'][0] == "=") then "selected" end %> > = </option>
+          </select>
+          <input type="text" name="door_req_gold" class="req-form-control" value= <%= @req_json.try(:[], 'gold').try(:[], 1..) || 0 %> />
+          <br>
+          <br>
+          <br>
+        </div>
+      </div>
+      <div class="section-label">
+          <br>
+          Result on entering:
+          <br>
+      </div>
+      <div>
+        <label class="door_result">HP gained or lost:</label>
+        <input type="text" name="door_result_hp" class="form-control" value= <%= @result_json.try(:[], 'hp') || 0 %> />
+        <br>
+      </div>
+      <div>  
+        <label class="door_result">EXP gained or lost:</label>
+        <input type="text" name="door_result_exp" class="form-control" value= <%= @result_json.try(:[], 'exp') || 0 %> />
+        <br>
+      </div>
+      <div>
+        <label class="door_result">Gold gained or lost:</label>
+        <input type="text" name="door_result_gold" class="form-control" value= <%= @result_json.try(:[], 'gold') || 0 %> />
+        <br>
+        <br>
+      </div>
+      <div class="section-label">
+          <br>
+          Set connections:
+          <br>
+      </div>
+      <% levels = Level.where(game_id: @door.game_id) %>
+      <br>
+      <br>
+      <div class="row">
+        <div class="column">
+          <div class="column-label">
+            Set the levels you can enter this door from
+            <br>
+          </div>  
+          <% levels.each do |level| %>
+            <div class="sec-row">
+              <div class="name">
+                <%= level.name %>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" name="prev_level_ids[]" value= <%= level.id %> <%= has_this_door(level, (@door.id || -1))%> /> 
+              </div>
+              <br>
+            </div>   
+          <% end %>
+        </div>
+        <div class="column">
+            <div class="column-label">
+              Set the levels you can get to through this door
+              <br>
+            </div>
+            <% levels.each do |level| %>
+              <div class="sec-row">
+                <div class="name">
+                  <%= level.name %>
+                </div>
+                <div class="checkbox">
+                  <input type="checkbox" name="next_level_ids[]" value= <%= level.id %>  <%= has_this_level(level) %> />    
+                </div>
+                <br>
+              </div>
+            <% end %>
+        </div>
+      </div>
+    <div>
+    <br><br>
+      <%= form.submit "Finish this door and return to game logic", class:  "btn-createdoor" %>
+    </div>
+    <div>
+      <%= form.submit "Save and make next door", class: "btn-continuecreatingdoors" %>
+    </div>
+  <% end %>
+  </div>
+
+</body>
