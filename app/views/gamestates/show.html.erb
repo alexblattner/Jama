@@ -13,8 +13,10 @@
 	<img id="hero" src="<%=@hero.attachment_url%>"/>
 	<div id="doors-holder"></div>
 </div>
+<div id="bottom">
 <div id="description">
 	<%= @description %>
 </div>
-<div id="tip"></div>
+<span id="tip"></span>
+</div>
 <%= javascript_pack_tag 'game.js' %>

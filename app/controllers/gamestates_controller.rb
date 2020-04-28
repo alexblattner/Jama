@@ -65,10 +65,8 @@ include SessionsHelper
         w-=1
       end
     }
-    @instance=EventInstance.where({level_id:@gamestate.level_id,gamestate_id:@gamestate.id}).where.not(progress:"1")
+    @instance=EventInstance.where({level_id:@gamestate.level_id,gamestate_id:@gamestate.id}).where.not(progress:"1").order(:id)
     ar=@instance.ids
-    puts 49489
-    puts ar.class
     @description=@level.description
     @boss={}
     if ar!=[]

@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
+  get '/event_instances/:id/:choice', to: 'event_instances#show'
+
   get  '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
   get '/gamestates/reset/:id', to: 'gamestates#reset'

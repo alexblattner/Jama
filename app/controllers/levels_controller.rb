@@ -151,7 +151,7 @@ class LevelsController < ApplicationController
       l=Level.find_by(id: g.level_id)
       arr=[]
       if l.doors.length>0
-      arr=JSON.parse(l.doors)
+        arr=JSON.parse(l.doors)
       end
       if arr.length>0
         i=1
@@ -162,7 +162,10 @@ class LevelsController < ApplicationController
         end
         ar=[1]
         d=Door.where(w)
+        puts 4747474
         render json: d
+      else
+        render json: [].to_json
       end
     end
   end

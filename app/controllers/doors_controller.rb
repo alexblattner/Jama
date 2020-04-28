@@ -40,37 +40,14 @@ class DoorsController < ApplicationController
     @gamestate=Gamestate.where({game_id: @door.game_id, user_id:session[:user_id]}).first
     @hero=Hero.find_by(id: @gamestate.hero_id)
     re=JSON.parse(@door.requirement)
-    passed=true
-    re.keys.each{
-      |i|
-      s=re[i]
-      if s[0]==">"
-        s[0]=''
-        t=(['exp','hp','gold'].include?i)?@hero:stats_calc(@hero.exp,@hero.hp)
-        if t[i]<=s.to_i
-          passed=false
-        end
-      elsif s[0]=="="
-        s[0]=''
-        t=(['exp','hp','gold'].include?i)?@hero:stats_calc(@hero.exp,@hero.hp)
-        if t[i]<=s.to_i
-          passed=false
-        end
-      elsif s[0]=="<"
-        s[0]=''
-        t=(['exp','hp','gold'].include?i)?@hero:stats_calc(@hero.exp,@hero.hp)
-        if t[i]<=s.to_i
-          passed=false
-        end
-      end
-    }
-    if passed
-      EventInstance.where({gamestate_id:@gamestate.id}).update(:progress=>"0")
+    if requirements_passed(@hero,re)
+      EventInstance.where({gamestate_id:@gamestate.id}).delete_all
       @gamestate.update(:level_id=>next_l)
       r=JSON.parse(@door.result)
       if r.is_a?(Hash)
         hero_update(r,@hero)
       end
+      
       render json: @door.to_json(only: [:result])
     else
       render json: [0].to_json
