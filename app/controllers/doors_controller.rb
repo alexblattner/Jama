@@ -17,13 +17,13 @@ class DoorsController < ApplicationController
     @door = Door.new
     @door.game_id = params[:game_id]
     @result_json = Hash.new
-    @result_json['hp'] = "0"
-    @result_json['exp'] = "0"
-    @result_json['gold'] = "0"
+    # @result_json['hp'] = "0"
+    # @result_json['exp'] = "0"
+    # @result_json['gold'] = "0"
     @req_json = Hash.new
-    @req_json['hp'] = ">0"
-    @req_json['rank'] = ">0" 
-    @req_json['gold'] = ">0"
+    # @req_json['hp'] = ">0"
+    # @req_json['rank'] = ">0" 
+    # @req_json['gold'] = ">0"
     @door.result = @result_json.to_json
     @door.requirement = @req_json.to_json
     arr = Array.new
@@ -76,25 +76,25 @@ class DoorsController < ApplicationController
   helper_method :get_req_json
 
   def createRequirementJSON params
-    req = ""
-    req += "{\"hp\":"
-    if(params['door_req_hp'].nil?)
-      req += "\">0\""
-    else
+    req = "{"
+    if(!params['door_req_hp'].nil? && !(params['door_req_hp'].to_i == 0))
+      req += "\"hp\":"
       req += "\"" + params['door_req_hp_operator'].to_s
       req += params['door_req_hp'] + "\""
     end
-    req += ",\"rank\":"
-    if(params['door_req_rank'].nil?)
-      result += "\">0\""
-    else
+    if(!params['door_req_rank'].nil? && !(params['door_req_rank'].to_i == 0))
+      if(req.length > 2)
+        req += ", "
+      end
+      req += "\"rank\":"
       req += "\"" +params['door_req_rank_operator']
       req += params['door_req_rank'] + "\""
     end
-    req += ", \"gold\":"
-    if(params['door_req_gold'].nil?)
-      req += "\">0\""
-    else
+    if(!params['door_req_gold'].nil? && !(params['door_req_gold'].to_i == 0))
+      if(req.length > 2)
+        req += ","
+      end
+      req+= "\"gold\":"
       req += "\"" + params['door_req_gold_operator']
       req += params['door_req_gold'] + "\""
     end
@@ -103,23 +103,24 @@ class DoorsController < ApplicationController
   end
 
   def createResultJSON params
-    result = ""
-    result += "{\"hp\":"
-    if(params['door_result_hp'].nil?)
-      result += "0"
-    else
+    result = "{"
+    if(!params['door_result_hp'].nil? && !(params['door_result_hp'].to_i == 0))
+      result += "\"hp\":"
       result += params['door_result_hp'] 
     end
-    result += ",\"exp\":"
-    if(params['door_result_exp'].nil?)
-      result += "0"
-    else
+    
+    if(!params['door_result_exp'].nil? && !(params['door_result_exp'].to_i == 0))
+      if (result.length > 2)
+        result +=","
+      end
+      result += "\"exp\":"
       result += params['door_result_exp'] 
     end
-    result += ", \"gold\":"
-    if(params['door_result_gold'].nil?)
-      result += "0"
-    else
+    if(!params['door_result_gold'].nil? && !(params['door_result_gold'].to_i == 0)) 
+      if (result.length > 2)
+        result +=","
+      end
+      result += "\"gold\":"
       result += params['door_result_gold']
     end
     result += "}"
@@ -173,7 +174,6 @@ class DoorsController < ApplicationController
     @door.next_levels = @next_levels.to_json
     @door.result = createResultJSON(params)
     @door.requirement = createRequirementJSON(params)
-    
 
     if @door.save
       @door.image = @door.attachment_url
