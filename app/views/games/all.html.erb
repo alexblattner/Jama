@@ -14,18 +14,18 @@
       <div class="gs-row-2">
       <% Game.where(admin_id: session['user_id']).each do |game| %>
         <div class="gs-row-2-col">
-          <div class="card">
+          <div class="gs card">
             <% if game.game_image.blank? %>
               <%= image_tag("defaultgame.png", :height =>"180", :width => "260")%>
             <% else %>
                 <%= image_tag(game.game_image, :height =>"180", :width => "260")%>
             <% end %>
-            <div class="card-body">
-              <h3 class="card-title"><%= game.game_name %></h3>
+            <div class="gs card-body">
+              <h3 class="gs card-title"><%= game.game_name %></h3>
               <% if game.description.blank? %>
-                <h4 class="card-text">No description</h4>
+                <h4 class="gs card-text">No description</h4>
               <% else %>
-                <h4 class="card-text"><%= game.description %></h4>
+                <h4 class="gs card-text"><%= game.description %></h4>
               <% end %>
               <%= link_to "Play", initiate_url(game.id), class: "btn-card" %>
               <%= link_to "Edit", leveldashboard_url(game.id), class: "btn-card" %>

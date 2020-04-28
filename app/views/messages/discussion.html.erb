@@ -3,7 +3,9 @@
 </style>
 
 <h1 style = "text-align:center">Discussion Page</h1>
+<% if @curruser %>
 <h2 style = "text-align:center">Hi welcome to game discussion forum <%=  @curruser.name %></h2>
+<%end %>
 <div class="d-flex justify-content-center">
     <%= link_to "Add Topic", addtopic_path, class:"btn btn-lg btn-warning" %>
 </div>

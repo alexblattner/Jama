@@ -2,6 +2,8 @@
 nav {
     padding-top: 7%!important;
     width: 100%!important;
+    height: 18%!important;
+    background-color: black!important;
 }
 
 //nav bar content properties
@@ -10,22 +12,22 @@ nav {
 }
 
 //links properties
-.navbar-nav a:link,
-a:visited,
-a:active {
-    background-color: transparent;
-    color: black;
-    padding: 14px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+a.navbar-nav:link,
+a.navbar-nav:visited,
+a.navbar-nav:active {
+    //background-color: transparent;
+    color: white!important;
+    padding: 14px 25px!important;
+    text-align: center!important;
+    text-decoration: none!important;
+    display: inline-block!important;
 }
 
-.navbar-nav a:hover {
-    background-color: black;
-    color: white;
-    padding: 14px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+a.navbar-nav:hover {
+    //background-color: black;
+    color: white!important;
+    padding: 14px 25px!important;
+    text-align: center!important;
+    text-decoration: underline!important;
+    display: inline-block!important;
 }

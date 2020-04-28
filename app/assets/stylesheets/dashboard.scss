@@ -16,11 +16,33 @@ body {
 }
 
 .db-row-head h2 {
+    text-align: left!important;
     font-size: 35px!important;
 }
 
-.listthings:hover {
-    background-color: transparent!important;
+.db-assign-container h4 {
+    text-align: center!important;
+    font-size: 20px!important;
+    color: white!important;
+    background-color: black!important;
+    width: 10%!important;
+    padding-top: 5px!important;
+    padding-bottom: 5px!important;
+}
+
+.db-assign-row-1 {
+    padding-top: 10px!important;
+    padding-bottom: 10px!important;
+}
+
+.db-assign-row-3 {
+    padding-top: 10px!important;
+    padding-bottom: 10px!important;
+}
+
+.db-row-finish {
+    padding-top: 40px!important;
+    padding-bottom: 50px!important;
 }
 
 .btn-finishgame {
@@ -31,5 +53,5 @@ body {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px!important;
+    font-size: 30px!important;
 }

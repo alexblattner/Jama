@@ -7,18 +7,18 @@
 <br>
 <% @events = Event.where(game_id: @game_id) %>
 <% @event_names = Array.new %>
-<div class="container">
+<div class="aefo-container">
     <% if !@events.nil? %>
         <% @events.each do |event| %>
-            <div class="card">
-                        <% if event.event_image.blank? %>
-                            <h2><%= link_to event.name, queueevent_path(@game_id, @level_id, event.id)%><h2>
-                        <% else %>
-                            <%= link_to(image_tag(event.event_image, :height =>"90", :width=> "130"), queueevent_path(@game_id, @level_id, event.id)) %>
-                        <% end %>
-                        <div class="card-body">
-                            <div class="card-title"><%= event.name%></div>
-                        </div>
+            <div class="aefo card">
+                <% if event.event_image.blank? %>
+                    <h2><%= link_to event.name, queueevent_path(@game_id, @level_id, event.id)%><h2>
+                <% else %>
+                    <%= link_to(image_tag(event.event_image, :height =>"90", :width=> "130"), queueevent_path(@game_id, @level_id, event.id)) %>
+                <% end %>
+                <div class="aefo card-body">
+                    <div class="aefo card-title"><%= event.name%></div>
+                </div>
             </div>
         <% end %>
     <% else %>
