@@ -194,7 +194,7 @@ class LevelsController < ApplicationController
     @level.doors = doors.to_json
     if @level.save
         flash[:success] = "Great! New level created."
-        if params[:commit] == 'Finish this level and return to dashboard'
+        if params[:commit] == 'Save & Finish'
           redirect_to leveldashboard_url(@level.game_id)
         else
           redirect_to addlevel_url(@level.game_id)
@@ -209,7 +209,7 @@ end
     # @level.image = url_for(@level.level_image)
 
     if @level.update(level_params)
-        if params[:commit] == 'Finish this level and return to dashboard'
+        if params[:commit] == 'Save & Finish'
           redirect_to leveldashboard_url(@level.game_id)
         elsif params[:commit] == 'Add events'
             redirect_to assigneventforall_path(@level.game_id)
