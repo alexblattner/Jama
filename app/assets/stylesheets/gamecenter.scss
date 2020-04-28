@@ -1,36 +1,90 @@
 body {
-    padding-top: 12%!important;
-    //background-image: image-url('landing.png');
-    background-repeat: repeat-x;
-    background-attachment: fixed;
+    padding-top: 10%!important;
 }
 
-h1 {
-    color: black;
-    font-size: 40px!important;
+.gs-container {
+    text-align: center!important;
+}
+
+.gs-row-1 {
+    text-align: left!important;
+    padding-left: 20%!important;
+}
+
+.gs-row-1 h1 {
+    font-size: 50px!important;
+}
+
+.gs-row-2 {
+    padding-left: 20%!important;
+}
+
+.gs-row-3 {
+    text-align: left!important;
+    padding-left: 20%!important;
+}
+
+.gs-row-3 h1 {
+    font-size: 50px!important;
+}
+
+.gs-row-4 {
+    padding-left: 20%!important;
 }
 
 // display each game using card
+
+/* Float four columns side by side */
+
+.column {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+}
+
+
+/* Remove extra left and right margins, due to padding in columns */
+
+.row {
+    margin: 0 -5px;
+}
+
+
+/* Clear floats after the columns */
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 .card {
     //box-shadow: 0 4px 8px 0 rgb(245, 245, 245);
     background-color: rgb(245, 245, 245)!important;
-    max-width: 300px;
+    max-width: 300px!important;
     margin: auto;
     text-align: center;
 }
 
 .card-title {
-    color: black;
+    color: black!important;
     font-size: 30px!important;
 }
 
 .card-text {
-    color: black;
+    color: black!important;
     font-size: 20px!important;
 }
 
-.btn-dark {
+// play & edit button
+.btn-card {
     background-color: black!important;
+    width: 80px!important;
+    padding-left: 10px!important;
+    padding-right: 10px!important;
     color: white!important;
-    font-size: 15px!important;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px!important;
 }

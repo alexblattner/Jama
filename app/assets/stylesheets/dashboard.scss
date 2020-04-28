@@ -1,0 +1,23 @@
+body {
+    padding-top: 10%!important;
+    //background-image: image-url('landing.png');
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+    background-color: white!important;
+    font-family: Courier!important;
+}
+
+.btn-finishgame {
+    background-color: rgb(0, 0, 0)!important;
+    width: 20%!important;
+    color: white!important;
+    padding: 15px 32px!important;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px!important;
+}
+
+.listthings:hover {
+    background-color: transparent!important;
+}
