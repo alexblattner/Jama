@@ -1,10 +1,26 @@
 body {
     padding-top: 10%!important;
-    //background-image: image-url('landing.png');
-    background-repeat: repeat-x;
-    background-attachment: fixed;
-    background-color: white!important;
     font-family: Courier!important;
+}
+
+.db-container {
+    padding-left: 20%!important;
+}
+
+.db-row-title h1 {
+    font-size: 50px!important;
+}
+
+.db-row-desc h3 {
+    font-size: 20px!important;
+}
+
+.db-row-head h2 {
+    font-size: 35px!important;
+}
+
+.listthings:hover {
+    background-color: transparent!important;
 }
 
 .btn-finishgame {
@@ -16,8 +32,4 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px!important;
-}
-
-.listthings:hover {
-    background-color: transparent!important;
 }

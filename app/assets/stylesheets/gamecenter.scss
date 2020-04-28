@@ -4,11 +4,11 @@ body {
 
 .gs-container {
     text-align: center!important;
+    padding-left: 20%!important;
 }
 
 .gs-row-1 {
     text-align: left!important;
-    padding-left: 20%!important;
 }
 
 .gs-row-1 h1 {
@@ -16,14 +16,12 @@ body {
 }
 
 .gs-row-2 {
-    padding-left: 20%!important;
     margin: 0 -5px!important;
     /* Remove extra left and right margins, due to padding in columns */
 }
 
 .gs-row-3 {
-    text-align: left!important;
-    padding-left: 20%!important;
+    padding-left: left!important;
 }
 
 .gs-row-3 h1 {
@@ -31,7 +29,6 @@ body {
 }
 
 .gs-row-4 {
-    padding-left: 20%!important;
     margin: 0 -5px!important;
 }
 

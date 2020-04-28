@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   get '/queuelevel/:game_id/:door_id/:level_id', to: 'doors#queuelevel', as: 'queuelevel'
   get '/dequeuelevel/:game_id/:door_id', to: 'doors#dequeuelevel', as: 'dequeuelevel'
 
-  get '/assigneventforall/:game_id', to: 'levels#assigneventforall', as: 'assigneventforall'
+  #get '/assigneventforall/:game_id', to: 'levels#assigneventforall', as: 'assigneventforall'
   get '/creategamelogic/:game_id', to: 'levels#creategamelogic', as: 'creategamelogic'
   get '/organize/:game_id' , to: 'levels#organize', as: 'organizelevel'
   get 'designatestart/:game_id', to: 'levels#designatestart', as: 'designatestart'
