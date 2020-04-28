@@ -26,10 +26,14 @@
         <%=  form_with model: @message do |f| %>
             <div class="input-group mb-3">
                 <%= f.hidden_field :topic_id, :value => topic.id %>
-                <%= f.text_field :body, placeholder: "Enter message...", class:'form-control', autocomplete:'off'  %>
-                <div class = "input-group-append">
-                    <%= f.submit "Send", class: 'btn btn-outline-secondary ' %>
+                <div>
+                    <%= f.text_field :body, placeholder: "Enter message...", class:'form-control', autocomplete:'off' %>
                 </div>
+                
+                <div class = "input-group-append">
+                    <%= f.submit "Send", class: 'btn btn-outline-secondary' %>
+                </div>
+
             </div>
         <% end %>
     <% else %>
