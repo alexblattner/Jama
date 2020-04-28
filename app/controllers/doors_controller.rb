@@ -7,7 +7,6 @@ class DoorsController < ApplicationController
   def index
     @doors = Door.all
   end
-
   # GET /doors/1
   # GET /doors/1.json
   def show
@@ -192,32 +191,34 @@ class DoorsController < ApplicationController
     puts params
     par = door_params.reject { |k,v| k == 'prev_level_ids' || k == 'next_level_ids' }
     nex = @next_levels.to_json
-    
     puts @next_levels.to_json    
     @door = Door.new(door_params)
     @door.next_levels = @next_levels.to_json
-    if (@door.door_image.attached?)
-      @door.image = url_for(@door.door_image)
-    end
     @door.result = createResultJSON(params)
     @door.requirement = createRequirementJSON(params)
     
 
     if @door.save
-      @prev_levels.each do
-        |level| lev = Level.find(level)
-        doors = Array.new
-        len = lev.doors.to_s.strip.length
-        if len > 2
-          doors = JSON.parse(lev.doors)
+      @door.image = @door.attachment_url
+      @door.save
+      if(!@prev_levels.nil?)
+        @prev_levels.each do
+          |level| lev = Level.find(level)
+          doors = Array.new
+          len = lev.doors.to_s.strip.length
+          if len > 2
+            doors = JSON.parse(lev.doors)
+          end
+          doors.push(@door.id)
+          lev.doors = doors.to_json
+          lev.save
         end
-        doors.push(@door.id)
-        lev.doors = doors.to_json
-        lev.save
+      else
+        flash[:fail] = "You should add some previous levels to the connection"
       end 
       flash[:success] = "Great! New door created."
       if params[:commit] == 'Finish this door and return to game logic'
-        redirect_to creategamelogic_url(@door.game_id)
+        redirect_to leveldashboard_url(@door.game_id)
       else
         redirect_to adddoor_url(@door.game_id)
       end
@@ -231,12 +232,12 @@ class DoorsController < ApplicationController
   def update
     @door.game_id = params[:game_id]
     @door.result = createResultJSON(params)
-    @door.image = url_for(@door.door_image)
+    @door.image = @door.attachment_url
     @door.requirement = createRequirementJSON(params)
     if @door.update(door_params)
       flash[:success] = "Great! Door updated."
       if params[:commit] == 'Finish this door and return to game logic'
-        redirect_to creategamelogic_url(@door.game_id)
+        redirect_to leveldashboard_url(@door.game_id)
       else
         redirect_to adddoor_url(@door.game_id)
       end

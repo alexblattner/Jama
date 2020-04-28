@@ -183,9 +183,10 @@ class LevelsController < ApplicationController
   # POST /levels.json
   def create
     @level = Level.new(level_params)
-
+    @events = Array.new
+    @level.event_id = @events.to_json
     #@level.game = Game.find(level_params[:game_id])
-    @level.image = url_for(@level.level_image)
+    #@level.image = url_for(@level.level_image)
     doors = Array.new
     @level.doors = doors.to_json
     if @level.save
@@ -202,7 +203,7 @@ end
   # PATCH/PUT /levels/1
   # PATCH/PUT /levels/1.json
   def update
-    @level.image = url_for(@level.level_image)
+    # @level.image = url_for(@level.level_image)
 
     if @level.update(level_params)
         if params[:commit] == 'Finish this level and return to dashboard'

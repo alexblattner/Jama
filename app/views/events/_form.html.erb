@@ -32,62 +32,63 @@
         <option value="direct">direct</option>
         <option value="fight">fight</option>
     </select>
+    <%= @a = "" %>
     <p>&nbsp;</p>
     <% @json = get_json %>
     <label class="hidden_option">Enemy HP:</label>
-    <input type="text" name="enemy_hp" class="hidden_option" value= <%= @json.try(:[], 'hp') || 0 %> />
+    <input type="text" name="enemy_hp" class="hidden_option" value= <%= h " " %> />
     <br>
      <label class="hidden_option">Damage dealt per attack:</label>
-    <input type="text" name="enemy_attack_hp" class="hidden_option" value= <%= @json.try(:[], 'attack').try(:[], 'hp') || 0 %> />
+    <input type="text" name="enemy_attack_hp" class="hidden_option" value= <%= h (@json.try(:[], 'attack').try(:[], 'hp') || "") %> />
     <br>
     <label class="hidden_option">Exp loss per attack:</label>
-    <input type="text" name="enemy_attack_exp" class="hidden_option" value= <%= @json.try(:[], 'attack').try(:[], 'exp') || 0 %> />
+    <input type="text" name="enemy_attack_exp" class="hidden_option" value= <%= @json.try(:[], 'attack').try(:[], 'exp') || " " %> />
     <br>
     <label class="hidden_option">Gold loss per attack:</label>
-    <input type="text" name="enemy_attack_gold" class="hidden_option" value= <%= @json.try(:[], 'attack').try(:[], 'gold') || 0 %> />
+    <input type="text" name="enemy_attack_gold" class="hidden_option" value= <%= @json.try(:[], 'attack').try(:[], 'gold') || "" %> />
     <br> 
     <label class="hidden_option">HP gained on death:</label>
-    <input type="text" name="enemy_death_hp" class="hidden_option" value= <%= @json.try(:[], 'death').try(:[], 'hp') || 0 %> />
+    <input type="text" name="enemy_death_hp" class="hidden_option" value= <%= @json.try(:[], 'death').try(:[], 'hp') || "" %> />
     <br>
     <label class="hidden_option">EXP dropped on death:</label>
-    <input type="text" name="enemy_death_exp" class="hidden_option" value= <%= @json.try(:[], 'death').try(:[], 'exp') || 0%> />
+    <input type="text" name="enemy_death_exp" class="hidden_option" value= <%= @json.try(:[], 'death').try(:[], 'exp') || "" %> />
     <br>
     <label class="hidden_option">Gold on death:</label>
-    <input type="text" name="enemy_death_gold" class="hidden_option" value= <%= @json.try(:[], 'death').try(:[], 'gold') || 0 %> />
+    <input type="text" name="enemy_death_gold" class="hidden_option" value= <%= @json.try(:[], 'death').try(:[], 'gold') || "" %> />
     <br>
     
     <label class="shown_option">HP:</label>
-    <input type="text" name="hp" class="shown_option" value= <%= @json.try(:[], 'hp') || 0 %> />
+    <input type="text" name="hp" class="shown_option" value= <%= @json.try(:[], 'hp') ||  ""%> />
     <br>
     <label class="shown_option">Exp:</label>
-    <input type="text" name="exp" class="shown_option" value= <%= @json.try(:[], 'exp') || 0 %> />
+    <input type="text" name="exp" class="shown_option" value= <%= @json.try(:[], 'exp') ||  ""%> />
     <br>
     <label class="shown_option">Gold:</label>
-    <input type="text" name="gold" class="shown_option" value= <%= @json.try(:[], 'gold') || 0 %> />
+    <input type="text" name="gold" class="shown_option" value= <%= @json.try(:[], 'gold') ||  ""%> />
     
     <% @req_json = get_req_json %>
     <br>
     <label class="event_req">HP:</label>
     <select name="event_req_hp_operator" id="event_selector"  style="width: 30px;">
-      <option value=">" <%= if (@req_json['hp'][0] == ">") then "selected" end %> > &gt; </option>
-      <option value="<" <%= if (@req_json['hp'][0] == "<") then "selected" end %> > &lt; </option>
-      <option value="=" <%= if (@req_json['hp'][0] == "=") then "selected" end %> > = </option>
+      <option value=">" <%= if (@req_json.try(:[], 'hp').try(:[], 0) == ">") then "selected" end %> > &gt; </option>
+      <option value="<" <%= if (@req_json.try(:[], 'hp').try(:[], 0) == "<") then "selected" end %> > &lt; </option>
+      <option value="=" <%= if (@req_json.try(:[], 'hp').try(:[], 0) == "=") then "selected" end %> > = </option>
    </select>
    <input type="text" name="event_req_hp" class="event_req" value= <%= @req_json.try(:[], 'hp').try(:[], 1..) || 0 %> />
    <br>
    <label class="event_req">Rank:</label>
    <select name="event_req_rank_operator" id="event_selector" style="width: 30px;">
-    <option value=">" <%= if (@req_json['rank'][0] == ">") then "selected" end %> > &gt; </option>
-    <option value="<" <%= if (@req_json['rank'][0] == "<") then "selected" end %> > &lt; </option>
-    <option value="=" <%= if (@req_json['rank'][0] == "=") then "selected" end %> > = </option>
+    <option value=">" <%= if (@req_json.try(:[], 'rank').try(:[], 0) == ">") then "selected" end %> > &gt; </option>
+    <option value="<" <%= if (@req_json.try(:[], 'rank').try(:[], 0) == "<") then "selected" end %> > &lt; </option>
+    <option value="=" <%= if (@req_json.try(:[], 'rank').try(:[], 0) == "=") then "selected" end %> > = </option>
    </select>
    <input type="text" name="event_req_rank" class="event_req" value= <%= @req_json.try(:[], 'rank').try(:[], 1..) || 0 %> />
    <br>
    <label class="event_req">Gold:</label>
    <select name="event_req_gold_operator" id="door_selector" style="width: 30px;">
-      <option value=">" <%= if (@req_json['gold'][0] == ">") then "selected" end %> > &gt; </option>
-      <option value="<" <%= if (@req_json['gold'][0] == "<") then "selected" end %> > &lt; </option>
-      <option value="=" <%= if (@req_json['gold'][0] == "=") then "selected" end %> > = </option>
+      <option value=">" <%= if (@req_json.try(:[], 'gold').try(:[], 0) == ">") then "selected" end %> > &gt; </option>
+      <option value="<" <%= if (@req_json.try(:[], 'gold').try(:[], 0) == "<") then "selected" end %> > &lt; </option>
+      <option value="=" <%= if (@req_json.try(:[], 'gold').try(:[], 0) == "=") then "selected" end %> > = </option>
    </select>
    <input type="text" name="event_req_gold" class="event_req" value= <%= @req_json.try(:[], 'gold').try(:[], 1..) || 0 %> />
    <br>

@@ -77,7 +77,7 @@ include SessionsHelper
     if en.event_type=="fight"
       @boss=JSON.parse(en.result)
       @boss['name']=en.name
-      @boss['image']=en.image
+      @boss['image']=en.attachment_url #changed, originally en.image
       @boss['progress']=finst.progress.delete_suffix('hp').to_i
       if @boss['progress']==0
         @boss['progress']=@boss['hp']

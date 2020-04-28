@@ -33,6 +33,7 @@ class HeroesController < ApplicationController
     @hero.exp = 0
     @hero.gold = 0
     if @hero.save
+      @hero.image = @hero.attachment_url
       @gamestate = Gamestate.find_by(id: @gamestate_id)
       @gamestate.hero_id = @hero.id
       @gamestate.save 
