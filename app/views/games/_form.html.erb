@@ -5,14 +5,13 @@
   </head>
 
   <body>
-    <div class="container">
-    
-      <div>
+    <div class="cg-container">
+      <div class='cg-row-1'>
         <h1>Create a New Game</h1>
       </div>
       <br>
       
-      <div class = 'formgroup'>
+      <div>
         <%= form_with(model: game, local: true) do |form| %>
           <!-- Validation check -->
           <% if game.errors.any? %>
@@ -27,20 +26,17 @@
           <% end %>
           <!-- Input fields-->
           <div>
-            <%= form.label 'Enter game name:' %>
-            <%= form.text_field :game_name, class: 'form-control' %>
+            <%= form.label 'Enter game name:', class: 'game-form-control-label'%>
+            <%= form.text_field :game_name, class: 'game-form-control-field' %>
           </div>
-          <br><br>
           <div>
-            <%= form.label 'Write a brief description of this game:' %>
-            <%= form.text_field :description, class: 'form-control'  %>
+            <%= form.label 'Write a brief description of this game:', class: 'game-form-control-label'%>
+            <%= form.text_field :description, class: 'game-form-control-field'  %>
           </div>
-          <br><br>
           <div>
-            <%= form.label 'Upload a cover image:' %>
-            <%= form.file_field :game_image, class: 'form-control'%>
+            <%= form.label 'Upload a cover image:', class: 'game-form-control-label'%>
+            <%= form.file_field :game_image, class: 'game-form-control-field'%>
           </div>
-          <br><br>
           <!-- Submit Button-->
           <div>
             <%= form.submit "Create!", class: "btn-creategame" %>

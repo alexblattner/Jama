@@ -1,12 +1,52 @@
 // Place all the styles related to the session controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.login-container {
+    text-align: left!important;
+    padding-left: 20%!important;
+}
+
+.login-form-control-label {
+    font-size: 30px!important;
+    color: black!important;
+    box-shadow: none!important;
+    text-align: right!important;
+    display: block!important;
+    clear: both!important;
+}
+
+.login-form-control-field {
+    font-size: 25px!important;
+    color: black!important;
+    background-color: transparent !important;
+    border: none !important;
+    width: 25%!important;
+    box-shadow: none!important;
+    border-bottom: 3px solid black!important;
+    display: block!important;
+    clear: both!important;
+}
+
+//links properties
+a.login-row-3:link,
+a.login-row-3:visited,
+a.login-row-3:active {
+    //background-color: transparent;
+    color: black!important;
+    text-decoration: underline!important;
+}
+
+a.login-row-3:hover {
+    //background-color: black;
+    color: black!important;
+    text-decoration: underline!important;
+}
+
 .btn-login {
     background-color: rgb(0, 0, 0);
     width: 20%;
     color: white;
     padding: 15px 32px;
-    text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;

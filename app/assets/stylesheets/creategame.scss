@@ -3,28 +3,34 @@ body {
     font-family: Courier!important;
 }
 
-h1 {
+.cg-container {
+    padding-left: 20%!important;
+}
+
+.cg-row-1 h1 {
     font-size: 50px!important;
     color: black!important;
 }
 
-//form
-.form-control {
+.game-form-control-label {
+    font-size: 30px!important;
+    color: black!important;
+    box-shadow: none!important;
+    text-align: right!important;
+    display: block!important;
+    clear: both!important;
+}
+
+.game-form-control-field {
+    font-size: 25px!important;
     color: black!important;
     background-color: transparent !important;
     border: none !important;
-    width: 25%;
+    width: 40%!important;
     box-shadow: none!important;
     border-bottom: 3px solid black!important;
-}
-
-label {
-    color: black!important;
-    text-align: right;
-    clear: both;
-    float: left;
-    margin-right: 15px;
-    font-size: 25px!important;
+    display: block!important;
+    clear: both!important;
 }
 
 // create game button
