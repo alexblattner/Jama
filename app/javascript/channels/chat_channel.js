@@ -14,6 +14,8 @@ consumer.subscriptions.create("ChatChannel", {
   received(data) {
     var messages = $('#messages');
 		messages.append(data['message']);
-		messages.scrollTop($('#messages')[0].scrollHeight);
+    messages.scrollTop($('#messages')[0].scrollHeight);
+    console.log("111111")
+    console.log(messages)
   }
 });
