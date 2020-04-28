@@ -49,6 +49,9 @@ include SessionsHelper
     @level=Level.find_by(id: @gamestate.level_id)
     @hero=Hero.find_by(id: @gamestate.hero_id)
     @hero_level_info=stats_calc(@hero.exp,@hero.hp)
+    puts 3030
+    puts 303030
+    puts @hero_level_info
     eid=JSON.parse(@level.event_id)
     b = Hash.new(0)
     eid.each do |v|
@@ -75,7 +78,7 @@ include SessionsHelper
     if en.event_type=="fight"
       @boss=JSON.parse(en.result)
       @boss['name']=en.name
-      @boss['image']=en.attachment_url #changed, originally en.image
+      @boss['image']=@boss.attachment_url #changed, originally en.image
       @boss['progress']=finst.progress.delete_suffix('hp').to_i
       if @boss['progress']==0
         @boss['progress']=@boss['hp']

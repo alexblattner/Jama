@@ -158,17 +158,17 @@ function requirements_tip(ob){
 		f="<br/><p class='warning'>You need to ";
 		for(var i=0;i<arr.length;i++){
 			if(ob[arr[i]].charAt(0)==">"){
-				if(arr[i]!="level")
+				if(arr[i]!="rank")
 				f+="have more than "+ob[arr[i]].substring(1)+" "+arr[i];
 				else
 				f+="to be rank "+ob[arr[i]].substring(1)+" or higher";
 			}else if(ob[arr[i]].charAt(0)=="="){
-				if(arr[i]!="level")
+				if(arr[i]!="rank")
 				f+="have "+ob[arr[i]].substring(1)+" "+arr[i];
 				else
 				f+="to be rank "+ob[arr[i]].substring(1);
 			}else if(ob[arr[i]].charAt(0)=="<"){
-				if(arr[i]!="level")
+				if(arr[i]!="rank")
 				f+="have less than "+ob[arr[i]].substring(1)+" "+arr[i];
 				else
 				f+="to be rank "+ob[arr[i]].substring(1)+" or lower";
