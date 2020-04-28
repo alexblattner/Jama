@@ -12,8 +12,8 @@
       </div>
 
       <div class="gs-row-2">
-        <div class="column">
-        <% Game.where(admin_id: session['user_id']).each do |game| %>
+      <% Game.where(admin_id: session['user_id']).each do |game| %>
+        <div class="gs-row-2-col">
           <div class="card">
             <% if game.game_image.blank? %>
               <%= image_tag("defaultgame.png", :height =>"180", :width => "260")%>
@@ -22,7 +22,11 @@
             <% end %>
             <div class="card-body">
               <h3 class="card-title"><%= game.game_name %></h3>
-              <h4 class="card-text"><%= game.description %></h4>
+              <% if game.description.blank? %>
+                <h4 class="card-text">No description</h4>
+              <% else %>
+                <h4 class="card-text"><%= game.description %></h4>
+              <% end %>
               <%= link_to "Play", initiate_url(game.id), class: "btn-card" %>
               <%= link_to "Edit", leveldashboard_url(game.id), class: "btn-card" %>
             </div>
@@ -37,17 +41,23 @@
 
       <div class="gs-row-4">
         <% @games.each do |game| %>
-            <div class="card">
-            <% if game.game_image.blank? %>
-              <%= link_to(image_tag("defaultgame.png", :height =>"180", :width => "260"), root_path) %>
-            <% else %>
-                <%= link_to(image_tag(game.game_image, :height =>"180", :width => "260"), root_path) %>
-            <% end %>
-            <div class="card-body">
-              <h3 class="card-title"><%= game.game_name %></h3>
-              <h4 class="card-text"><%= game.description %></h4>
-              <%= link_to "Play", initiate_url(game.id), class: "btn-dark" %>
-            </div>
+          <div class="gs-row-2-col">
+              <div class="card">
+                <% if game.game_image.blank? %>
+                  <%= image_tag("defaultgame.png", :height =>"180", :width => "260") %>
+                <% else %>
+                    <%= image_tag(game.game_image, :height =>"180", :width => "260") %>
+                <% end %>
+                <div class="card-body">
+                  <h3 class="card-title"><%= game.game_name %></h3>
+                  <% if game.description.blank? %>
+                    <h4 class="card-text">No description</h4>
+                  <% else %>
+                    <h4 class="card-text"><%= game.description %></h4>
+                  <% end %>
+                  <%= link_to "Play", initiate_url(game.id), class: "btn-card" %>
+                </div>
+              </div>
             </div>
         <% end %>
       </div>
