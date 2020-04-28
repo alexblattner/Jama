@@ -8,6 +8,7 @@
             <!-- Main Menu -->
             <li><%= link_to "Game Center", allgames_path %></li>
             <li><%= link_to "Create New Game", creategame_path %></li>
+            <li><%= link_to "Discussion", discussion_path %></li>
             <!-- User Activity Function-->
             <% if !logged_in? %>
                 <li><%= link_to "Log in", login_path  %></li>
