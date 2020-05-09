@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :topics
+  resources :messages
   resources :doors
   resources :event_instances
   resources :events
@@ -28,6 +30,9 @@ Rails.application.routes.draw do
   get '/gamestates/reset/:id', to: 'gamestates#reset'
   get '/gamestates/partial/:id', to: 'gamestates#partial'
   get '/games', to: 'games#index'
+  get '/discussion', to: 'messages#discussion'
+  post '/discussion', to: 'message#create'
+  get '/addtopic', to: 'topics#new'
   get '/publishedgames', to: 'games#published'
   get '/doors/open/:id', to: 'doors#open'
   #game creation
@@ -54,7 +59,7 @@ Rails.application.routes.draw do
   get '/queuelevel/:game_id/:door_id/:level_id', to: 'doors#queuelevel', as: 'queuelevel'
   get '/dequeuelevel/:game_id/:door_id', to: 'doors#dequeuelevel', as: 'dequeuelevel'
 
-  get '/assigneventforall/:game_id', to: 'levels#assigneventforall', as: 'assigneventforall'
+  #get '/assigneventforall/:game_id', to: 'levels#assigneventforall', as: 'assigneventforall'
   get '/creategamelogic/:game_id', to: 'levels#creategamelogic', as: 'creategamelogic'
   get '/organize/:game_id' , to: 'levels#organize', as: 'organizelevel'
   get 'designatestart/:game_id', to: 'levels#designatestart', as: 'designatestart'

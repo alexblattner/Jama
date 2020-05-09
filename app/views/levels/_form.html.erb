@@ -5,10 +5,12 @@
   </head>
 
   <body>
-  <div class= 'container'>
-      <div>
+  <div class= 'cl-container'>
+      <div class='cl-row-1'>
         <h1>Create a New Level</h1>
       </div>
+      <br>
+      
       <div>
         <%= form_with(model: level, local: true) do |form| %>
           <% if level.errors.any? %>
@@ -25,30 +27,27 @@
         <div>
           <%= form.hidden_field :game_id, :value => params[:game_id] %>
         </div>
-
         <div>
-          <%= form.label(:name, "Enter level name:") %>
-          <%= form.text_field :name, class: 'form-control' %>
+          <%= form.label:name, "Enter level name:", class: 'level-form-control-label' %>
+          <%= form.text_field :name, class: 'level-form-control-field'%>
         </div>
-
         <div>
-          <%= form.label(:description, "Write a brief description of this level") %>
-          <%= form.text_field :description, class: 'form-control'%>
+          <%= form.label:description, "Write a brief description of this level", class: 'level-form-control-label' %>
+          <%= form.text_field :description ,class: 'level-form-control-field'%>
         </div>
-  
         <div>
-            <%= form.label :level_image %>
-            <%= form.file_field :level_image %>
+            <%= form.label :level_image, class: 'level-form-control-label' %>
+            <%= form.file_field :level_image ,class: 'level-form-control-field' %>
         </div>
-
-        <div>
-          <%= form.submit "Finish this level and return to dashboard", class: "btn btn-success" %>
+        <div class="submits" %>
+          <div class="row">
+            <%= form.submit "Save & Finish", class: "btn-finish" %>
+          </div>
+          <br>
+          <div class="row">
+            <%= form.submit "Save & Next", class: "btn-create" %>
+          </div>
         </div>
-
-        <div>
-          <%= form.submit "Save and make next level", class: "btn btn-success" %>
-        </div>
-     
         <% end %>
      </div>  <!-- form class -->
   </div> <!-- container class -->

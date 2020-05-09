@@ -1,113 +1,120 @@
-<%= stylesheet_link_tag 'levels' %>
+<%= stylesheet_link_tag 'dashboard' %>
 
 <body>
-        <div class="container">
-                <div class='row'>
-                        <h1>Dashboard</h1>
-                </div>
-                <div class='row'>
-                        <h3>This is the dashboard for your game creation</h3>
-                </div>
-                <div class='row'>
-                <h2>Add Levels</h2>
-                </div>
+	<div class="db-container">
+		<div class='db-row-title'>
+			<h1>Dashboard</h1>
+		</div>
 
-                <div class='row'>
-                <%= link_to(image_tag("plussign.png", :height =>"70", :width => "70"), addlevel_path(@game_id)) %>
-                <!-- <%= link_to 'Add a level', addlevel_path(@game_id) %> -->
-                <% levels = Level.where(game_id: @game_id) %>
-                <% levels.each do |level| %>
-                        <% if (level.level_image.attached?) %>
-                                <%= link_to image_tag(level.level_image, :height =>"47", :width => "70"), editlevel_path(@game_id, level.id)  %>
-                        <% else %>
-                                <%= link_to level.name, editlevel_path(@game_id, level.id) %>
-                        <% end %>
-                <% end %>
-                </div>
+		<div class='db-row-desc'>
+			<h3>This is the dashboard for your game creation</h3>
+		</div>
+		
+		<div class='db-row-head'>
+			<h2>Step 1: Add Levels</h2>
+		</div>
 
+		<div class='db-row-list'>
+			<%= link_to(image_tag("plussign.png", :height =>"90", :width => "90", :class=>"cancelhover"), addlevel_path(@game_id))%>
+			<% levels = Level.where(game_id: @game_id) %>
+			<% levels.each do |level| %>
+				<% if (level.level_image.attached?) %>
+					<%= link_to image_tag(level.level_image, :height =>"90", :width => "90"), editlevel_path(@game_id, level.id)  %>
+				<% else %>
+					<%= link_to level.name, editlevel_path(@game_id, level.id) %>
+				<% end %>
+			<% end %>
+		</div>
 
-                <div class='row'>
-                <h2>Add Events</h2>
-                </div>
-                <div class='row'>
-                <%= link_to(image_tag("plussign.png", :height =>"70", :width => "70"), addevent_path(@game_id)) %>
-                <% events = Event.where(game_id: @game_id) %>
-                <% events.each do |event| %>
-                        <% if (event.event_image.attached?) %>
-                                <%= link_to image_tag(event.event_image, :height =>"47", :width => "70"), editevent_url(@game_id, event.id)  %>
-                        <% else %>
-                                <%=  link_to event.name, editevent_url(@game_id, event.id) %>
-                        <% end %>
-                <% end %>
-                </div>
+		<div class='db-row-head'>
+			<h2>Step 2: Add Events</h2>
+		</div>
 
-                <div class = 'row'>
-                <h2> Event Assignments </h2>
-                </div> 
+		<div class='db-row-list'>
+			<%= link_to(image_tag("plussign.png", :height =>"90", :width => "90"), addevent_path(@game_id)) %>
+			<% events = Event.where(game_id: @game_id) %>
+			<% events.each do |event| %>
+				<% if (event.event_image.attached?) %>
+					<%= link_to image_tag(event.event_image, :height =>"90", :width => "90"), editevent_url(@game_id, event.id)  %>
+				<% else %>
+					<%=  link_to event.name, editevent_url(@game_id, event.id) %>
+				<% end %>
+			<% end %>
+		</div>
 
-                <div class='row'>
-                        <% @unassigned_levels = Level.where(game_id: @game_id, event_id: [nil, "[]", ""]) %>
-                        <% @assigned_levels = Level.where(game_id: @game_id).where.not(event_id: [nil, "[]", ""])%>
-                                <div class='col'>
-                                        <h4>Levels with assigned events</h4>
-                                        <br> 
-                                        <% @assigned_levels.each do |level| %>
-                                                <% level %>
-                                                <%= link_to level.name, assigneventforone_path(@game_id, level.id) %>
-                                                <% if (level.level_image.attached?) %>
-                                                        <%= link_to image_tag(level.level_image, :height =>"47", :width => "70"), assigneventforone_path(@game_id, level.id)  %>
-                                                <% end %>
-                                        <% end %>
-                                </div>
-                                <div class='col'>
-                                        <h4>Levels without assigned events</h4>
-                                        <% @unassigned_levels.each do |level| %>
-                                                <% level %>
-                                                <% if (level.level_image.attached?) %>
-                                                        <%= link_to image_tag(level.level_image, :height =>"47", :width => "70"), assigneventforone_path(@game_id, level.id)  %>
-                                                <% else %>
-                                                        <%= link_to level.name, assigneventforone_path(@game_id, level.id) %>
-                                                <% end %>
-                                        <% end %>
-                                </div>
-                        </div> 
-                <div class='row'>
-                <h2>Add Doors</h2>
-                </div>
-                <div class='row'>
-                <%= link_to(image_tag("plussign.png", :height =>"70", :width => "70"), adddoor_path(@game_id)) %>
-                <% doors = Door.where(game_id: @game_id) %>
-                <% doors.each do |door| %>
-                        <% if (door.door_image.attached?) %>
-                                <%= link_to image_tag(door.door_image, :height =>"47", :width => "70"), editdoor_url(@game_id, door.id)  %>
-                        <% else %>
-                                <%= link_to door.name, editdoor_url(@game_id, door.id) %>
-                        <% end %>
-                <% end %>
-                </div>
+		<div class='db-row-head'>
+			<h2> Step 3: Assign Events</h2>
+		</div> 
 
-                <div class='row'>
-                        <h2>Designate starting level</h2>
-                </div>
-                
-                <div class='row'>
-                        <%= link_to 'Designate starting level', designatestart_path(@game_id)%> 
-                        <% @game = Game.find_by(id: @game_id) %>
-                        <% @start_level = Level.find_by(id: @game.start_level_id) %>
-                        <br> 
-                        <% if(!@start_level.nil?) %>
-                                Starting level is <%= @start_level.name %>
-                                <% if(@start_level.level_image.attached?) %>
-                                        <%= image_tag(@start_level.level_image, :height =>"47", :width => "70") %>
-                                <% end %>
-                        <% end %>
-                </div>
-                <br>
+		<div class='db-assign-container'>
+			<% @unassigned_levels = Level.where(game_id: @game_id, event_id: [nil, "[]", ""]) %>
+			<% @assigned_levels = Level.where(game_id: @game_id).where.not(event_id: [nil, "[]", ""])%>
+				<div class='db-assign-row-1'>
+				<h4>Assigned</h4>
+				</div>
+				<div class='db-assign-row-2'>
+				<% @assigned_levels.each do |level| %>
+					<% level %>
+					
+					<% if (level.level_image.attached?) %>
+						<%= link_to image_tag(level.level_image, :height =>"90", :width => "90"), assigneventforone_path(@game_id, level.id)  %>
+					<% else %>
+						<%= link_to level.name, assigneventforone_path(@game_id, level.id) %>
+					<% end %>
+				<% end %>
+				</div>
+				<div class='db-assign-row-3'>
+				<h4>Unassigned</h4>
+				</div>
+				<div class='db-assign-row-4'>
+				<% @unassigned_levels.each do |level| %>
+					<% level %>
+					<% if (level.level_image.attached?) %>
+						<%= link_to image_tag(level.level_image, :height =>"90", :width => "90"), assigneventforone_path(@game_id, level.id)  %>
+					<% else %>
+						<%= link_to level.name, assigneventforone_path(@game_id, level.id) %>
+					<% end %>
+				<% end %>
+				</div>
+		</div>
 
-                <div class='row'>
-                        <%= link_to "Finish game", allgames_path, class: "btn-finishgame" %>
-                </div>
+		<br> 
 
-        </div>
+		<div class='db-row-head'>
+			<h2>Step 4: Add Doors</h2>
+		</div>
+
+		<div class='db-row-list'>
+		<%= link_to(image_tag("plussign.png", :height =>"90", :width => "90"), adddoor_path(@game_id)) %>
+		<% doors = Door.where(game_id: @game_id) %>
+		<% doors.each do |door| %>
+			<% if (door.door_image.attached?) %>
+				<%= link_to image_tag(door.door_image, :height =>"90", :width => "90"), editdoor_url(@game_id, door.id)  %>
+		<% else %>
+				<%= link_to door.name, editdoor_url(@game_id, door.id) %>
+			<% end %>
+		<% end %>
+		</div>
+
+		<div class='db-row-head'>
+			<h2>Step 5: Designate Start</h2>
+		</div>
+		
+		<div class='db-row-list'>
+			<%= link_to(image_tag("plussign.png", :height =>"90", :width => "90"), designatestart_path(@game_id)) %>
+			<% @game = Game.find_by(id: @game_id) %>
+			<% @start_level = Level.find_by(id: @game.start_level_id) %>
+			<% if(!@start_level.nil?) %>
+				<% if(@start_level.level_image.attached?) %>
+					<%= image_tag(@start_level.level_image, :height =>"90", :width => "90") %>
+				<% end %>
+			<% end %>
+		</div>
+
+		<div class='db-row-finish'>
+			<%= link_to "Finish!", allgames_path, class: "btn-finishgame" %>
+		</div>
+
+	</div>
 
 <body>

@@ -7,20 +7,24 @@
   </head>
 
   <body>
-    <div class='container'>
+    <div class='login-container'>
+      <div class='login-row-1'>
       <h1>Member Login</h1>
-      <br>
+      </div>
       <!-- Log in form-->
-      <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
-          <%= f.label :email %>
-          <%= f.email_field :email, class: 'form-control' %>
-        <%= f.label :password %>
-        <%= f.password_field :password, class: 'form-control' %>
-        <%= f.submit "Log in", class: "btn-login" %>
-      <% end %>
+      <div>
+        <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
+          <%= f.label :email, class: 'login-form-control-label' %>
+          <%= f.email_field :email, class: 'login-form-control-field' %>
+          <%= f.label :password , class: 'login-form-control-label'%>
+          <%= f.password_field :password, class: 'login-form-control-field' %>
+          <%= f.submit "Log in", class: "btn-login" %>
+        <% end %>
+      </div>
       <!-- New user link-->
-        <h3>Not Registered?</h3>
-        <%= link_to "Create an account", signup_path %></p>
+      <div class='login-row-3'>
+        <h3>Not Registered? <%= link_to "Create an account", signup_path, :class=>'login-row-3' %> </h3>
+      </div>
     </div>
   </body>
 </html>

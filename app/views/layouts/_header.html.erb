@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag 'general' %>
+<%= stylesheet_link_tag 'header' %>
 
 <head>
     <nav class="navbar navbar-expand-lg fixed-top justify-content-center" style="margin-top: -80px;">
@@ -8,17 +8,20 @@
             <%= link_to(image_tag("logo.jpg", :height =>"47", :width => "70"), root_path) %>
             </li>
             <li class="nav-item">
-            <%= link_to "Game Center", allgames_path %>
+            <%= link_to "Game Center", allgames_path, :class=>'navbar-nav' %>
             </li>
             <li class="nav-item">
-            <%= link_to "Create New Game", creategame_path %>
+            <%= link_to "Create New Game", creategame_path, :class=>'navbar-nav' %>
+            </li>
+            <li class="nav-item">
+                <%= link_to "Discussion", discussion_path, :class=>'navbar-nav' %>
             </li>
             <li class="nav-item">
             <!-- User Activity Function-->
             <% if !logged_in? %>
-            <%= link_to "Log in", login_path  %>
+            <%= link_to "Log in", login_path, :class=>'navbar-nav'  %>
             <% else %>
-            <%= link_to "Log out", logout_path, method: :delete %>
+            <%= link_to "Log out", logout_path, :class=>'navbar-nav', method: :delete %>
             <% end %>
             </li>
         </ul>
