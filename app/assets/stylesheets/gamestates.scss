@@ -30,7 +30,7 @@
   }
 }
 #game-screen{
-  width:var(--screen-width);height:var(--screen-height);position:relative;left:50%;margin-left:calc((-1)*var(--screen-width)/2);margin-top:-150px;
+  width:var(--screen-width);height:var(--screen-height);position:relative;left:50%;margin-left:calc((-1)*var(--screen-width)/2);margin-top:-150px;z-index:1000000;
 }
 #bottom{
   width:var(--screen-width);position:relative;left:50%;margin-left:calc((-1)*var(--screen-width)/2);background:black;border:1px grey solid;
