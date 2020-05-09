@@ -191,9 +191,12 @@ class LevelsController < ApplicationController
     #@level.game = Game.find(level_params[:game_id])
     #@level.image = url_for(@level.level_image)
     doors = Array.new
+
     @level.doors = doors.to_json
     if @level.save
         flash[:success] = "Great! New level created."
+        @level.image = url_for(@level.level_image)
+        puts 111111
         if params[:commit] == 'Save & Finish'
           redirect_to leveldashboard_url(@level.game_id)
         else
@@ -245,6 +248,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def level_params
-      params.require(:level).permit(:name, :event_id, :game_id, :doors, :description, :level_image)
+      params.require(:level).permit(:name, :event_id, :game_id, :doors, :description, :level_image, :image)
     end
 end

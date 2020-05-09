@@ -44,14 +44,15 @@ include SessionsHelper
   # GET /gamestates/1.json
   def show
     if session[:user_id]!= @gamestate.user_id
-    redirect_to action: 'index', status: 303
+      redirect_to action: 'index', status: 303
     end
     @level=Level.find_by(id: @gamestate.level_id)
     @hero=Hero.find_by(id: @gamestate.hero_id)
     @hero_level_info=stats_calc(@hero.exp,@hero.hp)
     puts 3030
-    puts 303030
     puts @hero_level_info
+    puts 3030
+    puts @gamestate
     eid=JSON.parse(@level.event_id)
     b = Hash.new(0)
     eid.each do |v|
@@ -90,12 +91,14 @@ include SessionsHelper
     end
     @arr=ar.to_json()
   end
+
   def partial
     @gamestate=Gamestate.find_by(id:params[:id])
     if session[:user_id]!= @gamestate.user_id
-    redirect_to action: 'index', status: 303
+      redirect_to action: 'index', status: 303
     end
     @level=Level.find_by(id: @gamestate.level_id)
+    puts @level
     eid=JSON.parse(@level.event_id)
     b = Hash.new(0)
     eid.each do |v|
@@ -172,6 +175,6 @@ include SessionsHelper
 
     # Only allow a list of trusted parameters through.
     def gamestate_params
-      params.require(:gamestate).permit(:user_id, :game_id, :hero_id)
+      params.require(:gamestate).permit(:user_id, :game_id, :hero_id, :level_id)
     end
 end

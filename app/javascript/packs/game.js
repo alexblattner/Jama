@@ -78,7 +78,7 @@ $(document).on({
 				id=window.location.href.split("/")[4];
 				$.get("/gamestates/partial/"+id,function(d){
 					$("#game-screen").attr("events",d.events);
-					$("#background-image").attr("src",d.level.image);
+					$("#background-image").attr("src",d.level.level_image);
 					$("#game-screen").removeClass('hold');
 					$("#doors-holder").empty();
 					$("#hero").show();
@@ -123,7 +123,7 @@ function next(){
 						change_description("<p>You have cleared this level, now choose your path.</p>");
 						for(var i=0;i<d.length;i++){
 							d[i]['requirement']=(typeof d[i]['requirement']=="undefined")?"":d[i]['requirement'];
-							$("#doors-holder").append("<img id='"+d[i]['id']+"' requirement='"+d[i]['requirement']+"' name='"+d[i]['name']+"' desc='"+d[i]['description']+"' src='"+d[i]['image']+"'/>");
+							$("#doors-holder").append("<img id='"+d[i]['id']+"' requirement='"+d[i]['requirement']+"' name='"+d[i]['name']+"' desc='"+d[i]['description']+"' src='"+d[i]['door_image']+"'/>");
 							tip(doors_tip);
 						}
 					}else{

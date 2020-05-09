@@ -191,6 +191,7 @@ class EventsController < ApplicationController
     @requirement_json = @event.requirement
     if @event.save
       flash[:success] = "Get new event created."
+      @event.image = url_for(@event.event_image)
       if params[:commit] == 'Save & Finish'
         redirect_to leveldashboard_url(@event.game_id)
       else
