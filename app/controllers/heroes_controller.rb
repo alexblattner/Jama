@@ -15,6 +15,7 @@ class HeroesController < ApplicationController
   # GET /heroes/new
   def new
     @hero = Hero.new
+
   end
 
   # GET /heroes/1/edit
@@ -24,17 +25,23 @@ class HeroesController < ApplicationController
   # POST /heroes
   # POST /heroes.json
   def create
-    @hero = Hero.new(hero_params)
-
-    respond_to do |format|
-      if @hero.save
-        redirect_to leveldashboard_url
-      else
-        format.html { render :new }
-        format.json { render json: @hero.errors, status: :unprocessable_entity }
-      end
+    @gamestate_id = hero_params['gamestate_id']
+    #hero_params.delete('gamestate_id')
+    h = hero_params.reject { |k,v| k == 'gamestate_id' }
+    @hero = Hero.new(h)
+    @hero.hp = 100
+    @hero.exp = 0
+    @hero.gold = 0
+    if @hero.save
+      @hero.image = @hero.attachment_url
+      @gamestate = Gamestate.find_by(id: @gamestate_id)
+      @gamestate.hero_id = @hero.id
+      @gamestate.save 
+      redirect_to gamestate_url(@gamestate.id)
+    else
+        render 'new'
     end
-  end
+    end
 
   # PATCH/PUT /heroes/1
   # PATCH/PUT /heroes/1.json
@@ -68,6 +75,6 @@ class HeroesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hero_params
-      params.require(:hero).permit(:name, :exp, :hp, :gold, :hero_image)
+      params.require(:hero).permit(:name, :exp, :hp, :gold, :hero_image, :gamestate_id, :image)
     end
 end

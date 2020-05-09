@@ -1,6 +1,8 @@
-<h1 align="center">Add a New Event</h1>
- 
-<%= render 'form', event: @event %>
-<%= link_to 'Back to the dashboard', leveldashboard_path(@event.game_id) %>
+<%= stylesheet_link_tag 'createevent' %>
 
-
+<body>
+    <div class='neweventpage'>
+        <%= render 'form', event: @event %>
+        <%= link_to 'Back', leveldashboard_path(@event.game_id), :class=>'btn-returndash'%>
+        </div>
+</body>

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: [:new, :create]
+  #skip_before_action :require_login, only: [:new, :create]
   include UsersHelper
   include SessionsHelper
   # GET /users

@@ -1,36 +1,48 @@
-Assign events to this level:
+<%= stylesheet_link_tag 'assignevent' %>
+<title> Assign Events to this level </title>
 <br>
-
+<h1>Assign Events </h1>
 <% @level = Level.find_by(id: @level_id) %>
-
-
-Available Events:
+<div class="section-label"> Available Events: </div>
+<br>
 <% @events = Event.where(game_id: @game_id) %>
 <% @event_names = Array.new %>
-<% if !@events.nil? %>
-    <% @events.each do |event| %>
-        <%= link_to event.name, queueevent_path(@game_id, @level_id, event.id) %>
-        <% @event_names.push(event.name) %>
-        <%= event.result %>
-    <% end %>
-    <% @level.name %>
-
-<br>
-<% else %>
-        You don't have any events
+<div class="aefo-container">
+    <% if !@events.nil? %>
+        <% @events.each do |event| %>
+            <div class="aefo card">
+                <% if event.event_image.blank? %>
+                    <h2><%= link_to event.name, queueevent_path(@game_id, @level_id, event.id)%><h2>
+                <% else %>
+                    <%= link_to(image_tag(event.event_image, :height =>"90", :width=> "130"), queueevent_path(@game_id, @level_id, event.id)) %>
+                <% end %>
+                <div class="aefo card-body">
+                    <div class="aefo card-title"><%= event.name%></div>
+                </div>
+            </div>
+        <% end %>
+    <% else %>
+        You do not have any events
         <%= link_to 'Go back and make some events', addevent_path(@game_id) %>
         <%= link_to 'Back to the dashboard', leveldashboard_path(@game_id) %>
-<% end %>
-<% @names = events_to_names(@level) %>
-    Events currently assigned to this level: 
+    <% end %>
     <br>
-    <% @names.each do |name| %>
-        <%= name %>
-        <br>
-<% end %>
-    
+    <br>
+</div>
+<br>
+<div class="list">
+    <% @names = events_to_names(@level) %>
+            Events currently assigned to this level: 
+            <br>
+            <% @names.each do |name| %>
+                <div class="card">
+                    <%= name %>
+                    <br>
+                </div>
+    <% end %>
+</div>
 <br> 
-<%= link_to "Remove the last event", dequeueevent_path(@game_id, @level_id) %>
+<h3><%= link_to "Remove the last event", dequeueevent_path(@game_id, @level_id) %><h3>
 <br>
 <br>
 <br>

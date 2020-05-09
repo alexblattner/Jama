@@ -1,0 +1,4 @@
+<div  id="message_<%=message.id%>">
+	[<%= message.created_at.strftime("%l:%M %p") %>] <%= message.user.name.split('@')[0].capitalize %>: <%= message.body %>
+
+</div>

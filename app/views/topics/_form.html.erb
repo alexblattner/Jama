@@ -1,0 +1,41 @@
+<style type="text/css" media="all">
+  .form_table { text-align: center; }
+  .full_width .segment_header { text-align: center !important; }
+  .q { float:none;display: inline-block; }
+  table.matrix, table.rating_ranking { margin-left:auto !important;margin-right:auto !important; }
+</style>
+
+<%= form_with(model: topic, local: true) do |form| %>
+  <% if topic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
+
+      <ul>
+        <% topic.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name,class: 'form-control'  %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description,class: 'form-control'  %>
+  </div>
+
+  <div class="field">
+      <%= form.label :topictype %>
+      <%= form.select :topictype, Topic::TYPE_LIST , class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+     <%= form.submit "Add the topic", class: 'btn btn-dark' %>
+  </div>
+<% end %>
+

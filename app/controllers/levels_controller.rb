@@ -151,7 +151,7 @@ class LevelsController < ApplicationController
       l=Level.find_by(id: g.level_id)
       arr=[]
       if l.doors.length>0
-      arr=JSON.parse(l.doors)
+        arr=JSON.parse(l.doors)
       end
       if arr.length>0
         i=1
@@ -162,7 +162,10 @@ class LevelsController < ApplicationController
         end
         ar=[1]
         d=Door.where(w)
+        puts 4747474
         render json: d
+      else
+        render json: [].to_json
       end
     end
   end
@@ -183,12 +186,18 @@ class LevelsController < ApplicationController
   # POST /levels.json
   def create
     @level = Level.new(level_params)
-
+    @events = Array.new
+    @level.event_id = @events.to_json
     #@level.game = Game.find(level_params[:game_id])
-  
+    #@level.image = url_for(@level.level_image)
+    doors = Array.new
+
+    @level.doors = doors.to_json
     if @level.save
         flash[:success] = "Great! New level created."
-        if params[:commit] == 'Finish this level and return to dashboard'
+        @level.image = url_for(@level.level_image)
+        puts 111111
+        if params[:commit] == 'Save & Finish'
           redirect_to leveldashboard_url(@level.game_id)
         else
           redirect_to addlevel_url(@level.game_id)
@@ -200,8 +209,10 @@ end
   # PATCH/PUT /levels/1
   # PATCH/PUT /levels/1.json
   def update
+    # @level.image = url_for(@level.level_image)
+
     if @level.update(level_params)
-        if params[:commit] == 'Finish this level and return to dashboard'
+        if params[:commit] == 'Save & Finish'
           redirect_to leveldashboard_url(@level.game_id)
         elsif params[:commit] == 'Add events'
             redirect_to assigneventforall_path(@level.game_id)
@@ -237,6 +248,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def level_params
-      params.require(:level).permit(:name, :event_id, :game_id, :doors, :description, :level_image)
+      params.require(:level).permit(:name, :event_id, :game_id, :doors, :description, :level_image, :image)
     end
 end

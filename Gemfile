@@ -23,8 +23,12 @@ gem 'omniauth-auth0', '~> 2.2'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-ui-rails'
+gem "aws-sdk-s3"
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog-aws'
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -46,6 +50,7 @@ group :development do
   gem 'activerecord-import'
   gem "better_errors"
   gem "font-awesome-rails"
+
 end
 
 group :test do

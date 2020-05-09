@@ -3,22 +3,16 @@ module HeroesHelper
     par.keys.each{
       |r|
         if r=="exp"
-          puts "exp"
           og=stats_calc(hero.exp,hero.hp)
           after=(r=="exp")?stats_calc(hero.exp+par['exp'],hero.hp):og
-          if og['level']<after['level']
-            puts hero.hp
-              hero.hp+=(after['maxhp']-og['maxhp'])
-              puts hero.hp           
+          if og['rank']<after['rank']
+            hero.hp+=(after['maxhp']-og['maxhp'])
+          elsif og['rank']>after['rank']
+            hero.hp=(after['maxhp']>og['hp'])?after['maxhp']:og['hp']
           end
         elsif r=="hp"
-          puts "hp"
-          puts hero.hp
           og=stats_calc(hero.exp,hero.hp)
-          puts og['maxhp']
-          puts (par['hp'].to_i+hero.hp)
           hero.hp=((par['hp'].to_i+hero.hp)>og['maxhp'])?og['maxhp']:(par['hp'].to_i+hero.hp)
-          puts hero.hp
         end
         if r!="hp"
           hero[r]=hero[r]+par[r]
@@ -30,12 +24,42 @@ module HeroesHelper
     }
     hero.save
   end
+  def requirements_passed(hero,re)
+    passed=true
+    re.keys.each{
+      |i|
+      s=re[i]
+      if s[0]==">"
+        s[0]=''
+        t=(['exp','hp','gold'].include?i)?hero:stats_calc(hero.exp,hero.hp)
+        if t[i]<=s.to_i
+          passed=false
+        end
+      elsif s[0]=="="
+        s[0]=''
+        t=(['exp','hp','gold'].include?i)?hero:stats_calc(hero.exp,hero.hp)
+        if t[i]<=s.to_i
+          passed=false
+        end
+      elsif s[0]=="<"
+        s[0]=''
+        t=(['exp','hp','gold'].include?i)?hero:stats_calc(hero.exp,hero.hp)
+        if t[i]>=s.to_i
+          passed=false
+        end
+      end
+    }
+    return passed
+  end
   def stats_calc(exp,hp)
-    e=exp
+    if exp>0
+      e=exp
+    else
+      e=0
+    end
     m=1
     level=1
     while e>=(100*m)
-      puts e
       e-=100*m
       m=m*2
       level+=1
@@ -48,6 +72,6 @@ module HeroesHelper
     e=e.to_f
     expp=((e/l)*100).to_i
     e=e.to_i
-    return {"level"=>level,"exp"=>e,"exp_left"=>l,"maxhp"=>maxhp,"hp%"=>hpper,"exp%"=>expp}
+    return {"rank"=>level,"exp"=>e,"exp_left"=>l,"maxhp"=>maxhp,"hp%"=>hpper,"exp%"=>expp,"hp"=>hp}
   end
 end

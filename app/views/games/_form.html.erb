@@ -1,32 +1,50 @@
-<div class="row">
-<div class="col-md-6 col-md-offset-3">
-<%= form_with(model: game, local: true) do |form| %>
-  <% if game.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+<%= stylesheet_link_tag 'creategame' %>
+<html>
+  <head>
+    <title>Create Your Game</title>
+  </head>
 
-      <ul>
-        <% game.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+  <body>
+    <div class="cg-container">
+      <div class='cg-row-1'>
+        <h1>Create a New Game</h1>
+      </div>
+      <br>
+      
+      <div>
+        <%= form_with(model: game, local: true) do |form| %>
+          <!-- Validation check -->
+          <% if game.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+              <ul>
+                <% game.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <!-- Input fields-->
+          <div>
+            <%= form.label 'Enter game name:', class: 'game-form-control-label'%>
+            <%= form.text_field :game_name, class: 'game-form-control-field' %>
+          </div>
+          <div>
+            <%= form.label 'Write a brief description of this game:', class: 'game-form-control-label'%>
+            <%= form.text_field :description, class: 'game-form-control-field'  %>
+          </div>
+          <div>
+            <%= form.label 'Upload a cover image:', class: 'game-form-control-label'%>
+            <%= form.file_field :game_image, class: 'game-form-control-field'%>
+          </div>
+          <!-- Submit Button-->
+          <div>
+            <%= form.submit "Create!", class: "btn-creategame" %>
+          </div>
         <% end %>
-      </ul>
+      </div>
+
     </div>
-  <% end %>
-  <div class="field">
-    <%= form.label :game_name %>
-    <%= form.text_field :game_name, class: 'form-control' %>
-  </div>
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, class: 'form-control'  %>
-  </div>
-  <div class="field">
-          <%= form.label :game_image %>
-          <%= form.file_field :game_image %>
-  </div>
-    <%= form.submit "Create the game", class: "btn btn-success" %>
-  </div>
-</div>
 
-<% end %>
-
+  </body>
+<html>

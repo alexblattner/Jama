@@ -1,5 +1,13 @@
+<%= stylesheet_link_tag 'createevent' %>
+<html>
+  <head>
+    <title>Create Event</title>
+  </head>
+  <body>
+  
+  
+
 <div class="row">
-<div class="col-md-6 col-md-offset-3">
 <%= form_with(model: event, local: true) do |form| %>
  <% if event.errors.any? %>
    <div id="error_explanation">
@@ -22,8 +30,11 @@
    <%= form.label :description %>
    <%= form.text_field :description, class: 'form-control' %>
  
-   <%= form.label :image %>
-   <%= form.text_field :image, class: 'form-control' %>
+   <div class="field">
+        <%= form.label :event_image %>
+        <%= form.file_field :event_image %>
+    </div>
+    
     <form action="" id="events">
     <select name="event_type" id="event_selector">
         <option value="direct">direct</option>
@@ -35,7 +46,7 @@
     <input type="text" name="enemy_hp" class="hidden_option" value= <%= @json.try(:[], 'hp') || 0 %> />
     <br>
      <label class="hidden_option">Damage dealt per attack:</label>
-    <input type="text" name="enemy_attack_hp" class="hidden_option" value= <%= @json.try(:[], 'attack').try(:[], 'hp') || 0 %> />
+    <input type="text" name="enemy_attack_hp" class="hidden_option" value= <%= h (@json.try(:[], 'attack').try(:[], 'hp') || 0) %> />
     <br>
     <label class="hidden_option">Exp loss per attack:</label>
     <input type="text" name="enemy_attack_exp" class="hidden_option" value= <%= @json.try(:[], 'attack').try(:[], 'exp') || 0 %> />
@@ -47,55 +58,61 @@
     <input type="text" name="enemy_death_hp" class="hidden_option" value= <%= @json.try(:[], 'death').try(:[], 'hp') || 0 %> />
     <br>
     <label class="hidden_option">EXP dropped on death:</label>
-    <input type="text" name="enemy_death_exp" class="hidden_option" value= <%= @json.try(:[], 'death').try(:[], 'exp') || 0%> />
+    <input type="text" name="enemy_death_exp" class="hidden_option" value= <%= @json.try(:[], 'death').try(:[], 'exp') || 0 %> />
     <br>
     <label class="hidden_option">Gold on death:</label>
     <input type="text" name="enemy_death_gold" class="hidden_option" value= <%= @json.try(:[], 'death').try(:[], 'gold') || 0 %> />
     <br>
     
     <label class="shown_option">HP:</label>
-    <input type="text" name="hp" class="shown_option" value= <%= @json.try(:[], 'hp') || 0 %> />
+    <input type="text" name="hp" class="shown_option" value= <%= @json.try(:[], 'hp') ||  0 %> />
     <br>
     <label class="shown_option">Exp:</label>
-    <input type="text" name="exp" class="shown_option" value= <%= @json.try(:[], 'exp') || 0 %> />
+    <input type="text" name="exp" class="shown_option" value= <%= @json.try(:[], 'exp') ||  0 %> />
     <br>
     <label class="shown_option">Gold:</label>
-    <input type="text" name="gold" class="shown_option" value= <%= @json.try(:[], 'gold') || 0 %> />
+    <input type="text" name="gold" class="shown_option" value= <%= @json.try(:[], 'gold') ||  0 %> />
     
     <% @req_json = get_req_json %>
     <br>
     <label class="event_req">HP:</label>
     <select name="event_req_hp_operator" id="event_selector"  style="width: 30px;">
-      <option value=">" <%= if (@req_json['hp'][0] == ">") then "selected" end %> > &gt; </option>
-      <option value="<" <%= if (@req_json['hp'][0] == "<") then "selected" end %> > &lt; </option>
-      <option value="=" <%= if (@req_json['hp'][0] == "=") then "selected" end %> > = </option>
+      <option value=">" <%= if (@req_json.try(:[], 'hp').try(:[], 0) == ">") then "selected" end %> > &gt; </option>
+      <option value="<" <%= if (@req_json.try(:[], 'hp').try(:[], 0) == "<") then "selected" end %> > &lt; </option>
+      <option value="=" <%= if (@req_json.try(:[], 'hp').try(:[], 0) == "=") then "selected" end %> > = </option>
    </select>
    <input type="text" name="event_req_hp" class="event_req" value= <%= @req_json.try(:[], 'hp').try(:[], 1..) || 0 %> />
    <br>
    <label class="event_req">Rank:</label>
    <select name="event_req_rank_operator" id="event_selector" style="width: 30px;">
-    <option value=">" <%= if (@req_json['rank'][0] == ">") then "selected" end %> > &gt; </option>
-    <option value="<" <%= if (@req_json['rank'][0] == "<") then "selected" end %> > &lt; </option>
-    <option value="=" <%= if (@req_json['rank'][0] == "=") then "selected" end %> > = </option>
+    <option value=">" <%= if (@req_json.try(:[], 'rank').try(:[], 0) == ">") then "selected" end %> > &gt; </option>
+    <option value="<" <%= if (@req_json.try(:[], 'rank').try(:[], 0) == "<") then "selected" end %> > &lt; </option>
+    <option value="=" <%= if (@req_json.try(:[], 'rank').try(:[], 0) == "=") then "selected" end %> > = </option>
    </select>
    <input type="text" name="event_req_rank" class="event_req" value= <%= @req_json.try(:[], 'rank').try(:[], 1..) || 0 %> />
    <br>
    <label class="event_req">Gold:</label>
    <select name="event_req_gold_operator" id="door_selector" style="width: 30px;">
-      <option value=">" <%= if (@req_json['gold'][0] == ">") then "selected" end %> > &gt; </option>
-      <option value="<" <%= if (@req_json['gold'][0] == "<") then "selected" end %> > &lt; </option>
-      <option value="=" <%= if (@req_json['gold'][0] == "=") then "selected" end %> > = </option>
+      <option value=">" <%= if (@req_json.try(:[], 'gold').try(:[], 0) == ">") then "selected" end %> > &gt; </option>
+      <option value="<" <%= if (@req_json.try(:[], 'gold').try(:[], 0) == "<") then "selected" end %> > &lt; </option>
+      <option value="=" <%= if (@req_json.try(:[], 'gold').try(:[], 0) == "=") then "selected" end %> > = </option>
    </select>
    <input type="text" name="event_req_gold" class="event_req" value= <%= @req_json.try(:[], 'gold').try(:[], 1..) || 0 %> />
    <br>
-   <%= form.submit "Create this event", class: "btn btn-success" %>
    <div>
-    <h1>   </h1>
+   <%= form.submit "Save & Finish", class: "btn-finish" %>
    </div>
-   <%= form.submit "Continue creating events", class: "btn btn-success" %>
-    </div>
+   <div>
+   <%= form.submit "Save & Next", class: "btn-create" %>
+   </div>
  </div>
 <% end %>
+
+
+</body>
+</html>
+
+
 <script type="text/javascript">
 $(document).ready(function(){
     $("#event_selector").change(function(){
