@@ -1,5 +1,6 @@
+<%= stylesheet_link_tag 'designatestart' %>
 <title> Designate Start </title>
-<h1> Designate your starting level </h1>
+<h1> Designate your starting level for your game </h1>
 <% levels = Level.where(game_id: @game_id).order(:id) %>
 <% @game = Game.find(@game_id) %>
 <% levels.each do |level| %>
