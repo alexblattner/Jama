@@ -12,6 +12,7 @@
     --font-desc:14pt;
     --font-tip:12pt;
     --char-size:200px;
+    --restart-width:80px;
   }
 }
 @media screen and (max-device-width: 600px){
@@ -24,13 +25,17 @@
     --font-desc:26pt;
     --font-tip:20pt;
     --char-size:200px;
+    --restart-width:120px;
   }
   #description p{
     line-height:50px;
   }
 }
+body{
+  background:black !important;
+}
 #game-screen{
-  width:var(--screen-width);height:var(--screen-height);position:relative;left:50%;margin-left:calc((-1)*var(--screen-width)/2);margin-top:-150px;z-index:1000000;
+  width:var(--screen-width);height:var(--screen-height);position:relative;left:50%;margin-left:calc((-1)*var(--screen-width)/2);margin-top:-150px;z-index:1000000;color:white;
 }
 #bottom{
   width:var(--screen-width);position:relative;left:50%;margin-left:calc((-1)*var(--screen-width)/2);background:black;border:1px grey solid;
@@ -66,13 +71,25 @@
   position:absolute; color:white;line-height:90%;font-size:var(--font-tip);
 }
 #hero-info{
-  width:var(--info-width);position:absolute;background: grey;height:var(--info-height);font-size:var(--font-tip);
+  width:var(--info-width);position:absolute;background: black;height:var(--info-height);font-size:var(--font-tip);
 }
 #enemy-info{
-  width:var(--info-width);position:absolute;background: grey;height:var(--info-height);right:0;font-size:var(--font-tip);
+  width:var(--info-width);position:absolute;background: black;height:var(--info-height);right:0;font-size:var(--font-tip);
+}
+#restart{
+  position: absolute;
+background: black;
+left: 50%;cursor:pointer;
+font-size: var(--font-tip);
+width: var(--restart-width);
+text-align: center;z-index:100;
+margin-left: calc(var(--restart-width)*(-0.5));
 }
 #doors-holder{
-  position:absolute;height:var(--screen-height);width:100%;line-height:var(--screen-height);
+  position:absolute;height:var(--screen-height);width:100%;line-height:var(--screen-height);display:none;
+}
+#doors-holder.full{
+  display:block;
 }
 #doors-holder img{
   width:calc(var(--char-size)*0.5);height:var(--char-size);margin:20px;border:4px solid brown;
@@ -92,6 +109,7 @@
 .warning{
   color:red;
 }
+#gold{color:white;}
 #tip{
   font-size:var(--font-tip);margin-bottom:10px;margin-left:10px;color:white;
   animation-name: text-highlight;
