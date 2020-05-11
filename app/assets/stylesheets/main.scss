@@ -1,6 +1,7 @@
 // Place all the styles related to the main controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
 body {
     padding-top: 15%!important;
 }
@@ -55,7 +56,8 @@ body {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 25px!important;width:350px;
+    font-size: 40pt !important;
+    font-family: arial;
 }
 .section{
   position:absolute;top:0;

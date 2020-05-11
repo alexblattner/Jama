@@ -39,6 +39,7 @@ $(document).on({
     		if(JSON.stringify(d)!='[0]'){
     		if(d.length!=0){
     		$("#doors-holder").empty();
+    		$("#doors-holder").removeClass("full");
     		var r=JSON.parse(d.result);
 			var k=Object.keys(r);
 			for(var i=0;i<k.length;i++){
@@ -64,7 +65,7 @@ $(document).on({
 					$("#gold").attr("gold",parseInt($("#gold").attr("gold"))+r.gold);
 					$("#gold").text("Gold: "+$("#gold").attr("gold"));
 					$("#gold").animate({color:"yellow"},300,function(){
-						$("#gold").animate({color:"black"},300);
+						$("#gold").animate({color:"white"},300);
 					});
 					if(r.gold<0){
 						damaged($("#hero"));
@@ -110,6 +111,7 @@ $(document).on({
 			$("#game-screen").attr("events",JSON.stringify(events));
 			$("#game-screen").attr("choice","");
 			$("#doors-holder").empty();
+			$("#doors-holder").removeClass("full");
 			$("#doors-holder").removeClass('choice');
 			$("#game-screen").removeClass('hold');
 			}else{
@@ -119,6 +121,13 @@ $(document).on({
     }
     }
 }, "#doors-holder img");
+$("#restart").click(function(){
+	var id=window.location.href.split("/")[4];
+	url="/gamestates/reset/"+id;
+		$.get(url,function(){
+			location.reload();
+		});
+});
 function next(){
 	var id=window.location.href.split("/")[4];
 	var url="/level-doors/"+id;
@@ -132,12 +141,11 @@ function next(){
 						change_description("<p>You have cleared this level, now choose your path.</p>");
 						for(var i=0;i<d.length;i++){
 							d[i]['requirement']=(typeof d[i]['requirement']=="undefined")?"":d[i]['requirement'];
+							$("#doors-holder").addClass("full");
 							$("#doors-holder").append("<img id='"+d[i]['id']+"' requirement='"+d[i]['requirement']+"' name='"+d[i]['name']+"' desc='"+d[i]['description']+"' src='"+d[i]['door_image']+"'/>");
 							tip(doors_tip);
-							$("#doors-holder").css("display","none");
 							$("#doors-holder").append("<img id='"+d[i]['id']+"' requirement='"+d[i]['requirement']+"' name='"+d[i]['name']+"' desc='"+d[i]['description']+"' src='"+d[i]['image']+"'/>");
 							$("#game-screen").waitForImages(function() {
-								$("#doors-holder").css("display","block");
 								tip(doors_tip);
 							});
 						}
@@ -217,10 +225,8 @@ if(($("#game-screen").attr("boss")=="" || typeof $("#game-screen").attr("boss")=
 				d=r.result;
 				for(var i=0;i<d.length;i++){
 					d[i]['requirement']=(typeof d[i]['requirement']=='undefined')?"{}":d[i]['requirement'];
-					$("#doors-holder").css("display","none");
 					$("#doors-holder").append("<img id='"+i+"' requirement='"+d[i]['requirement']+"' desc='"+d[i]['description']+"' src='"+d[i]['image']+"'/>");
 					$("#game-screen").waitForImages(function() {
-						$("#doors-holder").css("display","block");
 						tip(doors_tip);
 					});
 				}
@@ -316,7 +322,7 @@ function hero_change(r){
 			$("#gold").attr("gold",parseInt($("#gold").attr("gold"))+r.gold);
 			$("#gold").text("Gold: "+$("#gold").attr("gold"));
 			$("#gold").animate({color:"yellow"},300,function(){
-				$("#gold").animate({color:"black"},300);
+				$("#gold").animate({color:"white"},300);
 			});
 			if(r.gold<0){
 				damaged($("#hero"));
