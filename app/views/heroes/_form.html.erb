@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'heroes' %>
+
 <%= form_with(model: hero, local: true) do |form| %>
   <% if hero.errors.any? %>
     <div id="error_explanation">
