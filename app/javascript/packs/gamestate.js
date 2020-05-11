@@ -142,7 +142,6 @@ function next(){
 						for(var i=0;i<d.length;i++){
 							d[i]['requirement']=(typeof d[i]['requirement']=="undefined")?"":d[i]['requirement'];
 							$("#doors-holder").addClass("full");
-							$("#doors-holder").append("<img id='"+d[i]['id']+"' requirement='"+d[i]['requirement']+"' name='"+d[i]['name']+"' desc='"+d[i]['description']+"' src='"+d[i]['door_image']+"'/>");
 							tip(doors_tip);
 							$("#doors-holder").append("<img id='"+d[i]['id']+"' requirement='"+d[i]['requirement']+"' name='"+d[i]['name']+"' desc='"+d[i]['description']+"' src='"+d[i]['image']+"'/>");
 							$("#game-screen").waitForImages(function() {
