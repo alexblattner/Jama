@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   #game creation
   get '/creategame', to: 'games#new'
   get '/allgames', to: 'games#all'
+  get '/barload', to: 'games#barload'
   get '/addlevel/:game_id' , to: 'levels#new', as: 'addlevel'
   get '/addevent/:game_id' , to: 'events#new', as: 'addevent'
   get '/adddoor/:game_id' , to: 'doors#new', as: 'adddoor'
@@ -75,5 +76,6 @@ Rails.application.routes.draw do
   post '/searchtopic', to: 'topics#search'
   get '/searchtopic', to: 'topics#search'
 
+  get '/review/:game_id', to: 'games#review', as: 'review'
 
 end

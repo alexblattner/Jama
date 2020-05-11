@@ -11,18 +11,18 @@ class LevelsController < ApplicationController
   def show
   end
 
-  def events_to_names lev
-    @names = Array.new
+  def ids_to_events lev
+    @events = Array.new
     if(lev.event_id.to_s.strip.length != 0)
       event_ids = JSON.parse(lev.event_id)
       event_ids.each do 
         |event_id| event = Event.find_by(id: event_id)
-        @names.push(event.name)
+        @events.push(event)
       end
     end
-    @names
+    @events
   end
-  helper_method :events_to_names
+  helper_method :ids_to_events
 
   def doors_to_names lev
     @names = Array.new
@@ -133,7 +133,7 @@ class LevelsController < ApplicationController
   end
   
   def dashboard
-    @game_id= params[:game_id]
+    @game_id= params[:game_id]    
   end
   # GET /levels/new
   def new
@@ -196,7 +196,7 @@ class LevelsController < ApplicationController
     @level.doors = doors.to_json
     if @level.save
         flash[:success] = "Great! New level created."
-        if params[:commit] == 'Save & Finish'
+        if params[:commit] == 'Finish This Level'
           redirect_to leveldashboard_url(@level.game_id)
         else
           redirect_to addlevel_url(@level.game_id)

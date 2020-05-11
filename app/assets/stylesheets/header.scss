@@ -1,33 +1,32 @@
 //nav bar position properties
-nav {
-    padding-top: 7%!important;
-    width: 100%!important;
-    height: 18%!important;
-    background-color: black!important;
+.head-navbar {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    height: 60px;
+    background: black;
 }
 
-//nav bar content properties
-.navbar-nav {
-    font-size: 20px;
+.head-navbar ul {
+    display: flex;
+    list-style: none;
+    width: 100%;
+    justify-content: center;
 }
 
-//links properties
-a.navbar-nav:link,
-a.navbar-nav:visited,
-a.navbar-nav:active {
-    //background-color: transparent;
-    color: white!important;
-    padding: 14px 25px!important;
-    text-align: center!important;
-    text-decoration: none!important;
-    display: inline-block!important;
+.head-navbar ul li {
+    margin: 0 1rem;
+    padding: 1rem;
 }
 
-a.navbar-nav:hover {
-    //background-color: black;
-    color: white!important;
-    padding: 14px 25px!important;
-    text-align: center!important;
-    text-decoration: underline!important;
-    display: inline-block!important;
+.head-navbar ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+}
+
+.head-navbar ul li a:hover {
+    color: skyblue;
 }

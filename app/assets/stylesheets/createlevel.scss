@@ -3,8 +3,13 @@ body {
     font-family: Courier!important;
 }
 
-.newlevelpage {
-    padding-left: 20%!important;
+.cl-container {
+    padding-left: 33%!important;
+    padding-top: 1%!important;
+}
+
+.returndashclass {
+    padding-left: 33%!important;
 }
 
 .cl-row-1 h1 {
@@ -36,7 +41,7 @@ body {
 // create game button
 .btn-finish {
     background-color: black!important;
-    width: 20%!important;
+    width: 25%!important;
     color: white!important;
     padding: 15px 32px!important;
     text-align: center;
@@ -47,7 +52,7 @@ body {
 
 .btn-create {
     background-color: black!important;
-    width: 20%!important;
+    width: 25%!important;
     color: white!important;
     padding: 15px 32px!important;
     text-align: center;

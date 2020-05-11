@@ -1,32 +1,62 @@
-.section-label {
-    text-align: left;
-    font-size: 30px!important;
-    color: black!important;
+body {
+    padding-top: 10%!important;
+}
+
+.aefo-container {
+    text-align: center!important;
+    padding-left: 20%!important;
+}
+
+.aefo-row-1 {
+    text-align: left!important;
+}
+
+.aefo-row-1 h2 {
+    font-size: 35px!important;
+}
+
+.aefo-row-2 {
+    margin: 0 -5px!important;
+    /* Remove extra left and right margins, due to padding in columns */
+}
+
+.aefo-row-3 {
+    text-align: left!important;
+    padding-top: 10px!important;
+}
+
+.aefo-row-3 h2 {
+    font-size: 35px!important;
+}
+
+
+/* Float four columns side by side */
+
+.aefo-row-2-col {
+    float: left!important;
+    column-width: 25%!important;
+    padding: 0 10px!important;
+    padding-bottom: 15px!important;
+}
+
+
+/* Clear floats after the columns */
+
+.aefo-row-2:after {
+    content: ""!important;
+    display: table!important;
+    clear: both!important;
 }
 
 .aefo.card {
-    position: relative;
-    height: 170px;
-    width: 12.5%;
-    float: left;
-}
-
-.aefo.list {
-    position: relative;
-    margin: auto;
-    text-align: left;
-    font-size: 20px!important;
-}
-
-.aefo.card-body {
-    color: black!important;
-}
-
-.aefo.card-text {
-    color: black!important;
-    font-size: 10px!important;
+    background-color: white!important;
+    height: 160px!important;
+    width: 120px!important;
+    margin: auto!important;
+    text-align: center!important;
 }
 
 .aefo.card-title {
-    font-size: 20px!important;
+    color: black!important;
+    font-size: 15px!important;
 }

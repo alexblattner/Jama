@@ -83,24 +83,24 @@
       </div>
       <div>
         <label class="door_result">HP gained or lost:</label>
-        <input type="text" name="door_result_hp" class="form-control" value= <%= @result_json.try(:[], 'hp') || 0 %> />
+        <input type="text" name="door_result_hp" class="door-form-control" value= <%= @result_json.try(:[], 'hp') || 0 %> />
         <br>
       </div>
       <div>  
         <label class="door_result">EXP gained or lost:</label>
-        <input type="text" name="door_result_exp" class="form-control" value= <%= @result_json.try(:[], 'exp') || 0 %> />
+        <input type="text" name="door_result_exp" class="door-form-control" value= <%= @result_json.try(:[], 'exp') || 0 %> />
         <br>
       </div>
       <div>
         <label class="door_result">Gold gained or lost:</label>
-        <input type="text" name="door_result_gold" class="form-control" value= <%= @result_json.try(:[], 'gold') || 0 %> />
+        <input type="text" name="door_result_gold" class="door-form-control" value= <%= @result_json.try(:[], 'gold') || 0 %> />
         <br>
         <br>
       </div>
-      <div class="section-label">
-          <br>
+      <div>
+        <div class="conn-label">
           Set connections:
-          <br>
+        </div>
       </div>
       <% levels = Level.where(game_id: @door.game_id) %>
       <br>
@@ -116,8 +116,10 @@
               <div class="name">
                 <%= level.name %>
               </div>
-              <div class="checkbox">
-                <input type="checkbox" name="prev_level_ids[]" value= <%= level.id %> <%= has_this_door(level, (@door.id || -1))%> /> 
+              <div class= "checkbox-column">
+                <div class="checkbox-inline">
+                  <input type="checkbox" name="prev_level_ids[]" value= <%= level.id %> <%= has_this_door(level, (@door.id || -1))%> /> 
+                </div>
               </div>
               <br>
             </div>   
@@ -125,7 +127,7 @@
         </div>
         <div class="column">
             <div class="column-label">
-              Set the levels you can get to through this door
+              Set the levels this door leads to
               <br>
             </div>
             <% levels.each do |level| %>
@@ -133,10 +135,12 @@
                 <div class="name">
                   <%= level.name %>
                 </div>
-                <div class="checkbox">
+              <div class= "checkbox-column">
+                <div class="checkbox-inline">
                   <input type="checkbox" name="next_level_ids[]" value= <%= level.id %>  <%= has_this_level(level) %> />    
                 </div>
-                <br>
+              </div>
+              <br>
               </div>
             <% end %>
         </div>
@@ -148,6 +152,9 @@
     <div>
       <%= form.submit "Save and make next door", class: "btn-continuecreatingdoors" %>
     </div>
+    <div>
+      <%= link_to 'Back to dashboard', leveldashboard_path(@door.game_id), :class=>'btn-returndash'%>
+   </div>
   <% end %>
   </div>
 
