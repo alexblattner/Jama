@@ -132,21 +132,20 @@ class EventsController < ApplicationController
     if(params['enemy_attack_hp'].nil?)
       result += ""
     else
-      result += params['enemy_attack_hp'] 
+      result += (params['enemy_attack_hp'].to_i * -1).to_s
     end
     result += ", \"exp\":"
     if(params['enemy_attack_exp'].nil?)
       result += ""
     
     else
-      result += params['enemy_attack_exp'] 
+      result += (params['enemy_attack_exp'].to_i * -1).to_s 
     end
     result += ", \"gold\":"
     if(params['enemy_attack_gold'].nil?)
       result += ""
-    
     else
-      result += params['enemy_attack_gold'] 
+      result += (params['enemy_attack_gold'].to_i * -1).to_s 
     end
     # "death" :["hp": 1, "exp": 1, "gold": 1]
     result += "}, \"death\": {\"hp\":"
