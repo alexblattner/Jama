@@ -16,7 +16,7 @@
     width: 600px
 }
 
-.container {
+.chat_container {
     border: 2px solid #dedede;
     background-color: #f1f1f1;
     border-radius: 5px;
@@ -31,23 +31,23 @@
   }
   
   /* Clear floats */
-  .container::after {
+  .chat_container::after {
     content: "";
     clear: both;
     display: table;
   }
   
   /* Style images */
-  .container img {
+  .chat_container img {
     float: left;
-    max-width: 60px;
+    max-width: 260px;
     width: 100%;
     margin-right: 20px;
     border-radius: 50%;
   }
   
   /* Style the right image */
-  .container img.right {
+  .chat_container img.right {
     float: right;
     margin-left: 20px;
     margin-right:0;
