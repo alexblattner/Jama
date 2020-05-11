@@ -174,6 +174,9 @@ class DoorsController < ApplicationController
     @door.next_levels = @next_levels.to_json
     @door.result = createResultJSON(params)
     @door.requirement = createRequirementJSON(params)
+    if(!@door.door_image.attached?)
+      @door.door_image.attach(io: File.open("app/assets/images/door1.jpg"), filename: "door1.jpg")
+    end
     @door.image = @door.door_image.service_url
     if @door.save
       @door.save
@@ -208,7 +211,10 @@ class DoorsController < ApplicationController
   def update
     @door.game_id = params[:game_id]
     @door.result = createResultJSON(params)
-    @door.image = @door.attachment_url
+    if(!@door.door_image.attached?)
+      @door.door_image.attach(io: File.open("app/assets/images/door1.jpg"), filename: "door1.jpg")
+    end
+    @door.image = @door.door_image.service_url
     @door.requirement = createRequirementJSON(params)
     if @door.update(door_params)
       flash[:success] = "Great! Door updated."

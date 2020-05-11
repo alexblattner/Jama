@@ -80,7 +80,10 @@ module Games
                 valid = false
               end
             end
-            return valid
+            hash = Hash.new
+            hash[:errors] = @errors
+            hash[:valid] = valid
+            return hash
         end     
     end
 end       
