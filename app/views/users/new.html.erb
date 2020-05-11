@@ -1,24 +1,32 @@
-<% provide(:title, 'Sign up') %>
-<h2  align="center">Sign up</h1>
+<!-- <% provide(:title, "Log in") %> -->
+<%= stylesheet_link_tag 'session' %>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_with(model: @user, url: signup_path, local: true) do |f| %>
-      <%= render 'layouts/error_message' %>
+    <title>Sign Up</title>
+    <div class='login-container'>
+      <div class='login-row-1'>
+      <h1>Sign up</h1>
+      </div>
+      <!-- Log in form-->
+      <div>
+        <%= form_with(model: @user, url: signup_path, local: true) do |f| %>
+        <%= render 'layouts/error_message' %>
+          <%= f.label :name, class: 'login-form-control-label' %>
+          <%= f.text_field :name, class: 'login-form-control-field' %>
+          <%= f.label :email, class: 'login-form-control-label' %>
+          <%= f.email_field :email, class: 'login-form-control-field' %>
+          <%= f.label :password , class: 'login-form-control-label'%>
+          <%= f.password_field :password, class: 'login-form-control-field' %>
+          <%= f.label :password_confirmation , class: 'login-form-control-label'%>
+          <%= f.password_field :password_confirmation, class: 'login-form-control-field' %>
+          <%= f.submit "Create my account", class: "btn-login wider" %>
+        <% end %>
+      </div>
+      <!-- New user link-->
+      <div class='login-row-3'>
+        <h3>Already have an account? <%= link_to "Log in!", login_path, :class=>'login-row-3' %> </h3>
+      </div>
+    </div>
 
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-
-      <%= f.submit "Create my account", class: "btn btn-success" %>
-    <% end %>
-  </div>
-</div>
+<

@@ -44,14 +44,15 @@ include SessionsHelper
   # GET /gamestates/1.json
   def show
     if session[:user_id]!= @gamestate.user_id
-    redirect_to action: 'index', status: 303
+      redirect_to action: 'index', status: 303
     end
     @level=Level.find_by(id: @gamestate.level_id)
     @hero=Hero.find_by(id: @gamestate.hero_id)
     @hero_level_info=stats_calc(@hero.exp,@hero.hp)
     puts 3030
-    puts 303030
     puts @hero_level_info
+    puts 3030
+    puts @gamestate
     eid=JSON.parse(@level.event_id)
     b = Hash.new(0)
     eid.each do |v|
@@ -60,16 +61,22 @@ include SessionsHelper
     k=b.keys
     k.each{#creates event instances as amount specified
       |i|
-      @instance=EventInstance.where({event_id:i,level_id:@gamestate.level_id,gamestate_id:@gamestate.id})
-      c=@instance.count()
+      en=Event.find_by(id: i)
+      progress="0"
+      @instances=EventInstance.where({event_id:i,level_id:@gamestate.level_id,gamestate_id:@gamestate.id})
+      if !requirements_passed(@hero,JSON.parse(en.requirement))
+        progress="1"
+        @instances.update(:progress=>progress)
+      end
+      c=@instances.count()
       w=b[i]-c
       while w>0
-        EventInstance.create({:gamestate_id=>@gamestate.id,:level_id=>@gamestate.level_id,:progress=>"0",:event_id=>i})
+        EventInstance.create({:gamestate_id=>@gamestate.id,:level_id=>@gamestate.level_id,:progress=>progress,:event_id=>i})
         w-=1
       end
     }
-    @instance=EventInstance.where({level_id:@gamestate.level_id,gamestate_id:@gamestate.id}).where.not(progress:"1").order(:id)
-    ar=@instance.ids
+    @instances=EventInstance.where({level_id:@gamestate.level_id,gamestate_id:@gamestate.id}).where.not(progress:"1").order(:id)
+    ar=@instances.ids
     @description=@level.description
     @boss={}
     if ar!=[]
@@ -78,7 +85,7 @@ include SessionsHelper
     if en.event_type=="fight"
       @boss=JSON.parse(en.result)
       @boss['name']=en.name
-      @boss['image']=@boss.attachment_url #changed, originally en.image
+      @boss['image']=en.image #changed, originally en.image
       @boss['progress']=finst.progress.delete_suffix('hp').to_i
       if @boss['progress']==0
         @boss['progress']=@boss['hp']
@@ -90,12 +97,14 @@ include SessionsHelper
     end
     @arr=ar.to_json()
   end
+
   def partial
     @gamestate=Gamestate.find_by(id:params[:id])
     if session[:user_id]!= @gamestate.user_id
-    redirect_to action: 'index', status: 303
+      redirect_to action: 'index', status: 303
     end
     @level=Level.find_by(id: @gamestate.level_id)
+    puts @level
     eid=JSON.parse(@level.event_id)
     b = Hash.new(0)
     eid.each do |v|
@@ -172,6 +181,6 @@ include SessionsHelper
 
     # Only allow a list of trusted parameters through.
     def gamestate_params
-      params.require(:gamestate).permit(:user_id, :game_id, :hero_id)
+      params.require(:gamestate).permit(:user_id, :game_id, :hero_id, :level_id)
     end
 end

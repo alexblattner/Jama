@@ -1,19 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Thanks for creating the topic </strong>
   <%= @topic.name %>
 </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @topic.description %>
-</p>
 
-<p>
-  <strong>Game:</strong>
-  <%= @topic.game_id %>
-</p>
 
 <%= link_to 'Edit', edit_topic_path(@topic) %> |
-<%= link_to 'Discussion', discussion_path %>
+<%= link_to 'Back to Discussion', discussion_path %>

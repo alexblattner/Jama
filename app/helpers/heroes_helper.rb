@@ -44,7 +44,7 @@ module HeroesHelper
       elsif s[0]=="<"
         s[0]=''
         t=(['exp','hp','gold'].include?i)?hero:stats_calc(hero.exp,hero.hp)
-        if t[i]<=s.to_i
+        if t[i]>=s.to_i
           passed=false
         end
       end

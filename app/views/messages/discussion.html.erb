@@ -1,5 +1,9 @@
 <style>
-  
+   .topic{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+  }
 </style>
 
 <h1 style = "text-align:center">Discussion Page</h1>
@@ -10,14 +14,16 @@
     <%= link_to "Add Topic", addtopic_path, class:"btn btn-lg btn-warning" %>
 </div>
 
-
+<div class="justify-content-center">
 <% @topics.each do |topic|%>
-  
-    <div class = "jumbtron">
-    <h3> <%= topic.name %></h3>
-    <h4> <%= topic.description %></h4>
+    <% if topic.topictype == "Rate the game" %>
+    <div class = "jumbtron" style="background:#FDF5E6;">
+        <div class = "jumbtron" style="background:gray; width:200px">
+            <h3 > <%= topic.name %></h3>
+        </div>
+    <h4 style="color:gray;"> <%= topic.description %></h4>
     <h4> <%= topic.topictype %></h4>
-    <div class = "well" id = "chatbox_<%= topic.id %>" style = "height:300px; border: solid 1px #222222; overflow-y: scroll">
+    <div class = "well" id = "chatbox_<%= topic.id %>" style = "height:300px; width:800px;  border: solid 1px #222222; overflow-y: scroll">
         <% @messages.each do |message| %>
             <%if message.topic_id == topic.id %>
                <%= render 'messages/message', message: message %>
@@ -26,14 +32,14 @@
     </div>
     <% if @curruser %>
         <%=  form_with model: @message do |f| %>
-            <div class="input-group mb-3">
+            <div class="input mb-3" style = "background: #FDF5E6">
                 <%= f.hidden_field :topic_id, :value => topic.id %>
                 <div>
                     <%= f.text_field :body, placeholder: "Enter message...", class:'form-control', autocomplete:'off' %>
                 </div>
                 
-                <div class = "input-group-append">
-                    <%= f.submit "Send", class: 'btn btn-outline-secondary' %>
+                <div class = "input" style = "width:600px; " >
+                    <%= f.submit "Send", class: 'btn btn-lg btn-outline-secondary' %>
                 </div>
 
             </div>
@@ -44,7 +50,80 @@
         </p>
     <% end %>
     </div>
+    <% elsif topic.topictype == "Game strategy"%>
+    <div class = "jumbtron" style="background:#F5FFFA">
+    <div class = "jumbtron" style="background:gray; width:200px">
+        <h3 > <%= topic.name %></h3>
+    </div>
+<h4 style="color:gray;"> <%= topic.description %></h4>
+<h4> <%= topic.topictype %></h4>
+<div class = "well" id = "chatbox_<%= topic.id %>" style = "height:300px; width:800px;  border: solid 1px #222222; overflow-y: scroll">
+    <% @messages.each do |message| %>
+        <%if message.topic_id == topic.id %>
+           <%= render 'messages/message', message: message %>
+        <% end %>
+    <% end %>
+</div>
+<% if @curruser %>
+    <%=  form_with model: @message do |f| %>
+        <div class="input mb-3" style = "background: #F5FFFA">
+            <%= f.hidden_field :topic_id, :value => topic.id %>
+            <div>
+                <%= f.text_field :body, placeholder: "Enter message...", class:'form-control', autocomplete:'off' %>
+            </div>
+            
+            <div class = "input" style = "width:600px; " >
+                <%= f.submit "Send", class: 'btn btn-lg btn-outline-secondary' %>
+            </div>
 
+        </div>
+    <% end %>
+<% else %>
+    <p style = "text-align:center">
+        You need to be <%= link_to"log in", login_path %> to chat.
+    </p>
 <% end %>
+
+</div>
+
+    <% else %>
+    <div class = "jumbtron" style="background:#F0FFFF">
+    <div class = "jumbtron" style="background:gray; width:200px">
+        <h3 > <%= topic.name %></h3>
+    </div>
+<h4 style="color:gray;"> <%= topic.description %></h4>
+<h4> <%= topic.topictype %></h4>
+<div class = "well" id = "chatbox_<%= topic.id %>" style = "height:300px; width:800px;  border: solid 1px #222222; overflow-y: scroll">
+    <% @messages.each do |message| %>
+        <%if message.topic_id == topic.id %>
+           <%= render 'messages/message', message: message %>
+        <% end %>
+    <% end %>
+</div>
+<% if @curruser %>
+    <%=  form_with model: @message do |f| %>
+        <div class="input mb-3" style = "background: #F0FFFF">
+            <%= f.hidden_field :topic_id, :value => topic.id %>
+            <div>
+                <%= f.text_field :body, placeholder: "Enter message...", class:'form-control', autocomplete:'off' %>
+            </div>
+            
+            <div class = "input" style = "width:600px; " >
+                <%= f.submit "Send", class: 'btn btn-lg btn-outline-secondary' %>
+            </div>
+
+        </div>
+    <% end %>
+<% else %>
+    <p style = "text-align:center">
+        You need to be <%= link_to"log in", login_path %> to chat.
+    </p>
+<% end %>
+
+</div>
+            
+    <% end %>
+<% end %>
+</div>
 
 
