@@ -1,11 +1,40 @@
 //nav bar position properties
+@media screen and (min-device-width: 600px){
+  :root{
+    --img-height:50px;
+    --img-width:75px;
+    --header-font:20pt;
+    --left-margin:20px;
+    --right-padding:0px;
+  }
+}
+@media screen and (max-device-width: 600px){
+  :root{
+    --img-height:80px;
+    --img-width:105px;
+    --header-font:22.5pt;
+    --left-margin:-35px;
+    --right-padding:20px;
+  }
+  .log{
+    margin-right: -6px;margin-top: -75px;
+  }
+}
+header{
+  width:100%;background:black;position:fixed;top:0; height:calc(var(--img-height)*1.2);z-index:1000;
+}
+header img{
+  height:var(--img-height);width:var(--img-width);
+}
 nav {
     padding-top: 7%!important;
     width: 100%!important;
     height: 18%!important;
     background-color: black!important;
 }
-
+header .navbar-nav{
+  font-size:var(--header-font);font-weight:bold;margin-left: var(--left-margin);margin-right:var(--right-padding);
+}
 //nav bar content properties
 .navbar-nav {
     font-size: 20px;
