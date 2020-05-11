@@ -1,22 +1,26 @@
-
-.container{
+.container {
     padding-top: -10%!important;
     font-family: Courier!important;
 }
-.title{
+
+.title {
     margin: auto;
     text-align: center;
     font-size: 36px;
 }
-.body{
+
+.body {
     margin: auto;
     text-align: center;
     font-size: 28px;
+    background-color: white!important;
 }
-.body-text{
+
+.body-text {
     font-size: 20px;
 }
-.img_preview{
+
+.img_graph {
     display: block;
     position: relative;
     margin-left: auto;
@@ -35,12 +39,14 @@
     display: inline-block;
     font-size: 30px!important;
 }
-.error-finish{
+
+.error-finish {
     color: black;
     font-size: 20px;
     margin: auto;
     text-align: center;
 }
+
 .btn-dashboard {
     background-color: rgb(0, 0, 0)!important;
     width: 30%!important;
@@ -52,7 +58,8 @@
     display: inline-block;
     font-size: 30px!important;
 }
-.errors{
+
+.errors {
     color: red;
     font-size: 20px;
     margin: auto;
