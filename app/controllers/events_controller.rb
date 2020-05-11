@@ -177,6 +177,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.event_type = params['event_type']
     @event.game = Game.find(event_params[:game_id])
+    @event.image = @event.event_image.service_url
     if @event.event_type == "fight"
       @event.result = createFightJSON(params)
     else
@@ -184,8 +185,6 @@ class EventsController < ApplicationController
     end
     # @event.image = url_for(@event.event_image)
     # puts @event.image
-    @event.image = @event.attachment_url
-
     @result_json = @event.result
     @event.requirement = createRequirementJSON(params)
     @requirement_json = @event.requirement

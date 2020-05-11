@@ -78,15 +78,6 @@ $(document).on({
 			setTimeout(function(){
 				id=window.location.href.split("/")[4];
 				$.get("/gamestates/partial/"+id,function(d){
-<<<<<<< HEAD
-					$("#game-screen").attr("events",d.events);
-					$("#background-image").attr("src",d.level.level_image);
-					$("#game-screen").removeClass('hold');
-					$("#doors-holder").empty();
-					$("#hero").show();
-					change_description(d.level.description);
-					tip(continue_tip);
-=======
 					$("#background-image").attr("src",d.level.image);
 					$("#game-screen").waitForImages(function() {
 					    $("#game-screen").attr("events",d.events);
@@ -95,7 +86,6 @@ $(document).on({
 						change_description(d.level.description);
 						tip(continue_tip);
 					});
->>>>>>> 834063a4c7b779e6d965ec1379ee35e8d3b122d8
 				});
 			},k.length*800);
 			}else{
@@ -135,17 +125,12 @@ function next(){
 						change_description("<p>You have cleared this level, now choose your path.</p>");
 						for(var i=0;i<d.length;i++){
 							d[i]['requirement']=(typeof d[i]['requirement']=="undefined")?"":d[i]['requirement'];
-<<<<<<< HEAD
-							$("#doors-holder").append("<img id='"+d[i]['id']+"' requirement='"+d[i]['requirement']+"' name='"+d[i]['name']+"' desc='"+d[i]['description']+"' src='"+d[i]['door_image']+"'/>");
-							tip(doors_tip);
-=======
 							$("#doors-holder").css("display","none");
 							$("#doors-holder").append("<img id='"+d[i]['id']+"' requirement='"+d[i]['requirement']+"' name='"+d[i]['name']+"' desc='"+d[i]['description']+"' src='"+d[i]['image']+"'/>");
 							$("#game-screen").waitForImages(function() {
 								$("#doors-holder").css("display","block");
 								tip(doors_tip);
 							});
->>>>>>> 834063a4c7b779e6d965ec1379ee35e8d3b122d8
 						}
 					}else{
 						change_description("<p>You completed this game, congratulations!</p>");

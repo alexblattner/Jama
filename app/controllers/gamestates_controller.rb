@@ -10,8 +10,10 @@ include SessionsHelper
   def index
     @gamestates = Gamestate.all
   end
+
   # POST /save/
   def save
+    
   end
 
   def initiate

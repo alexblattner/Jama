@@ -23,7 +23,8 @@ class GamesController < ApplicationController
 
   
   def all
-    @games = Game.where.not(admin_id: session['user_id'])
+    @mygames = Game.where.not(admin_id: session['user_id'])
+    @games = Game.all
     render "all"
   end
   def startinglevel

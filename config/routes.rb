@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
+
   get '/event_instances/:id/:choice', to: 'event_instances#show'
 
   get  '/signup', to: 'users#new'
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
   get '/discussion', to: 'messages#discussion'
   post '/discussion', to: 'message#create'
   get '/addtopic', to: 'topics#new'
+  get '/topic/:id', to: 'topics#show', as: 'joindiscuss'
   get '/publishedgames', to: 'games#published'
   get '/doors/open/:id', to: 'doors#open'
   #game creation
@@ -68,6 +70,10 @@ Rails.application.routes.draw do
 
   get '/initiatehero/:game_id', to: 'gamestates#initiate', as: 'initiate'
 
+  #search routets
+
+  post '/searchtopic', to: 'topics#search'
+  get '/searchtopic', to: 'topics#search'
 
 
 end

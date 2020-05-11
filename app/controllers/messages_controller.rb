@@ -26,6 +26,11 @@ class MessagesController < ApplicationController
     @messages = Message.all
     @message = Message.new
     @topics = Topic.all
+   
+    @ratetopics = Topic.where(topictype: "Rate the game")
+    @strategytopics = Topic.where(topictype: "Game strategy")
+    @questiontopics = Topic.where(topictype: "Questions about the Game")
+    
     render 'discussion'
   end
 

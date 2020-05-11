@@ -28,12 +28,15 @@ class HeroesController < ApplicationController
     @gamestate_id = hero_params['gamestate_id']
     #hero_params.delete('gamestate_id')
     h = hero_params.reject { |k,v| k == 'gamestate_id' }
+   
     @hero = Hero.new(h)
+
     @hero.hp = 100
     @hero.exp = 0
     @hero.gold = 0
+    @hero.image = @hero.hero_image.service_url
     if @hero.save
-      @hero.image = @hero.attachment_url
+ 
       @gamestate = Gamestate.find_by(id: @gamestate_id)
       @gamestate.hero_id = @hero.id
       @gamestate.save 

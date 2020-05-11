@@ -174,9 +174,8 @@ class DoorsController < ApplicationController
     @door.next_levels = @next_levels.to_json
     @door.result = createResultJSON(params)
     @door.requirement = createRequirementJSON(params)
-
+    @door.image = @door.door_image.service_url
     if @door.save
-      @door.image = @door.attachment_url
       @door.save
       if(!@prev_levels.nil?)
         @prev_levels.each do

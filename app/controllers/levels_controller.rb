@@ -88,6 +88,7 @@ class LevelsController < ApplicationController
     @level_id = params['level_id']
     @game_id = params['game_id']
   end
+
   def queuedoor
     @game_id = params[:game_id]
     @level_id = params[:level_id]
@@ -162,7 +163,6 @@ class LevelsController < ApplicationController
         end
         ar=[1]
         d=Door.where(w)
-        puts 4747474
         render json: d
       else
         render json: [].to_json
@@ -190,13 +190,12 @@ class LevelsController < ApplicationController
     @level.event_id = @events.to_json
     #@level.game = Game.find(level_params[:game_id])
     #@level.image = url_for(@level.level_image)
+    @level.image = @level.level_image.service_url
+    puts @level.image
     doors = Array.new
-
     @level.doors = doors.to_json
     if @level.save
         flash[:success] = "Great! New level created."
-        @level.image = url_for(@level.level_image)
-        puts 111111
         if params[:commit] == 'Save & Finish'
           redirect_to leveldashboard_url(@level.game_id)
         else
