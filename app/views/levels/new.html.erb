@@ -3,7 +3,9 @@
 <body>
     <div class='newlevelpage'>
         <%= render 'form', level: @level %>
-        <%= link_to 'Back', leveldashboard_path(@level.game_id), :class=>"btn-returndash"%>
+        <div class='returndashclass'>
+            <%= link_to 'Back', leveldashboard_path(@level.game_id), :class=>"btn-returndash"%>
         </div>
+    </div>
 </body>
 

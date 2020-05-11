@@ -2,8 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 .login-container {
-    text-align: left!important;
-    padding-left: 20%!important;
+    position:absolute;
+    width:800px;left:50%;margin-left:-400px;
+    top:50%;margin-top:-270px;
 }
 
 .login-form-control-label {
@@ -20,13 +21,15 @@
     color: black!important;
     background-color: transparent !important;
     border: none !important;
-    width: 25%!important;
+    width: 100%!important;
     box-shadow: none!important;
     border-bottom: 3px solid black!important;
     display: block!important;
     clear: both!important;
 }
-
+.btn-login.wider{
+  width:40%;
+}
 //links properties
 a.login-row-3:link,
 a.login-row-3:visited,

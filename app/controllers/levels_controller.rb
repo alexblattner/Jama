@@ -195,9 +195,7 @@ class LevelsController < ApplicationController
     @level.doors = doors.to_json
     if @level.save
         flash[:success] = "Great! New level created."
-        @level.image = url_for(@level.level_image)
-        puts 111111
-        if params[:commit] == 'Save & Finish'
+        if params[:commit] == 'Finish This Level'
           redirect_to leveldashboard_url(@level.game_id)
         else
           redirect_to addlevel_url(@level.game_id)

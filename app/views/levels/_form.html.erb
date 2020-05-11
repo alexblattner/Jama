@@ -32,21 +32,17 @@
           <%= form.text_field :name, class: 'level-form-control-field'%>
         </div>
         <div>
-          <%= form.label:description, "Write a brief description of this level", class: 'level-form-control-label' %>
+          <%= form.label:description, "Write a brief description of this level:", class: 'level-form-control-label' %>
           <%= form.text_field :description ,class: 'level-form-control-field'%>
         </div>
         <div>
-            <%= form.label :level_image, class: 'level-form-control-label' %>
+            <%= form.label:level_image, "Upload a level image:", class: 'level-form-control-label' %>
             <%= form.file_field :level_image ,class: 'level-form-control-field' %>
         </div>
-        <div class="submits" %>
-          <div class="row">
-            <%= form.submit "Save & Finish", class: "btn-finish" %>
-          </div>
+        <div>
+          <%= form.submit "Finish This Level", class: "btn-finish" %>
           <br>
-          <div class="row">
-            <%= form.submit "Save & Next", class: "btn-create" %>
-          </div>
+          <%= form.submit "Create Next Level", class: "btn-create" %>
         </div>
         <% end %>
      </div>  <!-- form class -->

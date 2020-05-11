@@ -1,53 +1,74 @@
 <%= stylesheet_link_tag 'assignevent' %>
-<title> Assign Events to this level </title>
-<br>
-<h1>Assign Events </h1>
-<% @level = Level.find_by(id: @level_id) %>
-<div class="section-label"> Available Events: </div>
-<br>
-<% @events = Event.where(game_id: @game_id) %>
-<% @event_names = Array.new %>
-<div class="aefo-container">
-    <% if !@events.nil? %>
-        <% @events.each do |event| %>
-            <div class="aefo card">
-                <% if event.event_image.blank? %>
-                    <h2><%= link_to event.name, queueevent_path(@game_id, @level_id, event.id)%><h2>
-                <% else %>
-                    <%= link_to(image_tag(event.event_image, :height =>"90", :width=> "130"), queueevent_path(@game_id, @level_id, event.id)) %>
-                <% end %>
-                <div class="aefo card-body">
-                    <div class="aefo card-title"><%= event.name%></div>
-                </div>
+
+<html>
+    <head>
+        <title> Assign Events</title>
+    </head>
+
+    <body>
+        <div class="aefo-container">
+            <div class="aefo-row-1">
+                <h1>Event Assignment</h1>
+                <h2>Available Events: </h2>
+                <h3>Click to add to the list </h3>
             </div>
-        <% end %>
-    <% else %>
-        You do not have any events
-        <%= link_to 'Go back and make some events', addevent_path(@game_id) %>
-        <%= link_to 'Back to the dashboard', leveldashboard_path(@game_id) %>
-    <% end %>
-    <br>
-    <br>
-</div>
-<br>
-<div class="list">
-    <% @names = events_to_names(@level) %>
-            Events currently assigned to this level: 
-            <br>
-            <% @names.each do |name| %>
-                <div class="card">
-                    <%= name %>
-                    <br>
+
+            <div class="aefo-row-2">
+            <% @level = Level.find_by(id: @level_id) %>
+                <% @events = Event.where(game_id: @game_id) %>
+                <% @event_names = Array.new %>
+                <% if !@events.nil? %>
+                    <% @events.each do |event| %>
+                        <div class="aefo-row-2-col">
+                        <div class="aefo card">
+                            <% if event.event_image.blank? %>
+                                <%= link_to event.name, queueevent_path(@game_id, @level_id, event.id)%>
+                            <% else %>
+                                <%= link_to(image_tag(event.event_image, :height =>"120", :width=> "120"), queueevent_path(@game_id, @level_id, event.id)) %>
+                            <% end %>
+                            <div class="aefo card-body">
+                                <h3 class="aefo card-title"><%= event.name%></div>
+                            </div>
+                        </div>
+                    <% end %>
+                <% else %>
+                    <h2>You do not have any events </h2>
+                    <%= link_to 'Go back and make some events', addevent_path(@game_id) %>
+                    <%= link_to 'Back to the dashboard', leveldashboard_path(@game_id) %>
+                <% end %>
+            </div>
+
+            <div class="aefo-row-3">
+                <h2>Current Assignment(order from left to right): </h2>
+            </div>
+
+            <div class="aefo-row-2">
+                
+                <% @names = events_to_names(@level) %>
+                <% @names.each do |name| %>
+                <div class="aefo-row-2-col">
+                    <div class="aefo card">
+                        <div class="aefo card-body">
+                            <h4 class="aefo card-text"> <%= name %></h4>
+                        </div>
+                    </div>
                 </div>
-    <% end %>
-</div>
-<br> 
-<h3><%= link_to "Remove the last event", dequeueevent_path(@game_id, @level_id) %><h3>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<%= link_to 'Back to the dashboard', leveldashboard_path(@game_id) %>
+                <% end %>
+
+                <div class="aefo-row-2-col">
+                    <div class="aefo card">
+                        <%= link_to(image_tag("remove.png", :height =>"90", :width => "90", :class=>"cancelhoverEXP"), dequeueevent_path(@game_id, @level_id))%>
+                         <div class="aefo card-body">
+                            <h3 class="aefo card-title">Remove Last Event</div>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="aefo-row-1">
+                <%= link_to 'Back', leveldashboard_path(@game_id), :class=>"btn-returndash"%>
+            </div>
+
+        </div> <!-- aefo container class end-->
+    </body>
+</html>
+

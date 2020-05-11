@@ -1,54 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    padding-top: 10%!important;
+    padding: 0!important;
     font-family: Courier!important;
+    background: white;
+    color: black;
+    line-height: 1.6;
+    height: 100vh;
 }
 
-.db-container {
-    padding-left: 20%!important;
+.overall-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
 }
 
-.db-row-title h1 {
+.dash-navbar {
+    position: fixed;
+    top: 60px;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    height: 60px;
+    background: rgba(27, 27, 27, 0.7);
+}
+
+.dash-navbar ul {
+    display: flex;
+    list-style: none;
+    width: 100%;
+    justify-content: center;
+}
+
+.dash-navbar ul li {
+    margin: 0 1rem;
+    padding: 1rem;
+}
+
+.dash-navbar ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+}
+
+.dash-navbar ul li a:hover {
+    color: skyblue;
+    background-color: transparent;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    width: 100%;
+    height: 100vh;
+    scroll-snap-align: center;
+}
+
+section#section1 {
+    background: rgb(185, 185, 185) no-repeat center center/cover;
+}
+
+section#section1 h1 {
+    color: black!important;
     font-size: 50px!important;
 }
 
-.db-row-desc h3 {
-    font-size: 20px!important;
+section#section1 h2 {
+    color: black!important;
 }
 
-.db-row-head h2 {
+section#section1 p {
+    color: black!important;
+}
+
+section#section2 {
+    background: white no-repeat center center/cover;
+}
+
+section#section2 h1 {
+    color: black!important;
+    font-size: 50px!important;
+}
+
+section#section3 {
+    background: rgb(185, 185, 185) no-repeat center center/cover;
+}
+
+section#section3 h1 {
+    color: black!important;
+    font-size: 50px!important;
+}
+
+section#section4 {
+    background: white no-repeat center center/cover;
+}
+
+section#section4 h1 {
+    color: black!important;
+    font-size: 50px!important;
+}
+
+section#section5 {
+    background: rgb(185, 185, 185) no-repeat center center/cover;
+}
+
+section#section5 h1 {
+    color: black!important;
+    font-size: 50px!important;
+}
+
+section#section6 {
+    background: white no-repeat center center/cover;
+}
+
+section#section6 h1 {
+    color: black!important;
+    font-size: 50px!important;
+}
+
+section#section7 {
+    background: rgb(185, 185, 185) no-repeat center center/cover;
+}
+
+.sectionhead h1 {
     text-align: left!important;
-    font-size: 35px!important;
+    font-size: 30px!important;
+    padding-top: 30px!important;
+    padding-left: 30px!important;
 }
 
-.cancelhover:hover {
-    -moz-box-shadow: 0 0 10px #ccc;
-    -webkit-box-shadow: 0 0 10px #ccc;
-    box-shadow: 0 0 10px #ccc;
+.db-assign-container {
+    text-align: center;
+    width: 60%!important;
 }
 
 .db-assign-container h4 {
-    text-align: center!important;
-    font-size: 20px!important;
-    color: white!important;
-    background-color: black!important;
-    width: 10%!important;
-    padding-top: 5px!important;
-    padding-bottom: 5px!important;
+    font-size: 25px!important;
+    color: black!important;
 }
 
-.db-assign-row-1 {
-    padding-top: 10px!important;
-    padding-bottom: 10px!important;
-}
-
-.db-assign-row-3 {
-    padding-top: 10px!important;
-    padding-bottom: 10px!important;
-}
-
-.db-row-finish {
-    padding-top: 40px!important;
-    padding-bottom: 50px!important;
+.db-assign-col {
+    float: left;
+    width: 50%;
 }
 
 .btn-finishgame {

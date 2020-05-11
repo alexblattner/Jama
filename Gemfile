@@ -27,6 +27,7 @@ gem "aws-sdk-s3"
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog-aws'
+gem 'will_paginate'
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
 
