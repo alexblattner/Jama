@@ -1,0 +1,47 @@
+
+<%= stylesheet_link_tag 'review_game' %>
+<div class= "container">
+    <div class= "title">
+        Review your game
+    </div>
+    <div class= "body">
+        Start Level:
+        <div class="body-text">
+            <% if @game.start_level_id.nil? %>
+                You should set a start level:
+                <%= link_to("designate start", designatestart_path(@game.id)) %>
+            <% else %>
+                Your start level is: 
+                <%= Level.find_by(id: @game.start_level_id).name %>
+            <% end %>
+        </div>
+        <br> <br>
+    </div>
+    <div class="body">
+        Review your level structure:
+        <div class="graph">
+            <%= image_tag(@game.graph_image, :class => "img_preview")%> 
+        </div>
+        <br>
+    </div>
+    <%if @valid %>
+        <div class='body'>
+			<%= link_to "Finish!", allgames_path, class: "btn-finishgame" %>
+        </div>
+    <% else %>
+       <div class='error-finish'>
+            You must finish creating the game before you can continue
+        </div>
+        <div class='errors'>
+            <% @errors.each do |error| %>
+                <%= error %>
+                <br>
+            <%end %>
+        </div>
+    <% end %>
+    <br>
+    <br>
+    <div class='body'>
+	    <%= link_to "Return to dashboard", leveldashboard_path(@game.id), class: "btn-dashboard" %>
+    </div>
+</div>

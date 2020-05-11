@@ -132,7 +132,7 @@ class LevelsController < ApplicationController
   end
   
   def dashboard
-    @game_id= params[:game_id]
+    @game_id= params[:game_id]    
   end
   # GET /levels/new
   def new
