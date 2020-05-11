@@ -34,11 +34,11 @@
     <br>
     <form action="" id="events">
     <select name="event_type" id="event_selector" class="event-sel">
-        <option value="fight" selected>fight</option>
-        <option value="direct">direct</option>
+        <option value="fight">fight</option>
+        <option value="direct" selected>direct</option>
     </select>
     <% @json = get_json %>
-    <div class="fight_option">
+    <div class="fight_option" style="display:none">
       <label class="fight_option_text">Enemy HP:</label>
       <input type="text" name="enemy_hp" class="fight_option_field" value= <%= @json.try(:[], 'hp') || 0 %> />
       <br>
@@ -62,14 +62,14 @@
       <br>
     </div>
     <div class="direct_option">
-      <label class="direct_option_text">HP:</label>
+      <label class="direct_option_text">HP gained or lost:</label>
       <input type="text" name="hp" class="direct_option_field" value= <%= @json.try(:[], 'hp') ||  0 %> />
       <br>
     
-      <label class="direct_option_text">Exp:</label>
+      <label class="direct_option_text">Exp gained or lost:</label>
       <input type="text" name="exp" class="direct_option_field" value= <%= @json.try(:[], 'exp') ||  0 %> />
       <br>
-      <label class="direct_option_text">Gold:</label>
+      <label class="direct_option_text">Gold gained or lost:</label>
       <input type="text" name="gold" class="direct_option_field" value= <%= @json.try(:[], 'gold') ||  0 %> />
     </div>
     <% @req_json = get_req_json %>
@@ -114,13 +114,10 @@
     </div>
     <br><br>
   </div>
-  </div>
-   <div>
-    <%= form.submit "Finish this event and return to dashboard", class: "btn-done" %>
-   </div>
-   <div>
-   <%= form.submit "Save and make next door", class: "btn-create" %>
-   </div>
+  
+  <%= form.submit "Finish this event and return to dashboard", class: "btn-done"%>
+  <br>
+  <%= form.submit "Save and make next door", class: "btn-create"%>
    <div>
     <%= link_to 'Back to dashboard', leveldashboard_path(@event.game_id), :class=>'btn-returndash'%>
    </div>

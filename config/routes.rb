@@ -69,6 +69,6 @@ Rails.application.routes.draw do
 
   get '/initiatehero/:game_id', to: 'gamestates#initiate', as: 'initiate'
 
-  get '/review/:game_id', to: 'games#review'
+  get '/review/:game_id', to: 'games#review', as: 'review'
 
 end
