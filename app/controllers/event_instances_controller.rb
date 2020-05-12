@@ -21,8 +21,7 @@ class EventInstancesController < ApplicationController
       @event_instance.progress="1"
       @event_instance.save
     end
-    puts 333
-    puts @event_instance.progress
+   
     if @event_instance.progress!="1" && session[:user_id]==uid && requirements_passed(@hero,re)
       if @event.event_type=="direct"
         @hero=Hero.find_by(id: @gamestate.hero_id)

@@ -18,15 +18,7 @@ class EventsController < ApplicationController
     @result_json = Hash.new
     @result_json['attack'] = Hash.new
     @result_json['death'] = Hash.new
-    # @result_json['hp'] = "0"
-    # @result_json['exp'] = "0"
-    # @result_json['gold'] = "0"
-    # @result_json['attack']['hp'] = "0"
-    # @result_json['attack']['exp'] = "0"
-    # @result_json['attack']['gold'] = "0"
-    # @result_json['death']['hp'] = "0"
-    # @result_json['death']['exp'] = "0"
-    # @result_json['death']['gold'] = "0"
+   
     @event.result = @result_json.to_json
     # @requirement_json = Hash.new
     # @requirement_json['hp'] = ">0"

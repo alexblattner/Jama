@@ -175,12 +175,10 @@ class LevelsController < ApplicationController
     @game = Game.find_by(id: @game_id)
   end
   def organizeevents
-    puts "************"
-    puts params
+
     @level = Level.find_by(id: params['level_id'])
     @game = Game.find_by(id: params['game_id'])
     render 'edit'
-    puts "************"
   end
   # POST /levels
   # POST /levels.json
@@ -194,7 +192,7 @@ class LevelsController < ApplicationController
       @level.level_image.attach(io: File.open("app/assets/images/samplegame2.jpg"), filename: "samplegame2.jpg")
     end
     @level.image = @level.level_image.service_url
-    puts @level.image
+   
     doors = Array.new
     @level.doors = doors.to_json
     if @level.save

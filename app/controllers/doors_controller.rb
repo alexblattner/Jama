@@ -165,11 +165,10 @@ class DoorsController < ApplicationController
   def create
     @prev_levels = params['prev_level_ids']
     @next_levels = params['next_level_ids']
-    puts "params: !!!!!!!!!!!!!!!"
-    puts params
+    
     par = door_params.reject { |k,v| k == 'prev_level_ids' || k == 'next_level_ids' }
     nex = @next_levels.to_json
-    puts @next_levels.to_json    
+   
     @door = Door.new(door_params)
     @door.next_levels = @next_levels.to_json
     @door.result = createResultJSON(params)
@@ -217,7 +216,7 @@ class DoorsController < ApplicationController
     @door.image = @door.door_image.service_url
     @door.requirement = createRequirementJSON(params)
     if @door.update(door_params)
-      #flash[:success] = "Great! Door updated."
+      
       if params[:commit] == 'Finish this door and return to dashboard'
         redirect_to leveldashboard_url(@door.game_id)
       else
