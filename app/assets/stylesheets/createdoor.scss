@@ -7,9 +7,24 @@ body {
     font-family: Courier!important;
 }
 
+.att-form-control {
+    color: black!important;
+    background-color: transparent !important;
+    border: none !important;
+    width: 75%;
+    font-size: 15px!important;
+    box-shadow: none!important;
+    border-bottom: 3px solid black!important;
+}
+
 h1 {
     font-size: 50px!important;
     color: black!important;
+}
+
+.door-container {
+    padding-left: 35%;
+    margin: auto;
 }
 
 //form
@@ -55,10 +70,10 @@ label {
 .conn-label {
     position: relative;
     float: left;
-    margin: auto;
     width: 100%;
     padding: 10px;
-    text-align: center;
+    text-align: left;
+    margin-left: -15px;
     font-size: 30px!important;
     color: black!important;
 }
