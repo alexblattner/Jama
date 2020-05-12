@@ -24,7 +24,7 @@ class GamesController < ApplicationController
 
   
   def all
-    @games = Game.search(params[:search]).where.not(admin_id: session['user_id']).paginate(:per_page => 20,:page => params[:page])
+    @games = Game.search(params[:search]).where.not(admin_id: session['user_id']).paginate(:per_page => 20,:page => params[:page]).order(:popularity)
     @self=Game.search(params[:search]).where(admin_id: session['user_id']).paginate(:per_page => 20,:page => params[:page])
     render "all"
   end
