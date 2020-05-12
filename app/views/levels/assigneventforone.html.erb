@@ -20,11 +20,11 @@
                 <% if !@events.nil? %>
                     <% @events.each do |event| %>
                         <div class="aefo-row-2-col">
-                        <div class="aefo card">
+                        <div class="aefo card shadow-lg rounded">
                             <% if event.event_image.blank? %>
                                 <%= link_to event.name, queueevent_path(@game_id, @level_id, event.id)%>
                             <% else %>
-                                <%= link_to(image_tag(event.event_image, :height =>"120", :width=> "120"), queueevent_path(@game_id, @level_id, event.id)) %>
+                                <%= link_to(image_tag(event.event_image, :height =>"120", :width=> "110"), queueevent_path(@game_id, @level_id, event.id)) %>
                             <% end %>
                             <div class="aefo card-body">
                                 <h3 class="aefo card-title"><%= event.name%></div>
@@ -46,8 +46,8 @@
                 <% @events = ids_to_events(@level) %>
                 <% @events.each do |event| %>
                 <div class="aefo-row-2-col">
-                    <div class="aefo card">
-                        <%= image_tag(event.event_image, :height =>"120", :width=> "120")%>
+                    <div class="aefo card shadow-lg rounded">
+                        <%= image_tag(event.event_image, :height =>"120", :width=> "110")%>
                         <div class="aefo card-body">
                             <h4 class="aefo card-text"> <%= event.name %></h4>
                         </div>
@@ -64,9 +64,9 @@
                     </div>
                 </div>
 
-            <div class="aefo-row-1">
-                <%= link_to 'Back', leveldashboard_path(@game_id), :class=>"btn-returndash"%>
-            </div>
+            
+            <%= link_to 'Back to dashboard', leveldashboard_path(@game_id), :class=>"btn-returndash"%>
+           
 
         </div> <!-- aefo container class end-->
     </body>
