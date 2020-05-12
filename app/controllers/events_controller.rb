@@ -132,21 +132,20 @@ class EventsController < ApplicationController
     if(params['enemy_attack_hp'].nil?)
       result += ""
     else
-      result += params['enemy_attack_hp'] 
+      result += (params['enemy_attack_hp'].to_i * -1).to_s
     end
     result += ", \"exp\":"
     if(params['enemy_attack_exp'].nil?)
       result += ""
     
     else
-      result += params['enemy_attack_exp'] 
+      result += (params['enemy_attack_exp'].to_i * -1).to_s 
     end
     result += ", \"gold\":"
     if(params['enemy_attack_gold'].nil?)
       result += ""
-    
     else
-      result += params['enemy_attack_gold'] 
+      result += (params['enemy_attack_gold'].to_i * -1).to_s 
     end
     # "death" :["hp": 1, "exp": 1, "gold": 1]
     result += "}, \"death\": {\"hp\":"
@@ -177,6 +176,9 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.event_type = params['event_type']
     @event.game = Game.find(event_params[:game_id])
+    if(!@event.event_image.attached?)
+      @event.event_image.attach(io: File.open("app/assets/images/fireball.jpg"), filename: "fireball.jpg")
+    end
     @event.image = @event.event_image.service_url
     if @event.event_type == "fight"
       @event.result = createFightJSON(params)
@@ -210,8 +212,10 @@ class EventsController < ApplicationController
       @event.result = createDirectJSON(params)
     end
     @result_json = @event.result
-    @event.image = @event.attachment_url
-
+    if(!@event.event_image.attached?)
+      @event.event_image.attach(io: File.open("app/assets/images/fireball.jpg"), filename: "fireball.jpg")
+    end
+    @event.image = @event.event_image.service_url
     @event.requirement = createRequirementJSON(params)
     if @event.update(event_params)
       flash[:success] = "Successfully updated event."

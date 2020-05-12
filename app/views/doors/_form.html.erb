@@ -3,7 +3,12 @@
   <title>Door Creator</title>
 </head>
 <body>
+<div class="door-container">
+  
   <div class="container">
+  <div class='cl-row-1'>
+        <h1>Create a New Door</h1>
+      </div>
     <br>
     <div class = 'formgroup'>
       <%= form_with(model: door, local:true) do |form| %>
@@ -23,23 +28,23 @@
       <%= form.hidden_field :game_id, :value => params[:game_id] %>
 
       <div>
-        <%= form.label(:name, "Door Name") %>
-        <%= form.text_field :name, class: 'form-control' %>
+        <%= form.label(:name, "Enter a Door Name") %>
+        <%= form.text_field :name, class: 'att-form-control' %>
       </div>
       <br><br>
       <div>
-        <%= form.label(:description, "Description") %>
-        <%= form.text_field :description, class: 'form-control'%>
+        <%= form.label(:description, "Please enter a Description") %>
+        <%= form.text_field :description, class: 'att-form-control'%>
       </div>
       <br><br>
       <div class="field">
-        <%= form.label :door_image %>
+        <%= form.label :door_image, "Attach a door image" %>
         <%= form.file_field :door_image, class: 'image-field'%>
       </div>
       <% @req_json = get_req_json %>
       <% @result_json = get_result_json %>
       <div>
-        <div class="section-label">
+        <div class="conn-label">
           Requirements to enter:
         </div>
         <br>
@@ -76,7 +81,7 @@
           <br>
         </div>
       </div>
-      <div class="section-label">
+      <div class="conn-label">
           <br>
           Result on entering:
           <br>
@@ -147,7 +152,7 @@
       </div>
     <div>
     <br><br>
-      <%= form.submit "Finish this door and return to game logic", class:  "btn-createdoor" %>
+      <%= form.submit "Finish this door and return to dashboard", class:  "btn-createdoor" %>
     </div>
     <div>
       <%= form.submit "Save and make next door", class: "btn-continuecreatingdoors" %>
@@ -157,5 +162,5 @@
    </div>
   <% end %>
   </div>
-
+</div>
 </body>

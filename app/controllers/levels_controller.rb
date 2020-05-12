@@ -190,6 +190,9 @@ class LevelsController < ApplicationController
     @level.event_id = @events.to_json
     #@level.game = Game.find(level_params[:game_id])
     #@level.image = url_for(@level.level_image)
+    if(!@level.level_image.attached?)
+      @level.level_image.attach(io: File.open("app/assets/images/samplegame2.jpg"), filename: "samplegame2.jpg")
+    end
     @level.image = @level.level_image.service_url
     puts @level.image
     doors = Array.new
@@ -203,13 +206,16 @@ class LevelsController < ApplicationController
         end
       else
         render "new"
-    end
+      end
 end
   # PATCH/PUT /levels/1
   # PATCH/PUT /levels/1.json
   def update
     # @level.image = url_for(@level.level_image)
-
+    if(!@level.level_image.attached?)
+      @level.level_image.attach(io: File.open("app/assets/images/samplegame2.jpg"), filename: "samplegame2.jpg")
+    end
+    @level.image = @level.level_image.service_url
     if @level.update(level_params)
         if params[:commit] == 'Save & Finish'
           redirect_to leveldashboard_url(@level.game_id)

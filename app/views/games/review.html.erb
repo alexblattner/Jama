@@ -1,23 +1,26 @@
 
 <%= stylesheet_link_tag 'review_game' %>
-<div class= "container">
+<div class= "graph-container">
     <div class= "title">
         Review your game
     </div>
-    <div class= "body">
+    <div class= "graph-body">
         Start Level:
-        <div class="body-text">
+        <div class="graph-body-text">
             <% if @game.start_level_id.nil? %>
                 You should set a start level:
                 <%= link_to("designate start", designatestart_path(@game.id)) %>
             <% else %>
                 Your start level is: 
-                <%= Level.find_by(id: @game.start_level_id).name %>
+                <% @start_level = Level.find_by(id: @game.start_level_id) %>
+                <%= @start_level.name %>
+                <br>
+                <%= image_tag(@start_level.level_image, :height =>"180", :width => "260") %>
             <% end %>
         </div>
         <br> <br>
     </div>
-    <div class="body">
+    <div class="graph-body">
         Review your level structure:
         <div class="graph">
             <%= image_tag(@game.graph_image, :class => "img_graph")%> 
@@ -25,7 +28,7 @@
         <br>
     </div>
     <%if @valid %>
-        <div class='body'>
+        <div class='graph-body'>
 			<%= link_to "Finish!", allgames_path, class: "btn-finishgame" %>
         </div>
     <% else %>
@@ -41,7 +44,7 @@
     <% end %>
     <br>
     <br>
-    <div class='body'>
+    <div class='graph-body'>
 	    <%= link_to "Return to dashboard", leveldashboard_path(@game.id), class: "btn-dashboard" %>
     </div>
 </div>
