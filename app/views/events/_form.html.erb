@@ -4,6 +4,10 @@
     <title>Create Event</title>
   </head>  
   <body>
+<div class='cl-row-1'>
+        <h1>Create a New Event</h1>
+      </div>
+<div class="ev-container">
 <div class="row">
   <%= form_with(model: event, local: true) do |form| %>
   <% if event.errors.any? %>
@@ -21,22 +25,25 @@
   <%= form.hidden_field :game_id, :value => params[:game_id] %>
 
   
-   <%= form.label :name %>
+   <%= form.label :name, "Enter an event name:" %>
    <%= form.text_field :name, class: 'form-control' %>
  
-   <%= form.label :description %>
+   <%= form.label :description, "Enter a description:" %>
    <%= form.text_field :description, class: 'form-control' %>
  
    <div class="field">
-        <%= form.label :event_image %>
+        <%= form.label :event_image, "Attach an image for this event" %>
         <%= form.file_field :event_image %>
     </div>
     <br>
     <form action="" id="events">
-    <select name="event_type" id="event_selector" class="event-sel">
-        <option value="fight">fight</option>
-        <option value="direct" selected>direct</option>
-    </select>
+    <div class="field">
+        <div class="sel-label">Select an event type:</div> 
+        <select name="event_type" id="event_selector" class="event-sel">
+          <option value="fight">fight</option>
+          <option value="direct" selected>direct</option>
+        </select>
+    </div>
     <% @json = get_json %>
     <div class="fight_option" style="display:none">
       <label class="fight_option_text">Enemy HP:</label>
@@ -117,13 +124,13 @@
   
   <%= form.submit "Finish this event and return to dashboard", class: "btn-done"%>
   <br>
-  <%= form.submit "Save and make next door", class: "btn-create"%>
+  <%= form.submit "Save and make next event", class: "btn-create"%>
    <div>
     <%= link_to 'Back to dashboard', leveldashboard_path(@event.game_id), :class=>'btn-returndash'%>
    </div>
  </div>
 <% end %>
-
+</div>
 
 </body>
 </html>

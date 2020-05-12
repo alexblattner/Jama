@@ -60,7 +60,10 @@ class GamesController < ApplicationController
     @start_level_id = @game.start_level_id
     @levels = Level.where(game_id: @game_id)
     @doors = Door.where(game_id: @game_id)
-    return Games::Graph.new(@game, @start_level_id, @levels, @doors)
+    hash = Games::Graph.new(@game, @start_level_id, @levels, @doors, @errors).valid
+    valid = hash[:valid]
+    @errors = hash[:errors]
+    valid
   end 
 
   # POST /games
