@@ -4,7 +4,9 @@
     <title>Create Event</title>
   </head>  
   <body>
-
+<div class='cl-row-1'>
+        <h1>Create a New Event</h1>
+      </div>
 <div class="ev-container">
 <div class="row">
   <%= form_with(model: event, local: true) do |form| %>
@@ -23,10 +25,10 @@
   <%= form.hidden_field :game_id, :value => params[:game_id] %>
 
   
-   <%= form.label :name, "Please enter an event name" %>
+   <%= form.label :name, "Enter an event name:" %>
    <%= form.text_field :name, class: 'form-control' %>
  
-   <%= form.label :description, "Enter a description" %>
+   <%= form.label :description, "Enter a description:" %>
    <%= form.text_field :description, class: 'form-control' %>
  
    <div class="field">
