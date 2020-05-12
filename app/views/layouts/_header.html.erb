@@ -2,7 +2,7 @@
 
 <nav class="head-navbar">
     <ul>
-        <li><%= link_to(image_tag("logo.jpg", :height =>"47", :width => "70"), root_path) %></li>
+        <li onclick="setTimeout(function(){window.location.reload(false);},50)"><%= link_to(image_tag("logo.jpg", :height =>"47", :width => "70"), root_path) %></li>
         <li><%= link_to "Game Center", allgames_path, :class=>'navbar-nav' %></li>
 
         <% if logged_in? %>
