@@ -96,14 +96,10 @@ class DoorsController < ApplicationController
     
     par = door_params.reject { |k,v| k == 'prev_level_ids' || k == 'next_level_ids' }
     nex = @next_levels.to_json
-<<<<<<< HEAD
-   
-=======
     if(nex == "null")
         nex = Array.new
         nex = nex.to_json
     end
->>>>>>> 7e74e537be9934cd04a830a3de92589c34d400e5
     @door = Door.new(door_params)
     @door.next_levels = nex
     
