@@ -3,12 +3,8 @@
   <title>Door Creator</title>
 </head>
 <body>
-<div class="door-container">
-  
-  <div class="container">
-  <div class='cl-row-1'>
-        <h1>Create a New Door</h1>
-      </div>
+  <div class="door-container">
+    <h1>Create a New Door</h1>
     <br>
     <div class = 'formgroup'>
       <%= form_with(model: door, local:true) do |form| %>
@@ -27,22 +23,20 @@
       <!-- Input fields-->
       <%= form.hidden_field :game_id, :value => params[:game_id] %>
 
-      <div>
-        <%= form.label(:name, "Enter a Door Name") %>
-        <%= form.text_field :name, class: 'att-form-control' %>
-      </div>
-      <br><br>
-      <div>
-        <%= form.label(:description, "Please enter a Description") %>
-        <%= form.text_field :description, class: 'att-form-control'%>
-      </div>
-      <br><br>
+      <%= form.label(:name, "Enter a Door Name:") %>
+      <%= form.text_field :name, class: 'desc-form-control' %>
+
+      <%= form.label(:description, "Enter a Description:") %>
+      <%= form.text_field :description, class: 'desc-form-control'%>
+
       <div class="field">
-        <%= form.label :door_image, "Attach a door image" %>
+        <%= form.label :door_image, "Upload a door image:" %>
         <%= form.file_field :door_image, class: 'image-field'%>
       </div>
+
       <% @req_json = get_req_json %>
       <% @result_json = get_result_json %>
+
       <div>
         <div class="conn-label">
           Requirements to enter:
@@ -152,10 +146,10 @@
       </div>
     <div>
     <br><br>
-      <%= form.submit "Finish this door and return to dashboard", class:  "btn-createdoor" %>
+      <%= form.submit "Finish this door", class:  "btn-createdoor" %>
     </div>
     <div>
-      <%= form.submit "Save and make next door", class: "btn-continuecreatingdoors" %>
+      <%= form.submit "Create next door", class: "btn-continuecreatingdoors" %>
     </div>
     <div>
       <%= link_to 'Back to dashboard', leveldashboard_path(@door.game_id), :class=>'btn-returndash'%>

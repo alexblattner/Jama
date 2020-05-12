@@ -2,6 +2,7 @@ body {
     padding-top: 10%!important;
     font-family: Courier!important;
 }
+
 .centerform {
     margin: auto;
     padding-left: 33%!important;
@@ -22,7 +23,7 @@ body {
     font-size: 30px!important;
     color: black!important;
     box-shadow: none!important;
-    text-align: right!important;
+    text-align: left!important;
     display: block!important;
     clear: both!important;
 }
@@ -51,15 +52,16 @@ body {
     font-size: 25px!important;
 }
 
-
 .hero_custom-file-input {
-    border:  transparent;
+    border: transparent;
     color: transparent;
-  }
-  .hero_custom-file-input::-webkit-file-upload-button {
+}
+
+.hero_custom-file-input::-webkit-file-upload-button {
     visibility: hidden;
-  }
-  .hero_custom-file-input::before {
+}
+
+.hero_custom-file-input::before {
     content: 'Select some files';
     color: black;
     display: inline-block;
@@ -74,17 +76,20 @@ body {
     text-shadow: 1px 1px #fff;
     font-weight: 700;
     font-size: 10pt;
-  }
-  .hero_custom-file-input:hover::before {
+}
+
+.hero_custom-file-input:hover::before {
     border-color: black;
-  }
-  .hero_custom-file-input:active {
+}
+
+.hero_custom-file-input:active {
     outline: 0;
-  }
-  .hero_custom-file-input:active::before {
-    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
-  }
-  
-  body {
+}
+
+.hero_custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+body {
     padding: 20px;
-  }
+}
