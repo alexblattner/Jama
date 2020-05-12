@@ -17,13 +17,24 @@ body {
     border-bottom: 3px solid black!important;
 }
 
+.desc-form-control {
+    color: black!important;
+    background-color: transparent !important;
+    border: none !important;
+    width: 50%;
+    font-size: 25px!important;
+    box-shadow: none!important;
+    border-bottom: 3px solid black!important;
+    display: block!important;
+}
+
 h1 {
     font-size: 50px!important;
     color: black!important;
 }
 
 .door-container {
-    padding-left: 35%;
+    padding-left: 25%;
     margin: auto;
 }
 
@@ -41,9 +52,9 @@ h1 {
 
 label {
     color: black!important;
-    text-align: right;
+    text-align: left;
     clear: both;
-    float: left;
+    display: block;
     margin-right: 15px;
     font-size: 25px!important;
 }

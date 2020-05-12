@@ -1,22 +1,27 @@
 <%= stylesheet_link_tag 'designatestart' %>
 <title> Designate Start </title>
-<h1> Designate your starting level for your game </h1>
-<% levels = Level.where(game_id: @game_id).order(:id) %>
-<% @game = Game.find(@game_id) %>
-<% levels.each do |level| %>
-        <div class= "<%= if @game.start_level_id == level.id then "bordered" else "internal" end%> card">
-                <div>
-                        <% if level.level_image.blank? %>
-                                <%= link_to level.name, startinglevel_path(@game_id, level.id)%>
-                        <% else %>
-                                <%= link_to(image_tag(level.level_image, :height =>"180", :width => "260"), startinglevel_path(@game_id, level.id)) %>
-                        <% end %>
+
+<div class="ds-container">
+        <h1> Designate your starting level </h1>
+        <h2> Click on the level to designate </h2>
+        <% levels = Level.where(game_id: @game_id).order(:id) %>
+        <% @game = Game.find(@game_id) %>
+        <% levels.each do |level| %>
+                <div class= "<%= if @game.start_level_id == level.id then "bordered" else "internal" end%> card">
+                        <div>
+                                <% if level.level_image.blank? %>
+                                        <%= link_to level.name, startinglevel_path(@game_id, level.id)%>
+                                <% else %>
+                                        <%= link_to(image_tag(level.level_image, :height =>"180", :width => "260"), startinglevel_path(@game_id, level.id)) %>
+                                <% end %>
+                        </div>
+                        <div class="card-body">
+                                <h3 class="card-title"><%= level.name %></h3>
+                        </div>
                 </div>
-                <div class="card-body">
-                        <h3 class="card-title"><%= level.name %></h3>
-                </div>
-        </div>
-<% end %>
-<br>
-<br>
-<div class ="btn btn-warning centerbtn"><%= link_to "Return to dashboard", leveldashboard_path(@game_id) %></div>
+        <% end %>
+        <br>
+        <br>
+        <%= link_to "Back to dashboard", leveldashboard_path(@game_id), :class=> "btn-returndash"%>
+
+</div>
