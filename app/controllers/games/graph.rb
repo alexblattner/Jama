@@ -6,11 +6,12 @@ module Games
         attr_accessor :levels
         attr_accessor :doors 
 
-        def initialize(game, start_level_id, levels, doors)
+        def initialize(game, start_level_id, levels, doors, errors)
             @game = game
             @start_level_id = start_level_id
             @levels = levels
             @doors = doors
+            @errors = errors
         end
 
         def valid
@@ -79,7 +80,10 @@ module Games
                 valid = false
               end
             end
-            return valid
+            hash = Hash.new
+            hash[:errors] = @errors
+            hash[:valid] = valid
+            return hash
         end     
     end
 end       
