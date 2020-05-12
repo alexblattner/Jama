@@ -4,13 +4,13 @@
 	<div class="overall-container">
 		<nav class='dash-navbar'>
 			<ul>
-				<li><a href="#section1">Welcome</a><li>
+				<li><a href="#section1">Instruction</a><li>
 				<li><a href="#section2">Step 1</a><li>
 				<li><a href="#section3">Step 2</a><li>
 				<li><a href="#section4">Step 3</a><li>
 				<li><a href="#section5">Step 4</a><li>
 				<li><a href="#section6">Step 5</a><li>
-				<li><a href="#section7">Finish</a><li>
+				<li><a href="#section7">Review</a><li>
 			</ul>
 		</nav>
 
@@ -18,12 +18,84 @@
 			<h1>Dashboard</h1>
 			<h2>This is the dashboard for your game creation</h2>
 			<br>
-			<p> Insert Description of how users are able to make the game by folling each step</p>
+			<h2>Follow these EASY five steps to complete your game!</h2>
+			<br>
+			<br>
+			<div class="db-welcome-container">
+				<div class="db-welcome-row">
+					<div class='db-welcome-col'>
+						<a href="#section2">
+						<div class="db-welcome card shadow-lg rounded">
+							<%= image_tag("one.png", :height =>"180", :width => "200")%>
+							<div class="db-welcome card-body">
+								<h5 class="db-welcome card-title"> Add <br> Levels </h5>
+								<p class="db-welcome card-text">
+								Create some levels as the cornerstones of your game. They are the background environment of your game playing experience.
+								</p>
+							</div>
+						</div>
+						</a>
+					</div>
+					<div class='db-welcome-col'>
+						<a href="#section3">
+						<div class="db-welcome card shadow-lg rounded">
+							<%= image_tag("two.png", :height =>"180", :width => "200") %>
+							<div class="db-welcome card-body">
+								<h5 class="db-welcome card-title"> Add <br> Events </h5>
+								<p class="db-welcome card-text">
+								Events are the challenges you will face in each level, including two types: direct and fight.
+								</p>
+							</div>
+						</div>
+						</a>
+					</div>
+					<div class='db-welcome-col'>
+						<a href="#section3">
+						<div class="db-welcome card shadow-lg rounded">
+							<%= image_tag("three.png", :height =>"180", :width => "200") %>
+							<div class="db-welcome card-body">
+								<h5 class="db-welcome card-title"> Assign <br> Events </h5>
+								<p class="db-welcome card-text">
+								You mayput any number of events inside of each level. Assignment order represent the order events will appear in each level.
+								</p>
+							</div>
+						</div>
+						</a>
+					</div>
+					<div class='db-welcome-col'>
+						<a href="#section4">
+						<div class="db-welcome card shadow-lg rounded">
+							<%= image_tag("four.png", :height =>"180", :width => "200") %>
+							<div class="db-welcome card-body">
+								<h5 class="db-welcome card-title"> Add<br> Doors </h5>
+								<p class="db-welcome card-text">
+								Doors are the logic backbone of your game. For each door, set the requirement and connect it with its previous level and next level.
+								</p>
+							</div>
+						</div>
+						</a>
+					</div>
+
+					<div class='db-welcome-col'>
+						<a href="#section5">
+						<div class="db-welcome card shadow-lg rounded">
+							<%= image_tag("five.png", :height =>"180", :width => "200") %>
+							<div class="db-welcome card-body">
+								<h5 class="db-welcome card-title"> Designate Start </h5>
+								<p class="db-welcome card-text">
+								Select a starting level for you game from your existing levels. Your game is ready to play!
+								</p>
+							</div>
+						</div>
+						</a>
+					</div>
+				</div>
+			</div>
 		</section>
 
 		<section id='section2'>
 			<div class='sectionhead'>
-				<h1>Step 1: Add Levels</h2>
+				<h1>Level Creation</h1>
 			</div>
 			<div class='db-row-list'>
 				<%= link_to(image_tag("plussign.png", :height =>"90", :width => "90", :class=>"cancelhover"), addlevel_path(@game_id))%>
@@ -39,7 +111,7 @@
 		</section>
 
 		<section id='section3'>
-			<h1>Step 2: Add Events</h1>
+			<h1>Event Creation</h1>
 			<div class='db-row-list'>
 				<%= link_to(image_tag("plussign.png", :height =>"90", :width => "90"), addevent_path(@game_id)) %>
 				<% events = Event.where(game_id: @game_id) %>
@@ -54,7 +126,7 @@
 		</section>
 
 		<section id='section4'>
-			<h1> Step 3: Assign Events</h1>
+			<h1> Event Assignment</h1>
 			<div class='db-assign-container'>
 				<% @unassigned_levels = Level.where(game_id: @game_id, event_id: [nil, "[]", ""]) %>
 				<% @assigned_levels = Level.where(game_id: @game_id).where.not(event_id: [nil, "[]", ""])%>
@@ -84,7 +156,7 @@
 		</section>
 
 		<section id='section5'>
-			<h1>Step 4: Add Doors</h1>
+			<h1>Door Creation</h1>
 			<div class='db-row-list'>
 				<%= link_to(image_tag("plussign.png", :height =>"90", :width => "90"), adddoor_path(@game_id)) %>
 				<% doors = Door.where(game_id: @game_id) %>
@@ -99,7 +171,7 @@
 		</section>
 
 		<section id='section6'>
-			<h1>Step 5: Designate Start</h1>
+			<h1>Start Designation</h1>
 			<div class='db-row-list'>
 				<%= link_to(image_tag("plussign.png", :height =>"90", :width => "90"), designatestart_path(@game_id)) %>
 				<% @game = Game.find_by(id: @game_id) %>

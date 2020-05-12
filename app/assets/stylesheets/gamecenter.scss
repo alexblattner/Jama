@@ -90,3 +90,26 @@ body {
     display: inline-block;
     font-size: 25px!important;
 }
+
+a.btn-card:hover {
+    background-color: orange!important;
+    text-decoration: none!important;
+}
+
+a.btn-card:hover {
+    background-color: orange!important;
+}
+
+a.card-body:hover {
+    text-decoration: none!important;
+    background-color: transparent!important;
+}
+
+a.card-body:visited {
+    color: none!important;
+}
+
+.nav-tabs>li>a {
+    color: orange;
+    font-size: 15px;
+}
