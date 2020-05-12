@@ -2,9 +2,30 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 .login-container {
-    position:absolute;
-    width:800px;left:50%;margin-left:-400px;
-    top:50%;margin-top:-270px;
+    position: absolute;
+    width: 50%;
+    left: 50%;
+    margin-left: -400px;
+    top: 50%;
+    margin-top: -270px;
+    box-shadow: 10px 10px 8px 10px #888888;
+}
+
+.login-row-1 {
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.login-row-2 {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.login-row-3 {
+    padding-bottom: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .login-form-control-label {
@@ -27,21 +48,23 @@
     display: block!important;
     clear: both!important;
 }
-.btn-login.wider{
-  width:40%;
+
+.btn-login.wider {
+    width: 40%;
 }
+
 //links properties
 a.login-row-3:link,
 a.login-row-3:visited,
 a.login-row-3:active {
-    //background-color: transparent;
+    background-color: transparent!important;
     color: black!important;
     text-decoration: underline!important;
 }
 
 a.login-row-3:hover {
-    //background-color: black;
-    color: black!important;
+    background-color: transparent!important;
+    color: orange!important;
     text-decoration: underline!important;
 }
 
@@ -52,5 +75,5 @@ a.login-row-3:hover {
     padding: 15px 32px;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 20px;
 }

@@ -4,10 +4,10 @@
     <title>User Login Page</title>
     <div class='login-container'>
       <div class='login-row-1'>
-      <h1>Member Login</h1>
+        <h1>Member Login</h1>
       </div>
       <!-- Log in form-->
-      <div>
+      <div class='login-row-2'>
         <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
           <%= f.label :email, class: 'login-form-control-label' %>
           <%= f.email_field :email, class: 'login-form-control-field' %>
@@ -18,7 +18,7 @@
       </div>
       <!-- New user link-->
       <div class='login-row-3'>
-        <h3>Not Registered? <%= link_to "Create an account", signup_path, :class=>'login-row-3' %> </h3>
+        <h3>Not Registered? <%= link_to "Create an account!", signup_path %> </h3>
       </div>
     </div>
 

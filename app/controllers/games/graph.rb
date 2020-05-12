@@ -28,9 +28,10 @@ module Games
                 visited_level[level.id] = false
             end
             door_nodes = Hash.new
+            level_door_visit = Hash.new
             @doors.each do |door|
-             door_nodes[door.id] = g.add_nodes(door.name, :shape => 'square', :fontname => "Courier")
-            visited_level[door.id] = false
+              door_nodes[door.id] = g.add_nodes(door.name, :shape => 'square', :fontname => "Courier")
+              visited_door[door.id] = false
             end
             # Breadth first search with an extra step for doors
             if(!@start_level_id.nil?)
@@ -44,11 +45,11 @@ module Games
                         door_queue = JSON.parse(next_doors)
                         while door_queue.length > 0
                             curr_door = door_queue.pop
-                            if !(visited_door[curr_door])
+                            #if !(visited_door[curr_door])
                                 visited_door[curr_door] = true
                                 puts "*******"
-                                puts curr
-                                puts curr_door
+                                puts door_queue
+                                puts level_queue
                                 puts "**********"
                                 g.add_edges(level_nodes[curr], door_nodes[curr_door])
                                 door_pointer = @doors.find(curr_door)
@@ -57,13 +58,16 @@ module Games
                                     if !visited_level[level.to_i]
                                         level_queue.push(level.to_i)
                                     end
-                                    puts "*******"
-                                    puts level
+                                    puts "*******~~~~~~~"
+                                    puts level_queue
                                     puts curr_door
-                                    puts "**********"
-                                    g.add_edges(door_nodes[curr_door], level_nodes[level.to_i])
+                                    puts "**********~~~~`"
+                                    if !level_door_visit[[level.to_i, curr_door]]
+                                        g.add_edges(door_nodes[curr_door], level_nodes[level.to_i])
+                                        level_door_visit[[level.to_i, curr_door]] = true
+                                    end
                                 end
-                            end
+                            #end
                         end
                     end
                 end
