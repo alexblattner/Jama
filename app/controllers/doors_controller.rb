@@ -196,7 +196,7 @@ class DoorsController < ApplicationController
         flash[:fail] = "You should add some previous levels to the connection"
       end 
       flash[:success] = "Great! New door created."
-      if params[:commit] == 'Finish this door and return to game logic'
+      if params[:commit] == 'Finish this door and return to dashboard'
         redirect_to leveldashboard_url(@door.game_id)
       else
         redirect_to adddoor_url(@door.game_id)
