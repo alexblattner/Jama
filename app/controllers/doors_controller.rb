@@ -218,7 +218,7 @@ class DoorsController < ApplicationController
     @door.requirement = createRequirementJSON(params)
     if @door.update(door_params)
       flash[:success] = "Great! Door updated."
-      if params[:commit] == 'Finish this door and return to game logic'
+      if params[:commit] == 'Finish this door and return to dashboard'
         redirect_to leveldashboard_url(@door.game_id)
       else
         redirect_to adddoor_url(@door.game_id)

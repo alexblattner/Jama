@@ -206,7 +206,6 @@ class LevelsController < ApplicationController
         end
       else
         render "new"
-        # format.html { render "addlevel/#{@level.game_id}" }
       end
 end
   # PATCH/PUT /levels/1
