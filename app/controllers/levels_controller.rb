@@ -175,7 +175,6 @@ class LevelsController < ApplicationController
     @game = Game.find_by(id: @game_id)
   end
   def organizeevents
-
     @level = Level.find_by(id: params['level_id'])
     @game = Game.find_by(id: params['game_id'])
     render 'edit'

@@ -5,16 +5,21 @@ body {
 }
 
 .neweventpage {
-    padding-left: 35%!important;
+    padding-left: 25%!important;
 }
 
-.ce-row-1 h1 {
+.ce.row {
+    padding-bottom: 50px;
+}
+
+.ce.row h1 {
     font-size: 50px!important;
     color: black!important;
 }
 
 .ev-container {
     margin: auto;
+    padding-bottom: 30px!important;
 }
 
 .sel-label {
@@ -36,6 +41,8 @@ body {
     width: 20%;
     position: relative;
     top: 12px;
+    margin-left: 80px;
+    font-size: 25px;
 }
 
 .fight_option_text {
@@ -51,6 +58,7 @@ body {
     float: left;
     top: 5px;
     margin-right: 5px;
+    font-size: 25px!important;
 }
 
 .direct_option_text {
@@ -66,6 +74,7 @@ body {
     float: left;
     top: 5px;
     margin-right: 5px;
+    font-size: 25px!important;
 }
 
 .event-form-control-label {
@@ -104,7 +113,7 @@ body {
     top: 10px;
     width: 30px;
     float: left;
-    margin-right: 10px;
+    margin-right: 280px;
 }
 
 .section-label {
@@ -122,7 +131,7 @@ body {
     width: 100%;
     padding-bottom: 10px;
     text-align: center;
-    font-size: 15px!important;
+    font-size: 20px!important;
     color: black!important;
 }
 
@@ -133,32 +142,18 @@ body {
     width: 25%;
     float: left;
     top: 5px;
-    font-size: 15px!important;
+    font-size: 25px!important;
     box-shadow: none!important;
 }
 
 // create game button
 .btn-done {
     background-color: black!important;
-    width: 360px;
-    margin-right:300px!important;
+    width: 330px!important;
     color: white!important;
     padding: 5px 32px!important;
     text-align: left!important;
-    text-decoration: none;
-    margin-right: -15px;
-    margin-left: -15px;
-    font-size: 25px!important;
-}
-
-.btn-create {
-    background-color: black!important;
-    width: 360px!important;
-    color: white!important;
-    padding: 5px 32px!important;
-    text-align: left!important;
-    text-decoration: none;
-    margin-top: -5px;
+    text-decoration: none!important;
     margin-right: -15px;
     margin-left: -15px;
     font-size: 25px!important;
@@ -166,36 +161,12 @@ body {
 
 .btn-returndash {
     background-color: black!important;
-    width: 315px!important;
-    color: #ffffff!important;
+    width: 330px!important;
+    color: white!important;
     padding: 5px 32px!important;
-    text-decoration: none;
+    text-decoration: none!important;
     text-align: left!important;
-    margin-top: -5px;
     margin-right: -15px;
     margin-left: -15px;
     font-size: 25px!important;
-}
-
-//links properties
-a.eventreturndash:link,
-a.eventreturndash:visited,
-a.eventreturndash:active {
-    background-color: black!important;
-    color: white!important;
-    padding: 14px 25px!important;
-    text-align: center!important;
-    text-decoration: none!important;
-    display: inline-block!important;
-    font-size: 20px!important;
-}
-
-a.leventreturndash:hover {
-    //background-color: black;
-    color: white!important;
-    padding: 14px 25px!important;
-    text-align: center!important;
-    text-decoration: underline!important;
-    display: inline-block!important;
-    font-size: 20px!important;
 }

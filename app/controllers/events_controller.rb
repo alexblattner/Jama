@@ -18,12 +18,7 @@ class EventsController < ApplicationController
     @result_json = Hash.new
     @result_json['attack'] = Hash.new
     @result_json['death'] = Hash.new
-   
     @event.result = @result_json.to_json
-    # @requirement_json = Hash.new
-    # @requirement_json['hp'] = ">0"
-    # @requirement_json['rank'] = ">0"
-    # @requirement_json['gold'] = ">0"
     @event.requirement = @requirement_json.to_json
   end
 
@@ -56,112 +51,20 @@ class EventsController < ApplicationController
   end
   helper_method :get_req_json
 
-  def createRequirementJSON params
-    req = "{"
-    if(!params['event_req_hp'].nil? && !(params['event_req_hp'].to_i == 0))
-      req += "\"hp\":"
-      req += "\"" + params['event_req_hp_operator'].to_s
-      req += params['event_req_hp'] + "\""
-    end
-    if(!params['event_req_rank'].nil? && !(params['event_req_rank'].to_i == 0))
-      if(req.length > 2)
-        req += ","
-      end
-      req += "\"rank\":"
-      req += "\"" +params['event_req_rank_operator']
-      req += params['event_req_rank'] + "\""
-    end
-    if(!params['event_req_gold'].nil? && !(params['event_req_gold'].to_i == 0))
-      if(req.length > 2)
-        req += ","
-      end
-      req += "\"gold\":"
-      req += "\"" + params['event_req_gold_operator']
-      req += params['event_req_gold'] + "\""
-    end
-    req += "}"
-    req
-  end
   #turns hp, exp, and gold into the JSON required for result
-  def createDirectJSON params
-    result = "{"
-    if(!params['hp'].nil? && !(params['hp'].to_i == 0))
-      result += "\"hp\":"
-      result += params['hp'] 
-    end
-    if(!params['exp'].nil? && !(params['exp'].to_i == 0))
-      if(result.length > 2)
-        result += ","
-      end
-      result += "\"exp\":"
-      result += params['exp'] 
-    end
-    if(!params['gold'].nil? && !(params['gold'].to_i == 0))
-      if(result.length > 2)
-        result += ","
-      end
-      result += "\"gold\":"      
-      result += params['gold']
-    end
-    result += "}"
-    result
-  end
 
   # "[ "hp": 30, "attack": ["hp":10, "exp":0, "gold":10], death: ["hp":10, "exp":0, "gold":10]]"
   # "events"=>"fight", "enemy_hp"=>"123", "enemy_damage"=>"4", "enemy_damage_hp"=>"3",
   # "enemy_damage_exp"=>"1", "enemy_exp"=>"2",
   # "enemy_gold_drop"=>"2", "enemy_hp_drop"=>"4", "hp"=>""
-  
-  def createFightJSON params
-    result = ""
-    result += "{\"hp\":"
-    if(params['enemy_hp'].nil?)
-      result += ""
+  def createJSON params, event_type
+    if event_type == "fight"
+      return Events::Json.new(params).createFightJSON
     else
-      result += params['enemy_hp']
+      return Events::Json.new(params).createDirectJSON
     end
-    result += ", \"attack\": { \"hp\":"
-    if(params['enemy_attack_hp'].nil?)
-      result += ""
-    else
-      result += (params['enemy_attack_hp'].to_i * -1).to_s
-    end
-    result += ", \"exp\":"
-    if(params['enemy_attack_exp'].nil?)
-      result += ""
-    
-    else
-      result += (params['enemy_attack_exp'].to_i * -1).to_s 
-    end
-    result += ", \"gold\":"
-    if(params['enemy_attack_gold'].nil?)
-      result += ""
-    else
-      result += (params['enemy_attack_gold'].to_i * -1).to_s 
-    end
-    # "death" :["hp": 1, "exp": 1, "gold": 1]
-    result += "}, \"death\": {\"hp\":"
-    if(params['enemy_death_hp'].nil?)
-      result += ""
-    
-    else
-      result += params['enemy_death_hp'] 
-    end
-    result += ", \"exp\":"
-    if(params['enemy_death_exp'].nil?)
-      result += ""
-    else
-      result += params['enemy_death_exp'] 
-    end
-    result += ", \"gold\":"
-    if(params['enemy_death_gold'].nil?)
-      result += ""
-    else
-      result += params['enemy_death_gold'] 
-    end
-    result += "}}"
-    result
   end
+
   # POST /events
   # POST /events.json
   def create
@@ -172,15 +75,9 @@ class EventsController < ApplicationController
       @event.event_image.attach(io: File.open("app/assets/images/fireball.jpg"), filename: "fireball.jpg")
     end
     @event.image = @event.event_image.service_url
-    if @event.event_type == "fight"
-      @event.result = createFightJSON(params)
-    else
-      @event.result = createDirectJSON(params)
-    end
-    # @event.image = url_for(@event.event_image)
-    # puts @event.image
+    @event.result = createJSON(params, @event.event_type)
     @result_json = @event.result
-    @event.requirement = createRequirementJSON(params)
+    @event.requirement = Events::Json.new(params).createRequirementJSON
     @requirement_json = @event.requirement
     if @event.save
       flash[:success] = "Get new event created."
@@ -198,17 +95,14 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-    if params['event_type'] == "fight"
-      @event.result = createFightJSON(params)
-    else
-      @event.result = createDirectJSON(params)
-    end
+    @event.result = createJSON(params, @event.event_type)
+
     @result_json = @event.result
     if(!@event.event_image.attached?)
       @event.event_image.attach(io: File.open("app/assets/images/fireball.jpg"), filename: "fireball.jpg")
     end
     @event.image = @event.event_image.service_url
-    @event.requirement = createRequirementJSON(params)
+    @event.requirement = Events::Json.new(params).createRequirementJSON
     if @event.update(event_params)
       flash[:success] = "Successfully updated event."
     

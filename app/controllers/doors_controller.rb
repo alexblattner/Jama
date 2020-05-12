@@ -17,13 +17,7 @@ class DoorsController < ApplicationController
     @door = Door.new
     @door.game_id = params[:game_id]
     @result_json = Hash.new
-    # @result_json['hp'] = "0"
-    # @result_json['exp'] = "0"
-    # @result_json['gold'] = "0"
     @req_json = Hash.new
-    # @req_json['hp'] = ">0"
-    # @req_json['rank'] = ">0" 
-    # @req_json['gold'] = ">0"
     @door.result = @result_json.to_json
     @door.requirement = @req_json.to_json
     arr = Array.new
@@ -76,87 +70,21 @@ class DoorsController < ApplicationController
   helper_method :get_req_json
 
   def createRequirementJSON params
-    req = "{"
-    if(!params['door_req_hp'].nil? && !(params['door_req_hp'].to_i == 0))
-      req += "\"hp\":"
-      req += "\"" + params['door_req_hp_operator'].to_s
-      req += params['door_req_hp'] + "\""
-    end
-    if(!params['door_req_rank'].nil? && !(params['door_req_rank'].to_i == 0))
-      if(req.length > 2)
-        req += ", "
-      end
-      req += "\"rank\":"
-      req += "\"" +params['door_req_rank_operator']
-      req += params['door_req_rank'] + "\""
-    end
-    if(!params['door_req_gold'].nil? && !(params['door_req_gold'].to_i == 0))
-      if(req.length > 2)
-        req += ","
-      end
-      req+= "\"gold\":"
-      req += "\"" + params['door_req_gold_operator']
-      req += params['door_req_gold'] + "\""
-    end
-    req += "}"
-    req
+    return Doors::Json.new(params).createRequirementJSON
   end
 
   def createResultJSON params
-    result = "{"
-    if(!params['door_result_hp'].nil? && !(params['door_result_hp'].to_i == 0))
-      result += "\"hp\":"
-      result += params['door_result_hp'] 
-    end
-    
-    if(!params['door_result_exp'].nil? && !(params['door_result_exp'].to_i == 0))
-      if (result.length > 2)
-        result +=","
-      end
-      result += "\"exp\":"
-      result += params['door_result_exp'] 
-    end
-    if(!params['door_result_gold'].nil? && !(params['door_result_gold'].to_i == 0)) 
-      if (result.length > 2)
-        result +=","
-      end
-      result += "\"gold\":"
-      result += params['door_result_gold']
-    end
-    result += "}"
-    result
+    return Doors::Json.new(params).createResultJSON
   end
+
+
   def has_this_door(lev, id)
-    if(id == -1)
-      return false
-    end
-    lev.doors
-    json = JSON.parse(lev.doors)
-    has = ""
-    if json.detect{|c| c == id}
-      has = "checked"
-    end
-    puts has
-    has
+    return Doors::Has.new(lev).this_door(id)
   end
   helper_method :has_this_door
 
   def has_this_level lev
-    if(@door.nil?)
-      puts "door was nil"
-      return ""
-    end
-    l = @door.next_levels
-    json = JSON.parse(l)
-    has = ""
-    puts lev.id
-    puts @door.next_levels
-    if json.detect{|c| c == lev.id.to_s}
-      puts "has this level"
-      has = "checked"
-    end
-    puts has
-    has
+    return Doors::Has.new(lev).this_level(@door)
   end
   helper_method :has_this_level
   
@@ -168,9 +96,17 @@ class DoorsController < ApplicationController
     
     par = door_params.reject { |k,v| k == 'prev_level_ids' || k == 'next_level_ids' }
     nex = @next_levels.to_json
+<<<<<<< HEAD
    
+=======
+    if(nex == "null")
+        nex = Array.new
+        nex = nex.to_json
+    end
+>>>>>>> 7e74e537be9934cd04a830a3de92589c34d400e5
     @door = Door.new(door_params)
-    @door.next_levels = @next_levels.to_json
+    @door.next_levels = nex
+    
     @door.result = createResultJSON(params)
     @door.requirement = createRequirementJSON(params)
     if(!@door.door_image.attached?)
@@ -208,15 +144,35 @@ class DoorsController < ApplicationController
   # PATCH/PUT /doors/1
   # PATCH/PUT /doors/1.json
   def update
-    @door.game_id = params[:game_id]
-    @door.result = createResultJSON(params)
+    @prev_levels = params['prev_level_ids']
+    @next_levels = params['next_level_ids']
+    par = door_params.reject { |k,v| k == 'prev_level_ids' || k == 'next_level_ids' }
+    nex = @next_levels.to_json
+    if(nex == "null")
+      nex = Array.new
+      nex = nex.to_json
+  end
+    @door.next_levels = nex
     if(!@door.door_image.attached?)
       @door.door_image.attach(io: File.open("app/assets/images/door1.jpg"), filename: "door1.jpg")
     end
     @door.image = @door.door_image.service_url
     @door.requirement = createRequirementJSON(params)
+    @door.result = createResultJSON(params)
     if @door.update(door_params)
-      
+      if(!@prev_levels.nil?)
+        @prev_levels.each do
+          |level| lev = Level.find(level)
+          doors = Array.new
+          len = lev.doors.to_s.strip.length
+          if len > 2
+            doors = JSON.parse(lev.doors)
+          end
+          doors.push(@door.id)
+          lev.doors = doors.to_json
+          lev.save
+        end
+      end
       if params[:commit] == 'Finish this door and return to dashboard'
         redirect_to leveldashboard_url(@door.game_id)
       else
@@ -237,66 +193,8 @@ class DoorsController < ApplicationController
     end
   end
 
-  def assignlevelforone
-    @door_id = params['door_id']
-    @game_id = params['game_id']
-  end
 
-  def levels_to_names door
-    @names = Array.new
-    if(door.next_levels.to_s.strip.length > 2)
-      level_ids = JSON.parse(door.next_levels)
-      level_ids.each do 
-        |level_id| level = Level.find_by(id: level_id)
-        @names.push(level.name)
-      end
-    end
-    @names
-  end
-  helper_method :levels_to_names
-
-  def queuelevel
-    @game_id = params[:game_id]
-    @level_id = params[:level_id]
-    @door_id = params[:door_id]
-    curr_door = Door.find_by(id: @door_id)
-    curr_levels = Array.new
-    len = curr_door.next_levels.to_s.strip.length
-    
-    #because the default JSON string is "[]"
-    if(len > 2)
-      curr_levels = JSON.parse(curr_door.next_levels)
-    end
-    curr_levels.push(@level_id)
-    curr_door.next_levels = curr_levels.to_json
-    level = Level.find_by(id: @level_id)
-    if(curr_door.save)
-      #flash[:success] = "Great, " + level.name + " was added to the list"  
-    end
-    render 'assignlevelforone'
-  end
-
-  def dequeuelevel
-    @game_id = params[:game_id]
-    @door_id = params[:door_id]
-    curr_door = Door.find_by(id: @door_id)
-    len = curr_door.next_levels.to_s.strip.length
-    
-    #because the default JSON string is "[]"
-    if(len <= 2)
-      #flash[:fail] = "No levels to remove"
-    else
-      curr_levels = JSON.parse(curr_door.next_levels)
-      curr_level = curr_levels.pop
-      curr_door = Door.find_by(id: curr_door)
-      curr_door.next_levels= curr_levels.to_json
-      if(curr_door.save)
-        #flash[:success] = "Great, " + curr_door.name + " was removed from the list"  
-      end
-    end
-    render 'assignlevelforone'
-
-  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_door
