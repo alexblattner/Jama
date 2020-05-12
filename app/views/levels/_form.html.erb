@@ -40,9 +40,11 @@
             <%= form.file_field :level_image ,class: 'level-form-control-field' %>
         </div>
         <div>
-          <%= form.submit "Finish This Level", class: "btn-finish" %>
-          <br>
-          <%= form.submit "Create Next Level", class: "btn-create" %>
+          <%= form.submit "Finish This Level", class: "btn-createlevel" %>
+        </div>
+        
+        <div>
+          <%= form.submit "Create Next Level", class: "btn-createlevel" %>
         </div>
         <% end %>
      </div>  <!-- form class -->

@@ -1,19 +1,19 @@
 <!-- <% provide(:title, "Log in") %> -->
 <%= stylesheet_link_tag 'session' %>
 
-    <title>Sign Up</title>
+    <title>Registration Page</title>
     <div class='login-container'>
       <div class='login-row-1'>
-      <h1>Sign up</h1>
+        <h1>Member Registration</h1>
       </div>
       <!-- Log in form-->
-      <div>
+      <div class='login-row-2'>
         <%= form_with(model: @user, url: signup_path, local: true) do |f| %>
         <%= render 'layouts/error_message' %>
-          <%= f.label :name, class: 'login-form-control-label' %>
-          <%= f.text_field :name, class: 'login-form-control-field' %>
-          <%= f.label :email, class: 'login-form-control-label' %>
-          <%= f.email_field :email, class: 'login-form-control-field' %>
+          <%= f.label 'Full Name', class: 'login-form-control-label' %>
+          <%= f.text_field :name, class: 'login-form-control-field', placeholder:'Jama Maja'%>
+          <%= f.label :email, class: 'login-form-control-label'%>
+          <%= f.email_field :email, class: 'login-form-control-field', placeholder:'jama@cosi.edu'%>
           <%= f.label :password , class: 'login-form-control-label'%>
           <%= f.password_field :password, class: 'login-form-control-field' %>
           <%= f.label :password_confirmation , class: 'login-form-control-label'%>
@@ -23,7 +23,7 @@
       </div>
       <!-- New user link-->
       <div class='login-row-3'>
-        <h3>Already have an account? <%= link_to "Log in!", login_path, :class=>'login-row-3' %> </h3>
+        <h3>Already have an account? <%= link_to "Log in!", login_path%> </h3>
       </div>
     </div>
 

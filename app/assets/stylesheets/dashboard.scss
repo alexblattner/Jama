@@ -15,18 +15,18 @@ body {
 .overall-container {
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
+    //overflow-y: scroll;
+    //scroll-behavior: smooth;
+    //scroll-snap-type: y mandatory;
 }
 
 .dash-navbar {
     position: fixed;
-    top: 60px;
+    top: 80px;
     z-index: 1;
     display: flex;
     width: 100%;
-    height: 60px;
+    height: 47px;
     background: rgba(27, 27, 27, 0.7);
 }
 
@@ -39,7 +39,8 @@ body {
 
 .dash-navbar ul li {
     margin: 0 1rem;
-    padding: 1rem;
+    padding-top: 1rem;
+    font-size: 18px;
 }
 
 .dash-navbar ul li a {
@@ -49,7 +50,7 @@ body {
 }
 
 .dash-navbar ul li a:hover {
-    color: skyblue;
+    color: orange;
     background-color: transparent;
 }
 
@@ -61,11 +62,11 @@ section {
     text-align: left;
     width: 100%;
     height: 100vh;
-    scroll-snap-align: center;
+    // scroll-snap-align: center;
 }
 
 section#section1 {
-    background: rgb(185, 185, 185) no-repeat center center/cover;
+    background: white no-repeat center center/cover;
 }
 
 section#section1 h1 {
@@ -75,14 +76,11 @@ section#section1 h1 {
 
 section#section1 h2 {
     color: black!important;
-}
-
-section#section1 p {
-    color: black!important;
+    font-size: 25px!important;
 }
 
 section#section2 {
-    background: white no-repeat center center/cover;
+    background: orange no-repeat center center/cover;
 }
 
 section#section2 h1 {
@@ -91,7 +89,7 @@ section#section2 h1 {
 }
 
 section#section3 {
-    background: rgb(185, 185, 185) no-repeat center center/cover;
+    background: white no-repeat center center/cover;
 }
 
 section#section3 h1 {
@@ -100,7 +98,7 @@ section#section3 h1 {
 }
 
 section#section4 {
-    background: white no-repeat center center/cover;
+    background: orange no-repeat center center/cover;
 }
 
 section#section4 h1 {
@@ -109,7 +107,7 @@ section#section4 h1 {
 }
 
 section#section5 {
-    background: rgb(185, 185, 185) no-repeat center center/cover;
+    background: white no-repeat center center/cover;
 }
 
 section#section5 h1 {
@@ -118,7 +116,7 @@ section#section5 h1 {
 }
 
 section#section6 {
-    background: white no-repeat center center/cover;
+    background: orange no-repeat center center/cover;
 }
 
 section#section6 h1 {
@@ -127,7 +125,7 @@ section#section6 h1 {
 }
 
 section#section7 {
-    background: rgb(185, 185, 185) no-repeat center center/cover;
+    background: white no-repeat center center/cover;
 }
 
 .sectionhead h1 {
@@ -152,6 +150,45 @@ section#section7 {
     width: 50%;
 }
 
+.db-welcome-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.db-welcome-row {
+    margin: 0 -5px!important;
+    /* Remove extra left and right margins, due to padding in columns */
+    text-align: center;
+}
+
+.db-welcome-col {
+    width: 15%;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: inline-block;
+}
+
+.db-welcome.card {
+    background-color: white!important;
+    height: 400px!important;
+    width: 200px!important;
+    margin: auto;
+    text-align: center;
+}
+
+.db-welcome.card-title {
+    color: white!important;
+    font-size: 22px!important;
+    background-color: black!important;
+}
+
+.db-welcome.card-text {
+    color: black!important;
+    font-size: 17px!important;
+    text-align: left!important;
+}
+
 .btn-finishgame {
     background-color: rgb(0, 0, 0)!important;
     width: 20%!important;
@@ -161,4 +198,9 @@ section#section7 {
     text-decoration: none;
     display: inline-block;
     font-size: 30px!important;
+}
+
+a.btn-finishgame:hover {
+    background-color: orange!important;
+    text-decoration: none!important;
 }

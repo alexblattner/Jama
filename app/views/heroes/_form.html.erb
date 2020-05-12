@@ -1,5 +1,9 @@
+<%= stylesheet_link_tag 'createhero' %>
 <%= stylesheet_link_tag 'heroes' %>
+<div class = "centerform" >
 
+<h1>New Hero</h1>
+<br>
 <%= form_with(model: hero, local: true) do |form| %>
   <% if hero.errors.any? %>
     <div id="error_explanation">
@@ -16,17 +20,17 @@
   <%= form.hidden_field :gamestate_id, :value => params[:gamestate_id] %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label 'Create a name for the hero:', class: 'hero-form-control-label' %>
+    <%= form.text_field :name,class: 'hero-form-control-field' %>
   </div>
-
 
   <div class="field">
-          <%= form.label :hero_image %>
-          <%= form.file_field :hero_image %>
+          <%= form.label 'Select an image:', class: 'hero-form-control-label' %>
+          <%= form.file_field :hero_image , class: "hero_custom-file-input" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div>
+    <%= form.submit "Create Hero", class: "btn-createhero" %>
   </div>
 <% end %>
+<div>

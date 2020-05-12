@@ -5,7 +5,7 @@
     z-index: 1;
     display: flex;
     width: 100%;
-    height: 60px;
+    height: 80px;
     background: black;
 }
 
@@ -17,16 +17,61 @@
 }
 
 .head-navbar ul li {
-    margin: 0 1rem;
-    padding: 1rem;
+    margin-left: 1rem;
+    padding: 2.5rem;
 }
 
 .head-navbar ul li a {
     text-decoration: none;
     text-transform: uppercase;
     color: white;
+    font-size: 15px;
 }
 
 .head-navbar ul li a:hover {
-    color: skyblue;
+    color: orange;
+}
+
+ul.head-navbar navbar-center {
+    float: center!important;
+}
+
+ul.navbar-center {
+    width: 50%!important;
+    list-style-position: inside!important;
+    text-align: center!important;
+}
+
+.head-navbar navbar-right {
+    float: right!important;
+}
+
+.navbar-right {
+    width: 25%!important;
+    text-align: right!important;
+    list-style-position: inside!important;
+}
+
+.glyphicon-log-in {
+    font-size: 20px;
+    color: white;
+    padding-right: 4px;
+}
+
+.glyphicon-wrench {
+    font-size: 20px;
+    color: white;
+    padding-left: 4px;
+}
+
+.glyphicon-tower {
+    font-size: 20px;
+    color: white;
+    padding-left: 4px;
+}
+
+.glyphicon-education {
+    font-size: 20px;
+    color: white;
+    padding-left: 4px;
 }
