@@ -121,13 +121,18 @@
     </div>
     <br><br>
   </div>
-  
-  <%= form.submit "Finish this event and return to dashboard", class: "btn-done"%>
-  <br>
-  <%= form.submit "Save and make next event", class: "btn-create"%>
+  <div class = "container">
+  <div>
+  <%= form.submit "Finish This Event", class: "btn-done"%>
+  </div>
+  <div>
+  <%= form.submit "Create Next Event", class: "btn-create"%>
+  </div>
    <div>
-    <%= link_to 'Back to dashboard', leveldashboard_path(@event.game_id), :class=>'btn-returndash'%>
+    <%= link_to 'Back to Dashboard', leveldashboard_path(@event.game_id), :class=>'btn-create'%>
    </div>
+   
+ </div>
  </div>
 <% end %>
 </div>
