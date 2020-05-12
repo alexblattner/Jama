@@ -40,29 +40,24 @@
 
             <div class="aefo-row-3">
                 <h2>Current Assignment(order from left to right): </h2>
+                <h3>Click to remove from the list </h3>
             </div>
 
             <div class="aefo-row-2">
                 <% @events = ids_to_events(@level) %>
+                <% @counter = 0 %>
                 <% @events.each do |event| %>
                 <div class="aefo-row-2-col">
                     <div class="aefo card">
-                        <%= image_tag(event.event_image, :height =>"120", :width=> "120")%>
+                        <%= link_to(image_tag(event.event_image, :height =>"90", :width => "90", :class=>"cancelhoverEXP"), dequeueevent_path(@game_id, @level_id, @counter))%>
                         <div class="aefo card-body">
                             <h4 class="aefo card-text"> <%= event.name %></h4>
                         </div>
                     </div>
                 </div>
+                <% @counter+= 1 %> 
                 <% end %>
 
-                <div class="aefo-row-2-col">
-                    <div class="aefo card">
-                        <%= link_to(image_tag("remove.png", :height =>"90", :width => "90", :class=>"cancelhoverEXP"), dequeueevent_path(@game_id, @level_id))%>
-                         <div class="aefo card-body">
-                            <h3 class="aefo card-title">Remove Last Event</div>
-                        </div>
-                    </div>
-                </div>
 
             <div class="aefo-row-1">
                 <%= link_to 'Back', leveldashboard_path(@game_id), :class=>"btn-returndash"%>

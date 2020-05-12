@@ -65,6 +65,7 @@ class LevelsController < ApplicationController
   def dequeueevent
     @game_id = params[:game_id]
     @level_id = params[:level_id]
+    @pointer = params[:counter]
     curr_level = Level.find_by(id: @level_id)
     len = curr_level.event_id.to_s.strip.length
     
@@ -73,7 +74,7 @@ class LevelsController < ApplicationController
       flash[:fail] = "No events to remove"
     else
       curr_event_ids = JSON.parse(curr_level.event_id)
-      curr_event = curr_event_ids.pop
+      curr_event = curr_event_ids.delete_at(@pointer.to_i)
       curr_event = Event.find_by(id: curr_event)
       curr_level.event_id= curr_event_ids.to_json
       if(curr_level.save)
@@ -81,54 +82,6 @@ class LevelsController < ApplicationController
       end
     end
     render 'assigneventforone'
-
-  end
-
-  def assigndoorforone
-    @level_id = params['level_id']
-    @game_id = params['game_id']
-  end
-
-  def queuedoor
-    @game_id = params[:game_id]
-    @level_id = params[:level_id]
-    @door_id = params[:door_id]
-    curr_level = Level.find_by(id: @level_id)
-    curr_doors = Array.new
-    len = curr_level.doors.to_s.strip.length
-    
-    #because the default JSON string is "[]"
-    if(len > 2)
-      curr_doors = JSON.parse(curr_level.doors)
-    end
-    curr_doors.push(@door_id)
-    curr_level.doors = curr_doors.to_json
-    door = Door.find_by(id: @door_id)
-    if(curr_level.save)
-      flash[:success] = "Great, " + door.name + " was added to the list"  
-    end
-    render 'assigndoorforone'
-  end
-
-  def dequeuedoor
-    @game_id = params[:game_id]
-    @level_id = params[:level_id]
-    curr_level = Level.find_by(id: @level_id)
-    len = curr_level.doors.to_s.strip.length
-    
-    #because the default JSON string is "[]"
-    if(len <= 2)
-      flash[:fail] = "No doors to remove"
-    else
-      curr_doors = JSON.parse(curr_level.doors)
-      curr_door = curr_doors.pop
-      curr_door = Door.find_by(id: curr_door)
-      curr_level.doors= curr_doors.to_json
-      if(curr_level.save)
-        flash[:success] = "Great, " + curr_door.name + " was removed from the list"  
-      end
-    end
-    render 'assigndoorforone'
 
   end
   
