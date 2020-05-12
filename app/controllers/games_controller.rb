@@ -31,6 +31,7 @@ class GamesController < ApplicationController
   def barload
     @games = Game.search(params[:search]).where.not(admin_id: session['user_id']).paginate(:per_page => 20,:page => params[:page])
     @self=Game.search(params[:search]).where(admin_id: session['user_id']).paginate(:per_page => 20,:page => params[:page])
+    render layout: false
   end
   def startinglevel
     @game_id = params[:game_id]
