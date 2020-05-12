@@ -4,8 +4,8 @@
 <% levels = Level.where(game_id: @game_id).order(:id) %>
 <% @game = Game.find(@game_id) %>
 <% levels.each do |level| %>
-        <div class="card">
-                <div class= <%= if @game.start_level_id == level.id then "bordered" else "internal" end%> >
+        <div class= "<%= if @game.start_level_id == level.id then "bordered" else "internal" end%> card">
+                <div>
                         <% if level.level_image.blank? %>
                                 <%= link_to level.name, startinglevel_path(@game_id, level.id)%>
                         <% else %>
@@ -19,4 +19,4 @@
 <% end %>
 <br>
 <br>
-<%= link_to "Return to dashboard", leveldashboard_path(@game_id) %>
+<div class ="btn btn-warning centerbtn"><%= link_to "Return to dashboard", leveldashboard_path(@game_id) %></div>

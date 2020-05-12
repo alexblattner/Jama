@@ -13,13 +13,23 @@ include SessionsHelper
 
   # POST /save/
   def save
-    
+
   end
 
   def initiate
     @game_id = params['game_id']
     @user_id = session['user_id']
     @gamestate = Gamestate.find_by(game_id: @game_id, user_id: @user_id)
+    @game = Game.find_by(id: @game_id)
+  
+    #update game's popularity
+    if @game.popularity.nil?
+      @game.popularity = 1
+    else
+      @game.popularity += 1
+    end
+    @game.save
+ 
     if @gamestate.nil?
       @gamestate = Gamestate.new
       @gamestate.user_id = @user_id

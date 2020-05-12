@@ -1,1 +1,1 @@
-Rails.application.config.active_storage.service_urls_expire_in = 10.hour
+Rails.application.config.active_storage.service_urls_expire_in = 20.hour
