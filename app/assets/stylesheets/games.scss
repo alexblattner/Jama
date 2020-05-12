@@ -1,6 +1,14 @@
 // Place all the styles related to the games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-#search{
-  width:600px;position:relative;height:30px;font-size:20pt;
+#search {
+    width: 600px;
+    position: relative;
+    height: 30px;
+    font-size: 20pt;
+}
+
+.search-c {
+    text-align: left!important;
+    padding-left: 20%!important;
 }
