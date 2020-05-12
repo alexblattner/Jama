@@ -4,11 +4,9 @@
     <title>Create Event</title>
   </head>  
   <body>
-<div class='cl-row-1'>
-        <h1>Create a New Event</h1>
-      </div>
-<div class="ev-container">
-<div class="row">
+  
+<div class="ce row">
+  <br>
   <%= form_with(model: event, local: true) do |form| %>
   <% if event.errors.any? %>
    <div id="error_explanation">
@@ -32,7 +30,7 @@
    <%= form.text_field :description, class: 'form-control' %>
  
    <div class="field">
-        <%= form.label :event_image, "Attach an image for this event" %>
+        <%= form.label :event_image, "Upload an image for this event:" %>
         <%= form.file_field :event_image %>
     </div>
     <br>
@@ -121,24 +119,22 @@
     </div>
     <br><br>
   </div>
+
   <div class = "container">
-  <div>
-  <%= form.submit "Finish This Event", class: "btn-done"%>
-  </div>
-  <div>
-  <%= form.submit "Create Next Event", class: "btn-create"%>
-  </div>
-   <div>
-    <%= link_to 'Back to Dashboard', leveldashboard_path(@event.game_id), :class=>'btn-create'%>
+      <%= form.submit "Finish This Event", class: "btn-done"%>
+      <br>
+      <%= form.submit "Create Next Event", class: "btn-done"%>
+      <br>
+      <%= link_to 'Back to Dashboard', leveldashboard_path(@event.game_id), :class=>'btn-returndash'%>
    </div>
-   
  </div>
- </div>
+
 <% end %>
 </div>
 
 </body>
 </html>
+
 <script type="text/javascript">
 $(document).ready(function(){
     $("#event_selector").change(function(){ 
