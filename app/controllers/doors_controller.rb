@@ -193,9 +193,9 @@ class DoorsController < ApplicationController
           lev.save
         end
       else
-        flash[:fail] = "You should add some previous levels to the connection"
+        #flash[:fail] = "You should add some previous levels to the connection"
       end 
-      flash[:success] = "Great! New door created."
+      #flash[:success] = "Great! New door created."
       if params[:commit] == 'Finish this door and return to dashboard'
         redirect_to leveldashboard_url(@door.game_id)
       else
@@ -217,7 +217,7 @@ class DoorsController < ApplicationController
     @door.image = @door.door_image.service_url
     @door.requirement = createRequirementJSON(params)
     if @door.update(door_params)
-      flash[:success] = "Great! Door updated."
+      #flash[:success] = "Great! Door updated."
       if params[:commit] == 'Finish this door and return to dashboard'
         redirect_to leveldashboard_url(@door.game_id)
       else
@@ -272,7 +272,7 @@ class DoorsController < ApplicationController
     curr_door.next_levels = curr_levels.to_json
     level = Level.find_by(id: @level_id)
     if(curr_door.save)
-      flash[:success] = "Great, " + level.name + " was added to the list"  
+      #flash[:success] = "Great, " + level.name + " was added to the list"  
     end
     render 'assignlevelforone'
   end
@@ -285,14 +285,14 @@ class DoorsController < ApplicationController
     
     #because the default JSON string is "[]"
     if(len <= 2)
-      flash[:fail] = "No levels to remove"
+      #flash[:fail] = "No levels to remove"
     else
       curr_levels = JSON.parse(curr_door.next_levels)
       curr_level = curr_levels.pop
       curr_door = Door.find_by(id: curr_door)
       curr_door.next_levels= curr_levels.to_json
       if(curr_door.save)
-        flash[:success] = "Great, " + curr_door.name + " was removed from the list"  
+        #flash[:success] = "Great, " + curr_door.name + " was removed from the list"  
       end
     end
     render 'assignlevelforone'
