@@ -4,7 +4,7 @@ body {
 }
 
 .aefo-container {
-    text-align: center!important;
+    //text-align: center!important;
     padding-left: 20%!important;
 }
 
@@ -60,4 +60,14 @@ body {
 .aefo.card-title {
     color: black!important;
     font-size: 15px!important;
+}
+
+.btn-returndash {
+    background-color: black!important;
+    width: 330px!important;
+    color: white!important;
+    padding: 5px 32px!important;
+    text-decoration: none!important;
+    text-align: left!important;
+    font-size: 25px!important;
 }

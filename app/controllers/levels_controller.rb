@@ -144,7 +144,7 @@ class LevelsController < ApplicationController
       @level.level_image.attach(io: File.open("app/assets/images/samplegame2.jpg"), filename: "samplegame2.jpg")
     end
     @level.image = @level.level_image.service_url
-    puts @level.image
+   
     doors = Array.new
     @level.doors = doors.to_json
     if @level.save
