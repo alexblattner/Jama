@@ -28,7 +28,9 @@
                   <% else %>
                     <h4 class="gs card-text"><%= game.description %></h4>
                   <% end %>
+                  <% if game.start_level_id!=nil%>
                   <%= link_to "Play", initiate_url(game.id), class: "btn-card" %>
+                  <%end%>
                   <%= link_to "Edit", leveldashboard_url(game.id), class: "btn-card" %>
                 </div>
               </div>

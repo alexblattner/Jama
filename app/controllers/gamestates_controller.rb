@@ -61,10 +61,6 @@ include SessionsHelper
     @level=Level.find_by(id: @gamestate.level_id)
     @hero=Hero.find_by(id: @gamestate.hero_id)
     @hero_level_info=stats_calc(@hero.exp,@hero.hp)
-    puts 3030
-    puts @hero_level_info
-    puts 3030
-    puts @gamestate
     eid=JSON.parse(@level.event_id)
     b = Hash.new(0)
     eid.each do |v|
