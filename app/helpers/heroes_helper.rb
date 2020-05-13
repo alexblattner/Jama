@@ -16,8 +16,10 @@ module HeroesHelper
         end
         if r!="hp"
           hero[r]=hero[r]+par[r]
+          if r!="gold"
           if hero[r]<0
             hero[r]=0
+          end
           end
         end
         
