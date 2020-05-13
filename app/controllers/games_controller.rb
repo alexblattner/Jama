@@ -72,6 +72,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
     @game.admin_id = session['user_id']
+    @game.popularity = 1
     if @game.save
         flash[:success] = "Great! New game created, let's add some levels to the game."
         #puts @game.id 
